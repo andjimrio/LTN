@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>TLN - {% block titulo %}{% endblock %}</title>
+</head>
+<body>
+    <header>
+        <h1>{% block encabezado %}{% endblock %}</h1>
+        <nav >
+            <li><a href="\">Inicio</a></li>
+            <li><a href="\load">Carga</a></li>
+            <li><a href="\feeds">Feeds</a></li>
+        </nav>
+        <hr>
+    </header>
+    <section>
+        {% block contenido %}{% endblock %}
+    </section>
+    <footer>
+        <p>LTN - Andrés M. Jiménez - 24/12/2016</p>
+    </footer>
+</body>
+</html>

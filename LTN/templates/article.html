@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block titulo %}Película con mejor media{% endblock %}
+
+{% block encabezado %}Película con mejor media{% endblock %}
+
+{% block contenido %}
+    <a href="{{ link }}">{{ title }}</a>
+    <img src="{{ image }}" />
+    <p>{{ web }}</p>
+
+{% endblock %}

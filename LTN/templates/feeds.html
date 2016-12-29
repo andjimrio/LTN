@@ -10,8 +10,10 @@
         <h3>{{ feed.description }}</h3>
         <hr>
         {% for item in feed.items.all %}
-            <h4>{{ item.title }}</h4>
+            <h4><a href="{{ item.link }}">{{ item.title }}</a></h4>
             <p>{{ item.pubDate }}</p>
+            <a href="/article/{{ item.id }}/">Click</a>
+            <br>
             <p>{{ item.description }}</p>
             <hr>
         {% endfor %}

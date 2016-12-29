@@ -8,6 +8,7 @@ urlpatterns = patterns('',
     url(r'^$', 'Application.views.home'),
     url(r'^load/', 'Application.views.load'),
     url(r'^feeds/', 'Application.views.feeds'),
+    url(r'^article/(?P<idItem>\w+)/', 'Application.views.article'),
 
     # Examples:
     # url(r'^$', 'LTN.views.home', name='home'),

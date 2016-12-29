@@ -2,7 +2,7 @@
 
 import feedparser
 from bs4 import BeautifulSoup
-import datetime
+from django.utils import timezone
 from dateutil.parser import parse
 
 LINK_ABC= 'http://www.abc.es/rss/feeds/abcPortada.xml'
@@ -31,7 +31,7 @@ def redo_date(post):
         except:
             pass
 
-    return datetime.datetime.now()
+    return timezone.now()
 
 
 def clean_html(html_doc):

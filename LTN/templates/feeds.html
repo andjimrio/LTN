@@ -5,13 +5,17 @@
 {% block encabezado %}Película con mejor media{% endblock %}
 
 {% block contenido %}
-    <h1><a href="{{ feed.link }}">{{ feed.title }}</a></h1>
-    <h3>{{ feed.description }}</h3>
-    <hr>
-    {% for item in feed.items.all %}
-        <h4>{{ item.title }}</h4>
-        <p>{{ item.pubDate }}</p>
-        <p>{{ item.description }}</p>
+    {% for feed in feedes %}
+        <h1><a href="{{ feed.link }}">{{ feed.title }}</a></h1>
+        <h3>{{ feed.description }}</h3>
+        <hr>
+        {% for item in feed.items.all %}
+            <h4>{{ item.title }}</h4>
+            <p>{{ item.pubDate }}</p>
+            <p>{{ item.description }}</p>
+            <hr>
+        {% endfor %}
+        <hr>
         <hr>
     {% endfor %}
 

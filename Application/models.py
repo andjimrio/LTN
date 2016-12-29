@@ -7,7 +7,6 @@ class Feed(models.Model):
     link = models.CharField(max_length=500)
     description = models.CharField(max_length=5000)
     language = models.CharField(max_length=50)
-    pubDate = models.CharField(max_length=500)
 
     def __unicode__(self):
         return self.title
@@ -18,7 +17,7 @@ class Item(models.Model):
     title = models.CharField(max_length=500)
     link = models.CharField(max_length=500)
     description = models.CharField(max_length=5000)
-    pubDate = models.CharField(max_length=500)
+    pubDate = models.DateTimeField()
     creator = models.CharField(max_length=500)
 
     feed = models.ForeignKey(Feed, on_delete=models.CASCADE, related_name="items")

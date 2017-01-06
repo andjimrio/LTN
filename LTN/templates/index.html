@@ -5,5 +5,9 @@
 {% block encabezado %}Inicio{% endblock %}
 
 {% block contenido %}
-    <p>Bienvenido!!!</p>
+    {% if user.is_authenticated %}
+        <p>Bienvenido {{ user.username }}!!!</p>
+    {% else %}
+        <p>Bienvenido!!!</p>
+    {% endif %}
 {% endblock %}

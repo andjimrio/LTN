@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block titulo %}Register{% endblock %}
+
+{% block encabezado %}Register{% endblock %}
+
+{% block contenido %}
+    {% if registered %}
+        <p>Gracias por registrate!!</p>
+        <a href="/">Vuelve a la página principal</a>
+    {% else %}
+        <p>Registrate aquí</p>
+
+        <form id="user_form" method="POST" action="">
+            {% csrf_token %}
+
+            {{ user_form.as_p }}
+            {{ profile_form.as_p }}
+
+            <input type="submit" value="Confirmar">
+        </form>
+
+    {% endif %}
+{% endblock %}

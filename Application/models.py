@@ -1,5 +1,6 @@
 #encoding:utf-8
 from django.db import models
+from django.contrib.auth.models import User
 
 # Create your models here.
 class Feed(models.Model):
@@ -26,3 +27,10 @@ class Item(models.Model):
         return self.title
 
     pass
+
+class UserProfile(models.Model):
+    user = models.OneToOneField(User)
+    feeds = models.ManyToManyField(Feed, related_name="users")
+
+    def __unicode__(self):
+        return self.user.username

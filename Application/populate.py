@@ -14,4 +14,5 @@ def populate_rss(link):
         if not Item.objects.filter(feed_id=feederId,title=entry['title']).exists():
             itemer = Item(feed_id=feederId, **entry)
             itemer.save()
-    pass
+
+    return feederId

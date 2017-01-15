@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block titulo %}Article{% endblock %}
+
+{% block encabezado %}Article{% endblock %}
+
+{% block contenido %}
+    <a href="{{ link }}">{{ title }}</a>
+    <img src="{{ image }}" />
+    <p>{{ web }}</p>
+
+{% endblock %}

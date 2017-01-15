@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block titulo %}Feeds{% endblock %}
+
+{% block encabezado %}Feeds{% endblock %}
+
+{% block contenido %}
+    {% for feed in feedes %}
+        <h1><a href="{{ feed.link }}">{{ feed.title }}</a></h1>
+        <h3>{{ feed.description }}</h3>
+        <hr>
+        {% for item in feed.items.all %}
+            <h4><a href="{{ item.link }}">{{ item.title }}</a></h4>
+            <p>{{ item.pubDate }}</p>
+            <a href="/article/{{ item.id }}/">Click</a>
+            <br>
+            <p>{{ item.description }}</p>
+            <hr>
+        {% endfor %}
+        <hr>
+        <hr>
+    {% endfor %}
+
+{% endblock %}

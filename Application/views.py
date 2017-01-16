@@ -7,7 +7,7 @@ from django.http import HttpResponseRedirect, HttpResponse
 
 from Application.rss import LINK_ABC,LINK_ELPAIS,LINK_ACEPRENSA
 from Application.populate import populate_rss
-from Application.queries import all_feeds,get_item
+from Application.queries import get_feeds_by_user,get_item
 from Application.web import read_main_content
 from Application.forms import UserForm,UserProfileForm
 from Application.models import UserProfile,Feed
@@ -23,7 +23,7 @@ def load(request):
 
 @login_required
 def feeds(request):
-    feedes = all_feeds()
+    feedes = get_feeds_by_user(request.user.id)
     return render(request,'feeds.html',{'feedes':feedes})
 
 def article(request, idItem=None):

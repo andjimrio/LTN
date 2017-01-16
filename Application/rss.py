@@ -41,8 +41,8 @@ def clean_html(html_doc):
 
 if __name__ == '__main__':
     fecha = read_rss(LINK_ELPAIS)[1][0]['pubDate']
-    print fecha
+    print(fecha)
     fecha = read_rss(LINK_ACEPRENSA)[1][0]['pubDate']
-    print fecha
+    print(fecha)
     fecha = read_rss(LINK_ABC)[1][0]['pubDate']
-    print fecha
+    print(fecha)

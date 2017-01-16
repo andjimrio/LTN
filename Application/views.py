@@ -1,7 +1,6 @@
 #encoding:utf-8
 # Create your views here.
-from django.shortcuts import render_to_response
-from django.template.context import RequestContext
+from django.shortcuts import render
 from django.contrib.auth import authenticate,login as auth_login,logout
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect, HttpResponse
@@ -14,24 +13,24 @@ from Application.forms import UserForm,UserProfileForm
 from Application.models import UserProfile,Feed
 
 def home(request):
-    return render_to_response('index.html',RequestContext(request))
+    return render(request,'index.html',{})
 
 def load(request):
     populate_rss(LINK_ELPAIS)
     populate_rss(LINK_ABC)
     populate_rss(LINK_ACEPRENSA)
-    return render_to_response('index.html')
+    return HttpResponseRedirect('/')
 
 @login_required
 def feeds(request):
     feedes = all_feeds()
-    return render_to_response('feeds.html',RequestContext(request,{'feedes':feedes}))
+    return render(request,'feeds.html',{'feedes':feedes})
 
 def article(request, idItem=None):
     itemer = get_item(idItem)
     link = itemer.link
     web,image = read_main_content(link)
-    return render_to_response('article.html',RequestContext(request,{'link':link,'title':itemer.title,'web':web,'image':image}))
+    return render(request,'article.html',{'link':link,'title':itemer.title,'web':web,'image':image})
 
 def register(request):
     registered = False
@@ -55,14 +54,13 @@ def register(request):
             registered = True
 
         else:
-            print user_form.errors, profile_form.errors
+            print(user_form.errors, profile_form.errors)
 
     else:
         user_form = UserForm()
         profile_form = UserProfileForm()
 
-    return render_to_response('register.html',RequestContext(request, \
-                {'user_form':user_form,'profile_form':profile_form,'registered':registered}))
+    return render(request, 'register.html',{'user_form':user_form,'profile_form':profile_form,'registered':registered})
 
 def user_login(request):
     if request.method == 'POST':
@@ -79,11 +77,11 @@ def user_login(request):
                 return HttpResponse("Tu cuenta no está activa")
 
         else:
-            print "Los datos no son correctos: {0}, {1}".format(username,password)
+            print("Los datos no son correctos: {0}, {1}".format(username,password))
             return HttpResponse("Los datos no son correctos")
 
     else:
-        return render_to_response('login.html',RequestContext(request,{}))
+        return render(request,'login.html',{})
 
     pass
 

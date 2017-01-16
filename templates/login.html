@@ -5,7 +5,8 @@
 {% block encabezado %}Login{% endblock %}
 
 {% block contenido %}
-    <form id="login" method="POST" action="">
+    {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+    <form id="login" method="POST" action="{% url 'login' %}">
         {% csrf_token %}
         Username: <input type="text" name="username" value="" size="50" />
         <br />

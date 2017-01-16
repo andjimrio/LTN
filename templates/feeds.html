@@ -12,7 +12,7 @@
         {% for item in feed.items.all %}
             <h4><a href="{{ item.link }}">{{ item.title }}</a></h4>
             <p>{{ item.pubDate }}</p>
-            <a href="/article/{{ item.id }}/">Click</a>
+            <a href="{% url 'article' item.id %}">Click</a>
             <br>
             <p>{{ item.description }}</p>
             <hr>

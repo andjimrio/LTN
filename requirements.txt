@@ -1,8 +1,0 @@
-beautifulsoup4==4.5.1
-Django==1.4.7
-feedparser==5.2.1
-numpy==1.7.1
-Pattern==2.6
-Whoosh==2.7.4
-python-dateutil==2.6.0
-goose-extractor==1.0.25

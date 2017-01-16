@@ -10,8 +10,8 @@
         <a href="/">Vuelve a la página principal</a>
     {% else %}
         <p>Registrate aquí</p>
-
-        <form id="user_form" method="POST" action="">
+        {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+        <form id="user_form" method="POST" action="{% url 'register' %}">
             {% csrf_token %}
 
             {{ user_form.as_p }}

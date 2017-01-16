@@ -1,9 +1,8 @@
-import urllib2
+from urllib.request import urlopen
 from bs4 import BeautifulSoup
-#from goose import Goose
 
 def read_web(link):
-    web = urllib2.urlopen(link)
+    web = urlopen(link)
     html_doc = web.read()
     return html_doc
 
@@ -22,11 +21,11 @@ def read_main_content(link):
     html = read_web(link)
     web = read_all_text(html)
     image = get_images(html)[0] if len(get_images(html)) > 0 else ""
-    print get_images(html)
+    print(get_images(html))
     return web,image
 
 if __name__ == '__main__':
     LINK_ELPAIS='http://internacional.elpais.com/internacional/2016/12/29/actualidad/1483012496_387362.html'
     html = read_web(LINK_ELPAIS)
     web = read_all_text(html)
-    print web
+    print(web)

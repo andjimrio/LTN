@@ -9,7 +9,7 @@ class Feed(models.Model):
     description = models.CharField(max_length=5000)
     language = models.CharField(max_length=50)
 
-    def __unicode__(self):
+    def __str__(self):
         return self.title
 
     pass
@@ -23,7 +23,7 @@ class Item(models.Model):
 
     feed = models.ForeignKey(Feed, on_delete=models.CASCADE, related_name="items")
 
-    def __unicode__(self):
+    def __str__(self):
         return self.title
 
     pass
@@ -32,5 +32,5 @@ class UserProfile(models.Model):
     user = models.OneToOneField(User)
     feeds = models.ManyToManyField(Feed, related_name="users")
 
-    def __unicode__(self):
+    def __str__(self):
         return self.user.username

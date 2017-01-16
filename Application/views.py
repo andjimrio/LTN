@@ -8,7 +8,7 @@ from django.http import HttpResponseRedirect, HttpResponse
 from Application.rss import LINK_ABC,LINK_ELPAIS,LINK_ACEPRENSA
 from Application.populate import populate_rss
 from Application.queries import get_feeds_by_user,get_item
-from Application.web import read_main_content
+from Application.web import get_article
 from Application.forms import UserForm,UserProfileForm
 from Application.models import UserProfile,Feed
 
@@ -27,10 +27,9 @@ def feeds(request):
     return render(request,'feeds.html',{'feedes':feedes})
 
 def article(request, idItem=None):
-    itemer = get_item(idItem)
-    link = itemer.link
-    web,image = read_main_content(link)
-    return render(request,'article.html',{'link':link,'title':itemer.title,'web':web,'image':image})
+    link = get_item(idItem).link
+    article = get_article(link)
+    return render(request,'article.html',{'article':article})
 
 def register(request):
     registered = False

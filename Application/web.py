@@ -1,5 +1,6 @@
 from urllib.request import urlopen
 from bs4 import BeautifulSoup
+from newspaper import Article
 
 def read_web(link):
     web = urlopen(link)
@@ -24,8 +25,13 @@ def read_main_content(link):
     print(get_images(html))
     return web,image
 
+def get_article(link):
+    article = Article(link, language='es')
+    article.download()
+    article.parse()
+    return article
+
 if __name__ == '__main__':
     LINK_ELPAIS='http://internacional.elpais.com/internacional/2016/12/29/actualidad/1483012496_387362.html'
-    html = read_web(LINK_ELPAIS)
-    web = read_all_text(html)
-    print(web)
+    article = get_article(LINK_ELPAIS)
+    print(article.text)

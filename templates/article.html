@@ -1,12 +1,13 @@
 {% extends 'base.html' %}
+{% load apptags %}
 
 {% block titulo %}Article{% endblock %}
 
 {% block encabezado %}Article{% endblock %}
 
 {% block contenido %}
-    <a href="{{ link }}">{{ title }}</a>
-    <img src="{{ image }}" />
-    <p>{{ web }}</p>
+    <a href="{{ article.url }}">{{ article.title }}</a>
+    <img src="{{ article.top_image }}" />
+    <p>{% autoescape off %}{% pretty_text article.text %}{% endautoescape %}</p>
 
 {% endblock %}

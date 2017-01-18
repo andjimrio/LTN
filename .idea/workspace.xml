@@ -2,11 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4bfd7ac1-851b-4282-a969-843e3b22940b" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Procfile" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Procfile.windows" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/runtime.txt" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/LTNews/wsgi.py" afterPath="$PROJECT_DIR$/LTNews/wsgi.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -89,8 +85,8 @@
       <file leaf-file-name="wsgi.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/LTNews/wsgi.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="272">
-              <caret line="16" column="0" lean-forward="true" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
+            <state relative-caret-position="34">
+              <caret line="2" column="0" lean-forward="true" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="0" />
               <folding>
                 <element signature="e#223#232#0" expanded="true" />
               </folding>
@@ -585,14 +581,21 @@
       <option name="project" value="LOCAL" />
       <updated>1484736353617</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Actualizado ficheros para añadir el proyecto a Heroku">
+      <created>1484738194870</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1484738194870</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.18078668" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.18078668" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32980332" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -643,7 +646,8 @@
     <MESSAGE value="Fix #10: añadida librería de extracción de artículos&#10;&#10;No funcionaba Goose para Python3, por lo que me he pasado a otra: newspaper3k. Es muy útil, además de funcional." />
     <MESSAGE value="Eliminada dependencia de BeautifulSoup&#10;&#10;Es innecesaria con el uso de newspaper" />
     <MESSAGE value="Actualizado el fichero wsgi para subir el proyecto a pythonanywhere" />
-    <option name="LAST_COMMIT_MESSAGE" value="Actualizado el fichero wsgi para subir el proyecto a pythonanywhere" />
+    <MESSAGE value="Actualizado ficheros para añadir el proyecto a Heroku" />
+    <option name="LAST_COMMIT_MESSAGE" value="Actualizado ficheros para añadir el proyecto a Heroku" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -680,7 +684,7 @@
         <state relative-caret-position="323">
           <caret line="29" column="32" lean-forward="false" selection-start-line="29" selection-start-column="32" selection-end-line="29" selection-end-column="32" />
           <folding>
-            <element signature="e#42#77#0" expanded="true" />
+            <element signature="e#42#77#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -730,7 +734,7 @@
         <state relative-caret-position="323">
           <caret line="29" column="32" lean-forward="false" selection-start-line="29" selection-start-column="32" selection-end-line="29" selection-end-column="32" />
           <folding>
-            <element signature="e#42#77#0" expanded="true" />
+            <element signature="e#42#77#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -772,7 +776,7 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#42#77#0" expanded="true" />
+            <element signature="e#42#77#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -820,7 +824,7 @@
         <state relative-caret-position="782">
           <caret line="57" column="56" lean-forward="false" selection-start-line="57" selection-start-column="56" selection-end-line="57" selection-end-column="56" />
           <folding>
-            <element signature="e#42#77#0" expanded="true" />
+            <element signature="e#42#77#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -840,7 +844,7 @@
         <state relative-caret-position="782">
           <caret line="57" column="56" lean-forward="false" selection-start-line="57" selection-start-column="56" selection-end-line="57" selection-end-column="56" />
           <folding>
-            <element signature="e#42#77#0" expanded="true" />
+            <element signature="e#42#77#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -982,7 +986,7 @@
         <state relative-caret-position="323">
           <caret line="29" column="32" lean-forward="false" selection-start-line="29" selection-start-column="32" selection-end-line="29" selection-end-column="32" />
           <folding>
-            <element signature="e#42#77#0" expanded="true" />
+            <element signature="e#42#77#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1063,8 +1067,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/LTNews/wsgi.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="16" column="0" lean-forward="true" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
+        <state relative-caret-position="34">
+          <caret line="2" column="0" lean-forward="true" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="0" />
           <folding>
             <element signature="e#223#232#0" expanded="true" />
           </folding>

@@ -54,6 +54,7 @@ MIDDLEWARE = [
 ROOT_URLCONF = 'LTNews.urls'
 
 # Login static configuration
+
 LOGIN_URL = '/login/'
 LOGIN_REDIRECT_URL = "/"
 LOGOUT_URL = '/'

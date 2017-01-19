@@ -90,3 +90,7 @@ ENV/
 
 # BBDD
 *.db
+*.sqlite3
+
+# Distribution / packaging
+.idea

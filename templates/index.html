@@ -6,9 +6,45 @@
 {% block encabezado %}Inicio{% endblock %}
 
 {% block contenido %}
-    {% if user.is_authenticated %}
-        <p>Bienvenido {{ user.username }}!!!</p>
-    {% else %}
-        <p>Bienvenido!!!</p>
-    {% endif %}
+    <div class="row intro valign-wrapper {{ color_primary }} accent-2 no-margin">
+        <div class="container white-text">
+            <h1 class="header">LT-News</h1>
+
+            {% if user.is_authenticated %}
+                <h3>Bienvenido de nuevo, {{ user.username }}!!!</h3>
+                <a class="btn-large waves-effect waves-light {{ color_secondary }} accent-1"
+                    href="{% url 'feeds' %}">Feeds</a>
+            {% else %}
+                <h3>Otra forma de entender el periódico digital</h3>
+                <a class="btn-large waves-effect waves-light {{ color_secondary }} accent-1"
+                    href="{% url 'register' %}">Registrarse</a>
+                <a class="btn-large waves-effect waves-light {{ color_secondary }} lighten-1"
+                    href="{% url 'login' %}">Login</a>
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="row no-margin" id="start">
+        <div class="col s12 m6 l6">
+            <section class="container section no-pad-top">
+                <h3>Easy code</h3>
+                <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo.</p>
+            </section>
+        </div>
+
+        <div class="col s12 m6 l6 primo-start-1">
+
+        </div>
+    </div>
+    <div class="row">
+        <div class="col s12 m6 l6 push-m6 push-l6">
+            <section class="container section no-pad-top">
+                <h3>Responsive layout</h3>
+                <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo.</p>
+            </section>
+        </div>
+        <div class="col s12 m6 l6 pull-m6 pull-l6 primo-start-2">
+
+        </div>
+    </div>
 {% endblock %}

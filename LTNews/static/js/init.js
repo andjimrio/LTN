@@ -2,9 +2,8 @@
  * Created by andre on 20/01/2017.
  */
 (function($){
-  $(function(){
+    $(function(){
+        $('.button-collapse').sideNav();
 
-    $('.button-collapse').sideNav();
-
-  }); // end of document ready
+    }); // end of document ready
 })(jQuery); // end of jQuery name space

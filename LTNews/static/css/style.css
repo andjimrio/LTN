@@ -1,6 +1,12 @@
 /*  FOOTER
         - Para que el footer se coloque al final
 */
-.mdl-layout__content .page-content {
-    min-height: 50vh;
+body {
+display: flex;
+min-height: 100vh;
+flex-direction: column;
+}
+
+main {
+flex: 1 0 auto;
 }

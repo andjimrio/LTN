@@ -8,83 +8,73 @@
     <meta name="description" content="Lee Tus Noticias">
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
-  	<link rel="stylesheet" href="{% static "css/material.min.css" %}" />
+  	<link rel="stylesheet" href="{% static "css/materialize.min.css" %}" media="screen,projection" />
     <link rel="stylesheet" href="{% static "css/style.css" %}" />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 
     <link rel="shortcut icon" type="image/png" href="{% static "img/favicon.ico" %}"/>
     <link rel="icon" href="{% static "img/icon.png" %}">
 </head>
 <body>
-    <div class="mdl-layout mdl-js-layout mdl-layout--fixed-drawer mdl-layout--fixed-header">
-        <header class="mdl-layout__header">
-            <div class="mdl-layout__header-row">
-                <span class="mdl-layout__title">{% block encabezado %}{% endblock %}</span>
-                <div class="mdl-layout-spacer"></div>
-                <div class="mdl-textfield mdl-js-textfield mdl-textfield--expandable mdl-textfield--floating-label mdl-textfield--align-right">
-                    <label class="mdl-button mdl-js-button mdl-button--icon" for="fixed-header-drawer-exp">
-                        <i class="material-icons">search</i>
-                    </label>
-                    </label>
-                    <div class="mdl-textfield__expandable-holder">
-                        <input class="mdl-textfield__input" type="text" name="sample" id="fixed-header-drawer-exp">
-                    </div>
+    <nav class="{{ color_primary }}" role="navigation">
+        <div class="nav-wrapper container">
+            <a id="logo-container" href="#" class="brand-logo">{% block encabezado %}{% endblock %}</a>
+
+            <ul class="right hide-on-med-and-down">
+                <li><a href="{% url 'feeds' %}">Feeds</a></li>
+            </ul>
+
+            <ul id="nav-mobile" class="side-nav">
+                <li><a href="#">Navbar Link</a></li>
+            </ul>
+
+            <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
+        </div>
+    </nav>
+
+    <main class="container">
+        {% block contenido %}{% endblock %}
+    </main>
+
+    <footer class="page-footer {{ color_secondary }}">
+        <div class="container">
+            <div class="row">
+                <div class="col l6 s12">
+                    <h5 class="white-text">Company Bio</h5>
+                    <p class="grey-text text-lighten-4">We are a team of college students working on this project like it's our full time job. Any amount would help support and continue development on this project and is greatly appreciated.</p>
+                </div>
+
+                <div class="col l3 s12">
+                    <h5 class="white-text">Settings</h5>
+                    <ul>
+                        <li><a class="white-text" href="#!">Link 1</a></li>
+                        <li><a class="white-text" href="#!">Link 2</a></li>
+                        <li><a class="white-text" href="#!">Link 3</a></li>
+                        <li><a class="white-text" href="#!">Link 4</a></li>
+                    </ul>
+                </div>
+                <div class="col l3 s12">
+                    <h5 class="white-text">Connect</h5>
+                    <ul>
+                        <li><a class="white-text" href="#!">Link 1</a></li>
+                        <li><a class="white-text" href="#!">Link 2</a></li>
+                        <li><a class="white-text" href="#!">Link 3</a></li>
+                        <li><a class="white-text" href="#!">Link 4</a></li>
+                    </ul>
                 </div>
             </div>
-        </header>
-        <div class="mdl-layout__drawer">
-            <span class="mdl-layout__title">LTNews</span>
-            <nav class="mdl-navigation">
-                <a class="mdl-navigation__link" href="{% url 'feeds' %}">Feeds</a>
-                <a class="mdl-navigation__link" href="{% url 'admin:index' %}">Admin</a>
-                <a class="mdl-navigation__link" href="{% url 'login' %}">Login</a>
-                <a class="mdl-navigation__link" href="{% url 'logout' %}">Logout</a>
-                <a class="mdl-navigation__link" href="{% url 'register' %}">Register</a>
-            </nav>
         </div>
 
-        <main class="mdl-layout__content">
-            <div class="page-content">
-                {% block contenido %}{% endblock %}
+        <div class="footer-copyright">
+            <div class="container">
+                Copyright: <a class="{{ color_primary }}-text text-lighten-3" href="https://github.com/andjimrio">Andrés M. Jiménez</a>
             </div>
+        </div>
+    </footer>
 
-            <div class="mdl-layout-spacer"></div>
-
-            <footer class="mdl-mega-footer">
-                <div class="mdl-mega-footer__middle-section">
-                    <div class="mdl-mega-footer__drop-down-section">
-                        <h1 class="mdl-mega-footer__heading">Drop-down 1 Heading</h1>
-                        <ul class="mdl-mega-footer__link-list">
-                            <li><a href="">Link A</a></li>
-                            <li><a href="">Link A</a></li>
-                            <li><a href="">Link A</a></li>
-                            <li><a href="">Link A</a></li>
-                        </ul>
-                    </div>
-                    <div class="mdl-mega-footer__drop-down-section">
-                        <h1 class="mdl-mega-footer__heading">Drop-down 2 Heading</h1>
-                        <ul class="mdl-mega-footer__link-list">
-                            <li><a href="">Link A</a></li>
-                            <li><a href="">Link A</a></li>
-                            <li><a href="">Link A</a></li>
-                            <li><a href="">Link A</a></li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="mdl-mega-footer__bottom-section">
-                    <div class="mdl-logo">
-                        LT-News
-                    </div>
-                    <div class="mdl-mega-footer__link-list">
-                        <li><a href="https://github.com/andjimrio">Andrés Jiménez</a></li>
-                    </div>
-                </div>
-            </footer>
-
-        </main>
-    </div>
-
-    <script src="{% static "js/material.min.js" %}"></script>
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+            crossorigin="anonymous"></script>
+    <script src="{% static "js/materialize.min.js" %}"></script>
+    <script src="{% static "js/init.js" %}"></script>
 </body>
 </html>

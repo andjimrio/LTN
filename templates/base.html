@@ -48,11 +48,41 @@
             <div class="page-content">
                 {% block contenido %}{% endblock %}
             </div>
-        </main>
 
-        <footer>
-            <p>LTN - Andrés M. Jiménez - 24/12/2016</p>
-        </footer>
+            <div class="mdl-layout-spacer"></div>
+
+            <footer class="mdl-mega-footer">
+                <div class="mdl-mega-footer__middle-section">
+                    <div class="mdl-mega-footer__drop-down-section">
+                        <h1 class="mdl-mega-footer__heading">Drop-down 1 Heading</h1>
+                        <ul class="mdl-mega-footer__link-list">
+                            <li><a href="">Link A</a></li>
+                            <li><a href="">Link A</a></li>
+                            <li><a href="">Link A</a></li>
+                            <li><a href="">Link A</a></li>
+                        </ul>
+                    </div>
+                    <div class="mdl-mega-footer__drop-down-section">
+                        <h1 class="mdl-mega-footer__heading">Drop-down 2 Heading</h1>
+                        <ul class="mdl-mega-footer__link-list">
+                            <li><a href="">Link A</a></li>
+                            <li><a href="">Link A</a></li>
+                            <li><a href="">Link A</a></li>
+                            <li><a href="">Link A</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="mdl-mega-footer__bottom-section">
+                    <div class="mdl-logo">
+                        LT-News
+                    </div>
+                    <div class="mdl-mega-footer__link-list">
+                        <li><a href="https://github.com/andjimrio">Andrés Jiménez</a></li>
+                    </div>
+                </div>
+            </footer>
+
+        </main>
     </div>
 
     <script src="{% static "js/material.min.js" %}"></script>

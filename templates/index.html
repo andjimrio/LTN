@@ -11,7 +11,7 @@
             <h1 class="header">LT-News</h1>
 
             {% if user.is_authenticated %}
-                <h3>Bienvenido de nuevo, {{ user.username }}!!!</h3>
+                <h3>Bienvenido de nuevo, {{ user.username }}</h3>
                 <a class="btn-large waves-effect waves-light {{ color_secondary }} accent-1"
                     href="{% url 'feeds' %}">Feeds</a>
             {% else %}
@@ -26,25 +26,28 @@
 
     <div class="row no-margin" id="start">
         <div class="col s12 m6 l6">
-            <section class="container section no-pad-top">
-                <h3>Easy code</h3>
-                <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo.</p>
+            <section class="container no-pad-top">
+                <h3>Unifica tus periódicos</h3>
+                <p>LTNews es solo un lector de tus periódicos favoritos. Regístarte y podrás ver las noticias más recientes...
+                    o más antiguas de tus diarios. Además, en un único lugar.</p>
+                <p>Una vez que inicies sesión tendrás una ventana llamada <em>Feeds</em> donde estarán tus periódicos. Es por
+                    tanto, ideal para aquellos que deseen leer las noticias de actualidad en un solo lugar y de distintas fuentes.</p>
             </section>
         </div>
 
-        <div class="col s12 m6 l6 primo-start-1">
-
-        </div>
+        <div class="col s12 m6 l6 primo-start-1"></div>
     </div>
     <div class="row">
         <div class="col s12 m6 l6 push-m6 push-l6">
-            <section class="container section no-pad-top">
-                <h3>Responsive layout</h3>
-                <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo.</p>
+            <section class="container no-pad-top">
+                <h3>Aprende de ti</h3>
+                <p>LTNews aprende tu forma de leer las noticias, detectará de los principales temas los favoritos, te aconsejará noticias
+                    para leer... Hará de la prensa digital, un mundo nuevo para ti; del periódico largo y aburrido, convencional, un portal
+                    en que te recomendará noticias.</p>
+                <p>Esto es posible gracias a las herramientas de recomendación y la minería de datos... Si te interesa este tema, podrás
+                    ver el código en GitHub, ya que esta herramienta es de código abierto.</p>
             </section>
         </div>
-        <div class="col s12 m6 l6 pull-m6 pull-l6 primo-start-2">
-
-        </div>
+        <div class="col s12 m6 l6 pull-m6 pull-l6 primo-start-2"></div>
     </div>
 {% endblock %}

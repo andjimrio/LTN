@@ -1,24 +1,35 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block titulo %}Feeds{% endblock %}
 
 {% block encabezado %}Feeds{% endblock %}
 
 {% block contenido %}
-    {% for feed in feedes %}
-        <h1><a href="{{ feed.link }}">{{ feed.title }}</a></h1>
-        <h3>{{ feed.description }}</h3>
-        <hr>
-        {% for item in feed.items.all %}
-            <h4><a href="{{ item.link }}">{{ item.title }}</a></h4>
-            <p>{{ item.pubDate }}</p>
-            <a href="{% url 'article' item.id %}">Click</a>
-            <br>
-            <p>{{ item.description }}</p>
-            <hr>
-        {% endfor %}
-        <hr>
-        <hr>
-    {% endfor %}
+    <div class="container">
+        {% for feed in feedes %}
+            <h3 class="center"><a href="{{ feed.link }}" class="{{ color_secondary }}-text">{{ feed.title }}</a></h3>
+            <h5 class="header center">{{ feed.description }}</h5>
 
+            <div class="row">
+                {% for item in feed.items.all %}
+                    <div class="col s12 m6 l4">
+                        <div class="card large">
+                            <div class="card-image">
+                                <img src="{% static "img/icon.png" %}">
+                                <span class="card-title">{{ item.title }}</span>
+                            </div>
+                            <div class="card-content">
+                                <em>{{ item.pubDate }}</em>
+                                <p>{{ item.description }}</p>
+                            </div>
+                            <div class="card-action">
+                                <a href="{% url 'article' item.id %}" class="{{ color_primary }}-text">Leer más</a>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        {% endfor %}
+    </div>
 {% endblock %}

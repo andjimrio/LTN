@@ -7,7 +7,7 @@
 {% block contenido %}
     {% if registered %}
         <p>Gracias por registrate!!</p>
-        <a href="/">Vuelve a la página principal</a>
+        <a href="{% url 'home' %}">Vuelve a la página principal</a>
     {% else %}
         <p>Registrate aquí</p>
         {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}

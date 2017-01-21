@@ -43,7 +43,26 @@
             </ul>
 
             <ul id="nav-mobile" class="side-nav">
-                <li><a href="#">Navbar Link</a></li>
+                <li><a href="{% url 'feeds' %}">Feeds</a></li>
+                {% if user.is_authenticated %}
+                    <li>
+                        <div class="userView">
+                            <div class="background">
+                                <img src="{% static 'img/icon.png' %}">
+                            </div>
+                            <a href="#!user"><img class="circle" src="{% static 'img/icon.png' %}"></a>
+                            <a href="#!name"><span class="white-text name">{{ user.username }}</span></a>
+                            <a href="#!email"><span class="white-text email">{{ user.mail }}</span></a>
+                        </div>
+                    </li>
+
+                    <li><a href="#">Perfil</a></li>
+                    <li class="divider"></li>
+                    <li><a href="{% url 'logout' %}">Logout</a></li>
+                {% else %}
+                    <li><a href="{% url 'register' %}">Registarse</a></li>
+                    <li><a href="{% url 'login' %}">Login</a></li>
+                {% endif %}
             </ul>
 
             <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>

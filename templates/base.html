@@ -43,19 +43,19 @@
             </ul>
 
             <ul id="nav-mobile" class="side-nav">
-                <li><a href="{% url 'feeds' %}">Feeds</a></li>
                 {% if user.is_authenticated %}
                     <li>
                         <div class="userView">
                             <div class="background">
-                                <img src="{% static 'img/icon.png' %}">
+                                <img src="http://downloadwallpaper.org/wp-content/uploads/2016/05/newspaper-wallpaper4.jpg">
                             </div>
                             <a href="#!user"><img class="circle" src="{% static 'img/icon.png' %}"></a>
                             <a href="#!name"><span class="white-text name">{{ user.username }}</span></a>
-                            <a href="#!email"><span class="white-text email">{{ user.mail }}</span></a>
+                            <a href="#!email"><span class="white-text email">{{ user.email }}</span></a>
                         </div>
                     </li>
 
+                    <li><a href="{% url 'feeds' %}">Feeds</a></li>
                     <li><a href="#">Perfil</a></li>
                     <li class="divider"></li>
                     <li><a href="{% url 'logout' %}">Logout</a></li>

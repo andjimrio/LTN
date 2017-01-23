@@ -1,4 +1,4 @@
-/*  FOOTER
+/*  1. FOOTER
         - Para que el footer se coloque al final
 */
 body {
@@ -10,6 +10,21 @@ body {
 main {
     flex: 1 0 auto;
 }
+/*  END 1. FOOTER*/
+
+/*  2. SIDENAV
+        - Para tener un menú lateral
+*/
+header, main, footer {
+  padding-left: 300px;
+}
+
+@media only screen and (max-width : 992px) {
+  header, main, footer {
+    padding-left: 0;
+  }
+}
+/*  END 2. SIDENAV*/
 
 .intro {
     height: 100vh;

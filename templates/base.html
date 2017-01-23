@@ -16,58 +16,36 @@
     <link rel="icon" href="{% static "img/icon.png" %}">
 </head>
 <body>
-    <nav class="{{ color_primary }}" role="navigation">
-        <div class="nav-wrapper container">
-            <a id="logo-container" href="{% url 'home' %}" class="brand-logo">{% block encabezado %}{% endblock %}</a>
-
-            <ul class="right hide-on-med-and-down">
-                <li><a href="{% url 'feeds' %}">Feeds</a></li>
-                {% if user.is_authenticated %}
-                    <li><a href="#!" data-activates="usuario" class="dropdown-button">{{ user.username }}
-                        <i class="material-icons right">arrow_drop_down</i></a></li>
-
-                    <ul id="usuario" class="dropdown-content">
-                        <li><a href="#">Perfil</a></li>
-                        <li class="divider"></li>
-                        <li><a href="{% url 'logout' %}">Logout</a></li>
-                    </ul>
-                {% else %}
-                    <li><a href="#!" data-activates="acceder" class="dropdown-button">Acceder
-                        <i class="material-icons right">arrow_drop_down</i></a></li>
-
-                    <ul id="acceder" class="dropdown-content">
-                        <li><a href="{% url 'register' %}">Registarse</a></li>
-                        <li><a href="{% url 'login' %}">Login</a></li>
-                    </ul>
-                {% endif %}
-            </ul>
-
-            <ul id="nav-mobile" class="side-nav">
-                {% if user.is_authenticated %}
-                    <li>
-                        <div class="userView">
-                            <div class="background">
-                                <img src="http://downloadwallpaper.org/wp-content/uploads/2016/05/newspaper-wallpaper4.jpg">
-                            </div>
-                            <a href="#!user"><img class="circle" src="{% static 'img/icon.png' %}"></a>
-                            <a href="#!name"><span class="white-text name">{{ user.username }}</span></a>
-                            <a href="#!email"><span class="white-text email">{{ user.email }}</span></a>
+    <header>
+        <nav class="{{ color_primary }}" role="navigation">
+            <div class="nav-wrapper container">
+                <a href="{% url 'home' %}" class="brand-logo">{% block encabezado %}{% endblock %}</a>
+                <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
+            </div>
+        </nav>
+        <ul id="nav-mobile" class="side-nav fixed">
+            {% if user.is_authenticated %}
+                <li>
+                    <div class="userView">
+                        <div class="background">
+                            <img src="http://downloadwallpaper.org/wp-content/uploads/2016/05/newspaper-wallpaper4.jpg">
                         </div>
-                    </li>
+                        <a href="#!user"><img class="circle" src="{% static 'img/icon.png' %}"></a>
+                        <a href="#!name"><span class="white-text name">{{ user.username }}</span></a>
+                        <a href="#!email"><span class="white-text email">{{ user.email }}</span></a>
+                    </div>
+                </li>
 
-                    <li><a href="{% url 'feeds' %}">Feeds</a></li>
-                    <li><a href="#">Perfil</a></li>
-                    <li class="divider"></li>
-                    <li><a href="{% url 'logout' %}">Logout</a></li>
-                {% else %}
-                    <li><a href="{% url 'register' %}">Registarse</a></li>
-                    <li><a href="{% url 'login' %}">Login</a></li>
-                {% endif %}
-            </ul>
-
-            <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
-        </div>
-    </nav>
+                <li><a href="{% url 'feeds' %}">Feeds</a></li>
+                <li><a href="#">Perfil</a></li>
+                <li class="divider"></li>
+                <li><a href="{% url 'logout' %}">Logout</a></li>
+            {% else %}
+                <li><a href="{% url 'register' %}">Registarse</a></li>
+                <li><a href="{% url 'login' %}">Login</a></li>
+            {% endif %}
+        </ul>
+    </header>
 
     <main class="">
         {% block contenido %}{% endblock %}

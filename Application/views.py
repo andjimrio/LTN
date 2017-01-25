@@ -1,9 +1,8 @@
 #encoding:utf-8
 # Create your views here.
 from django.shortcuts import render
-from django.contrib.auth import authenticate,login as auth_login,logout
 from django.contrib.auth.decorators import login_required
-from django.http import HttpResponseRedirect, HttpResponse
+from django.http import HttpResponseRedirect
 
 from Application.rss import LINK_ABC,LINK_ELPAIS,LINK_ACEPRENSA
 from Application.populate import populate_rss
@@ -60,31 +59,3 @@ def register(request):
         profile_form = UserProfileForm()
 
     return render(request, 'register.html',{'user_form':user_form,'profile_form':profile_form,'registered':registered})
-
-def user_login(request):
-    if request.method == 'POST':
-        username = request.POST.get('username')
-        password = request.POST.get('password')
-        user = authenticate(username=username, password=password)
-
-        if user:
-            if user.is_active:
-                auth_login(request, user)
-                return HttpResponseRedirect('/feeds/')
-
-            else:
-                return HttpResponse("Tu cuenta no está activa")
-
-        else:
-            print("Los datos no son correctos: {0}, {1}".format(username,password))
-            return HttpResponse("Los datos no son correctos")
-
-    else:
-        return render(request,'login.html',{})
-
-    pass
-
-@login_required
-def user_logout(request):
-    logout(request)
-    return HttpResponseRedirect('/')

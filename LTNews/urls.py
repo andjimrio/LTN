@@ -15,7 +15,9 @@ Including another URLconf
 """
 from django.conf.urls import url
 from django.contrib import admin
-from Application.views import home,load,feeds,article,register,user_login,user_logout
+from Application.views import home,load,feeds,article,register
+from django.contrib.auth.views import login,logout
+from django.core.urlresolvers import reverse_lazy
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
@@ -24,6 +26,6 @@ urlpatterns = [
     url(r'^feeds/', feeds, name='feeds'),
     url(r'^article/(?P<idItem>\w+)/', article, name='article'),
     url(r'^register/', register, name='register'),
-    url(r'^login/', user_login, name='login'),
-    url(r'^logout/', user_logout, name='logout'),
+    url(r'^login/', login, {'template_name':'login.html'}, name='login'),
+    url(r'^logout/', logout, {'next_page': reverse_lazy('home')}, name='logout'),
 ]

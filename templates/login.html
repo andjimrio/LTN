@@ -6,25 +6,27 @@
 
 {% block contenido %}
     <div class="container">
-        {% if errors %}
-            {% for error_message in error %}
-                <script>
-                    Materialize.toast('{{ error_message }}', 4000)
-                </script>
-            {% endfor %}
+        <div class="row center">
+            <div class="s12 input-field">
+                <h3 class="{{ color_secondary }}-text">¡Accede desde aquí!</h3>
+                <br>
+        {% if form.errors %}
+            <script>
+                Materialize.toast('{{ form.errors }}', 4000)
+            </script>
         {% endif %}
         <form id="login" method="POST" action="{% url 'login' %}">
             {% csrf_token %}
             <div class="row">
                 <div class="s12 input-field">
-                    <input id="username" name="username" type="text" class="validate" value="{{ username }}">
-                    <label for="username">Usuario</label>
+                    {{ form.username }}
+                    {{ form.username.label_tag }}
                 </div>
             </div>
             <div class="row">
                 <div class="s12 input-field">
-                    <input id="password" name="password" type="password" class="validate" value="{{ password }}">
-                    <label for="password">Contraseña</label>
+                    {{ form.password }}
+                    {{ form.password.label_tag }}
                 </div>
             </div>
             <div class="row">
@@ -32,6 +34,7 @@
                     <button class="btn waves-effect waves-light {{ color_primary }}" type="submit" name="action">Confirmar
                         <i class="material-icons right">send</i>
                     </button>
+                    <input type="hidden" name="next" value="{{ next }}" />
                 </div>
             </div>
         </form>

@@ -45,3 +45,8 @@ header, main, footer {
     background: url("http://www.hd-tecnologia.com/imagenes/articulos/2014/10/En-2015-estar%C3%A1n-conectados-mas-de-12.000-millones-de-dispositivos-a-Internet.jpg") center no-repeat;
     background-size: cover
 }
+
+.error {
+    font-size: 0.8rem;
+    color: #b71c1c;
+}

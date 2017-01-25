@@ -45,7 +45,7 @@ def register(request):
             profile = UserProfile()
             profile.user = user
             profile.save()
-            for url in profile_form.data['urls'].split('\n'):
+            for url in profile_form.data['urls'].split('\r\n'):
                 ide = populate_rss(url)
                 profile.feeds.add(Feed.objects.get(id=ide))
 

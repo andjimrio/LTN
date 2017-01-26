@@ -6,8 +6,14 @@
 {% block encabezado %}Article{% endblock %}
 
 {% block contenido %}
-    <a href="{{ article.url }}">{{ article.title }}</a>
-    <img src="{{ article.top_image }}" />
-    <p>{% autoescape off %}{% pretty_text article.text %}{% endautoescape %}</p>
+    <div class="container center">
+        <h4 class="{{ color_secondary }}-text" href="{{ article.url }}">{{ article.title }}</h4>
+    </div>
+    <div class="parallax-container">
+        <div class="parallax"><img src="{{ article.top_image }}" /></div>
+    </div>
+    <div class="section container">
+        <p class="justify">{% autoescape off %}{% pretty_text article.text %}{% endautoescape %}</p>
+    </div>
 
 {% endblock %}

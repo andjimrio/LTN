@@ -13,18 +13,20 @@
 
             <div class="row">
                 {% for item in feed.items.all %}
-                    <div class="col s12 m6 l4">
-                        <div class="card large">
+                    <div class="col s12">
+                        <div class="card horizontal small">
                             <div class="card-image">
                                 <img src="{% static "img/icon.png" %}">
-                                <span class="card-title">{{ item.title }}</span>
                             </div>
-                            <div class="card-content">
-                                <em>{{ item.pubDate }}</em>
-                                <p>{{ item.description }}</p>
-                            </div>
-                            <div class="card-action">
-                                <a href="{% url 'article' item.id %}" class="{{ color_primary }}-text">Leer más</a>
+                            <div class="card-stacked">
+                                <div class="card-content">
+                                    <p class="card-title">{{ item.title }}</p>
+                                    <em>{{ item.pubDate }}</em>
+                                    <p>{{ item.description }}</p>
+                                </div>
+                                <div class="card-action">
+                                    <a href="{% url 'article' item.id %}" class="{{ color_primary }}-text">Leer más</a>
+                                </div>
                             </div>
                         </div>
                     </div>

@@ -18,6 +18,8 @@ from django.contrib import admin
 from Application.views import home,load,feeds,article,register
 from django.contrib.auth.views import login,logout
 from django.core.urlresolvers import reverse_lazy
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
@@ -28,4 +30,4 @@ urlpatterns = [
     url(r'^register/', register, name='register'),
     url(r'^login/', login, {'template_name':'login.html'}, name='login'),
     url(r'^logout/', logout, {'next_page': reverse_lazy('home')}, name='logout'),
-]
+]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

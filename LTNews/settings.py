@@ -25,7 +25,6 @@ SECRET_KEY = 'id(pu606k)*c2vs24atw3$2+_5$elfs)2lpf6(6@7%p2x=*1*d'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
-TEMPLATE_DEBUG = DEBUG
 
 ALLOWED_HOSTS = ["lt-news.herokuapp.com", "www.lt-news.herokuapp.com","localhost", "127.0.0.1"]
 
@@ -67,6 +66,7 @@ TEMPLATES = [
         ,
         'APP_DIRS': True,
         'OPTIONS': {
+            'debug':DEBUG,
             'context_processors': [
                 'django.template.context_processors.debug',
                 'django.template.context_processors.request',
@@ -83,20 +83,18 @@ WSGI_APPLICATION = 'LTNews.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/1.10/ref/settings/#databases
-in_heroku = False
-if 'DATABASE_URL' in os.environ:
-    in_heroku = True
 
-import dj_database_url
-if in_heroku:
-    DATABASES = {'default': dj_database_url.config()}
-else:
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.sqlite3',
-            'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-        }
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'django_psql_db',
+        'USER': 'django_psql',
+        'PASSWORD': 'django_psql',
+        'HOST': 'localhost',
+        'PORT': '',
     }
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/1.10/ref/settings/#auth-password-validators

@@ -5,8 +5,8 @@ from django.contrib.auth.models import User
 # Create your models here.
 class Feed(models.Model):
     title = models.CharField(max_length=500)
-    link = models.CharField(max_length=500)
-    description = models.CharField(max_length=5000)
+    link = models.URLField()
+    description = models.TextField()
     language = models.CharField(max_length=50)
 
     def __str__(self):
@@ -16,8 +16,10 @@ class Feed(models.Model):
 
 class Item(models.Model):
     title = models.CharField(max_length=500)
-    link = models.CharField(max_length=500)
-    description = models.CharField(max_length=5000)
+    link = models.URLField()
+    description = models.TextField()
+    image = models.URLField()
+    article = models.TextField()
     pubDate = models.DateTimeField()
     creator = models.CharField(max_length=500)
 

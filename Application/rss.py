@@ -4,6 +4,7 @@ import feedparser
 from bs4 import BeautifulSoup
 from django.utils import timezone
 from dateutil.parser import parse
+from Application.web import get_from_rss
 
 LINK_ABC= 'http://www.abc.es/rss/feeds/abcPortada.xml'
 LINK_ELPAIS= 'http://ep00.epimg.net/rss/tags/ultimas_noticias.xml'
@@ -19,8 +20,10 @@ def read_rss(link):
     entries = [{'title':post.title,
                 'link':post.link,
                 'description':clean_html(post.description),
+                'image':get_from_rss(post.link)[0],
+                'article': get_from_rss(post.link)[1],
                 'creator':post.author if 'author' in post else "",
-                'pubDate': redo_date(post)}#parse(post.published, parserinfo='%a, %d %b %Y %H:%M:%S %z')}
+                'pubDate': redo_date(post)}
                for post in rss.entries]
     return feeder,entries
 

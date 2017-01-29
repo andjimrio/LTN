@@ -88,8 +88,16 @@ if 'DATABASE_URL' in os.environ:
     in_heroku = True
 
 if in_heroku:
-    import dj_database_url
-    DATABASES = {'default': dj_database_url.config()}
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql_psycopg2',
+            'NAME': 'd81s7buuete01o',
+            'USER': 'udumudglyiqdri',
+            'PASSWORD': '3c609a605348fe623b0a027d8aaf0d520424322ca200403605563b4e3447b836',
+            'HOST': 'ec2-54-163-230-198.compute-1.amazonaws.com',
+            'PORT': '5432',
+        }
+    }
 
     # Honor the 'X-Forwarded-Proto' header for request.is_secure()
     SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')

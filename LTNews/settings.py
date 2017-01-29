@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/1.10/ref/settings/
 """
 
 import os
+import dj_database_url
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -83,36 +84,14 @@ WSGI_APPLICATION = 'LTNews.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/1.10/ref/settings/#databases
-in_heroku = False
-if 'DATABASE_URL' in os.environ:
-    in_heroku = True
 
-if in_heroku:
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.postgresql_psycopg2',
-            'NAME': 'd81s7buuete01o',
-            'USER': 'udumudglyiqdri',
-            'PASSWORD': '3c609a605348fe623b0a027d8aaf0d520424322ca200403605563b4e3447b836',
-            'HOST': 'ec2-54-163-230-198.compute-1.amazonaws.com',
-            'PORT': '5432',
-        }
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
-
-    # Honor the 'X-Forwarded-Proto' header for request.is_secure()
-    SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
-
-else:
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.postgresql_psycopg2',
-            'NAME': 'django_psql_db',
-            'USER': 'django_psql',
-            'PASSWORD': 'django_psql',
-            'HOST': 'localhost',
-            'PORT': '',
-        }
-    }
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/1.10/ref/settings/#auth-password-validators
@@ -155,3 +134,10 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = (
     os.path.join(PROY_DIR,'static'),
 )
+
+# Update database configuration with $DATABASE_URL.
+db_from_env = dj_database_url.config(conn_max_age=500)
+DATABASES['default'].update(db_from_env)
+
+# Honor the 'X-Forwarded-Proto' header for request.is_secure()
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')

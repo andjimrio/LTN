@@ -37,12 +37,12 @@ header, main, footer {
 
 .primo-start-1 {
     height: 400px;
-    background: url("http://downloadwallpaper.org/wp-content/uploads/2016/05/newspaper-wallpaper4.jpg") center no-repeat;
+    background: url("/static/img/newspaper.jpg") center no-repeat;
     background-size: cover
 }
 .primo-start-2 {
     height: 400px;
-    background: url("http://www.hd-tecnologia.com/imagenes/articulos/2014/10/En-2015-estar%C3%A1n-conectados-mas-de-12.000-millones-de-dispositivos-a-Internet.jpg") center no-repeat;
+    background: url("/static/img/internet.jpg") center no-repeat;
     background-size: cover
 }
 

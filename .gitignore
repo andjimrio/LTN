@@ -94,3 +94,6 @@ ENV/
 
 # Distribution / packaging
 .idea
+
+# Whoosh
+/LTNews/whoosh_index/

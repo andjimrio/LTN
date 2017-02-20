@@ -1,3 +1,4 @@
+{{object.ide}}
 {{object.title}}
 {{object.article}}
 {{object.pubDate}}

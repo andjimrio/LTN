@@ -96,4 +96,4 @@ ENV/
 .idea
 
 # Whoosh
-/LTNews/whoosh_index/
+LTNews/whoosh_index/*

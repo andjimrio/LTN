@@ -1,0 +1,6 @@
+{{object.ide}}
+{{object.title}}
+{{object.article}}
+{{object.pubDate}}
+{{object.creator}}
+{{object.newspaper}}

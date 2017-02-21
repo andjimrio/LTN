@@ -2,7 +2,7 @@ from whoosh import index
 from whoosh.qparser import QueryParser
 from os.path import join,dirname,abspath
 
-PROJECT_DIR = dirname(abspath(__file__))
+PROJECT_DIR = dirname(dirname(abspath(__file__)))
 INDEX = join(PROJECT_DIR,"LTNews/whoosh_index")
 
 def keywords(id):

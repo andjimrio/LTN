@@ -14,6 +14,12 @@
     </div>
     <div class="section container">
         <p class="justify">{% autoescape off %}{% pretty_text article.text %}{% endautoescape %}</p>
+
+    <div class="section"></div>
+    {% for tag in tags %}
+        <div class="chip">{{ tag }}</div>
+    {% endfor %}
+
     </div>
 
 {% endblock %}

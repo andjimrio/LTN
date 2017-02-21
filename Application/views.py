@@ -10,6 +10,7 @@ from Application.queries import get_feeds_by_user,get_item
 from Application.web import get_article
 from Application.forms import UserForm,UserProfileForm
 from Application.models import UserProfile,Feed
+from Application.index_utilities import identity,keywords
 
 def home(request):
     return render(request,'index.html',{})
@@ -28,7 +29,8 @@ def feeds(request):
 def article(request, idItem=None):
     link = get_item(idItem).link
     article = get_article(link)
-    return render(request,'article.html',{'article':article})
+    tags = keywords(idItem)
+    return render(request,'article.html',{'article':article,'tags':tags})
 
 def register(request):
     registered = False

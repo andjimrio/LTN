@@ -30,7 +30,8 @@ def article(request, idItem=None):
     link = get_item(idItem).link
     article = get_article(link)
     tags = keywords(idItem)
-    return render(request,'article.html',{'article':article,'tags':tags})
+    news = [get_item(new) for new in identity(idItem)]
+    return render(request,'article.html',{'article':article,'tags':tags,'news':news})
 
 def register(request):
     registered = False

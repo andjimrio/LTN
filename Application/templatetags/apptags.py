@@ -17,3 +17,11 @@ def pretty_text(text):
     for k,v in dict.items():
         text = text.replace(k,v)
     return text
+
+
+@register.simple_tag
+def reduce_text(text):
+    if text.find('.')>50:
+        return text[:text.find('.')+1]
+    else:
+        return text

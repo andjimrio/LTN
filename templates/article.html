@@ -7,14 +7,14 @@
 
 {% block contenido %}
     <div class="container center">
-        <h4 class="{{ color_secondary }}-text" href="{{ article.url }}">{{ article.title }}</h4>
+        <h4 class="{{ color_secondary }}-text" href="{{ article.link }}">{{ article.title }}</h4>
     </div>
     <div class="parallax-container">
-        <div class="parallax"><img src="{{ article.top_image }}" /></div>
+        <div class="parallax"><img src="{{ article.image }}" /></div>
     </div>
     <div class="container">
         <div class="section">
-            <p class="justify">{% autoescape off %}{% pretty_text article.text %}{% endautoescape %}</p>
+            <p class="justify">{% autoescape off %}{% pretty_text article.article %}{% endautoescape %}</p>
         </div>
 
         <div class="divider"></div>
@@ -34,30 +34,17 @@
 
             <div class="row">
                 {% for item in news %}
-                    <div class="col s12">
-                        <div class="card horizontal">
+                    <div class="col s12 m6 ">
+                        <div class="card">
                             <div class="card-image">
                                 <img src="{{ item.image }}">
+                                <a class="btn-floating halfway-fab waves-effect waves-light {{ color_primary }}"
+                                    href="{% url 'article' item.id %}"><i class="material-icons">launch</i></a>
                             </div>
-                            <div class="card-stacked">
-                                <div class="card-content">
-                                    <p class="card-title">{{ item.title }}</p>
-                                    <em>{{ item.pubDate }}</em>
-                                    <p class="justify">{% reduce_text item.description %}</p>
-                                </div>
-                                <div class="card-action">
-                                    <a href="{% url 'article' item.id %}" class="{{ color_primary }}-text">Leer más</a>
-                                    <a href="#modal{{ item.id }}" class="{{ color_primary }}-text">Ver artículo</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div id="modal{{ item.id }}" class="modal modal-fixed-footer">
-                            <div class="modal-content">
-                                <h4>{{ item.title }}</h4>
-                                <p class="justify">{% autoescape off %}{% pretty_text item.article %}{% endautoescape %}</p>
-                            </div>
-                            <div class="modal-footer">
-                                <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Cerrar</a>
+                            <div class="card-content">
+                                <span class="card-title">{{ item.title }}</span>
+                                <small>{{ item.pubDate }}</small>
+                                <p class="justify">{% reduce_text item.description %}</p>
                             </div>
                         </div>
                     </div>

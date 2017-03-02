@@ -21,7 +21,7 @@ def pretty_text(text):
 
 @register.simple_tag
 def reduce_text(text):
-    if text.find('.')>50:
+    if len(text)>150:
         return text[:text.find('.')+1]
     else:
         return text

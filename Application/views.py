@@ -27,8 +27,7 @@ def feeds(request):
     return render(request,'feeds.html',{'feedes':feedes})
 
 def article(request, idItem=None):
-    link = get_item(idItem).link
-    article = get_article(link)
+    article = get_item(idItem)
     tags = keywords(idItem)
     news = [get_item(new) for new in identity(idItem)]
     return render(request,'article.html',{'article':article,'tags':tags,'news':news})

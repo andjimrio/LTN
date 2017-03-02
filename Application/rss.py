@@ -25,6 +25,7 @@ def read_rss(link):
                 'creator':post.author if 'author' in post else "",
                 'pubDate': redo_date(post)}
                for post in rss.entries]
+
     return feeder,entries
 
 def redo_date(post):

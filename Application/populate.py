@@ -10,9 +10,13 @@ def populate_rss(link):
         feeder.save()
         feederId=feeder.id
 
+    print('FEED RSS: \t' + str(rss))
+
     for entry in entries:
         if not Item.objects.filter(feed_id=feederId,title=entry['title']).exists():
             itemer = Item(feed_id=feederId, **entry)
             itemer.save()
+
+    print('ID FEED: ('+ str(feederId) +') - ')
 
     return feederId

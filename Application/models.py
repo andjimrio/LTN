@@ -12,6 +12,9 @@ class Feed(models.Model):
     def __str__(self):
         return self.title
 
+    class Meta:
+        ordering = ('title', )
+
     pass
 
 class Item(models.Model):
@@ -27,6 +30,9 @@ class Item(models.Model):
 
     def __str__(self):
         return self.title
+
+    class Meta:
+        ordering = ('-pubDate', )
 
     pass
 

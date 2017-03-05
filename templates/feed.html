@@ -40,7 +40,7 @@
                 {% endif %}
                 {% for i in news.paginator.page_range %}
                     {% if news.number == i %}
-                        <li class="active"><a>{{ i }}</a></li>
+                        <li class="active {{ color_primary }}"><a>{{ i }}</a></li>
                     {% else %}
                         <li class="waves-effect"><a href="?page={{ i }}">{{ i }}</a></li>
                     {% endif %}

@@ -11,3 +11,6 @@ def get_feeds_by_user(user_id):
 
 def get_item(id):
     return Item.objects.get(id=id)
+
+def get_feed(id):
+    return Feed.objects.get(id=id)

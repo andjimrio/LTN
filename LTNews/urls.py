@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.conf.urls import url, include
 from django.contrib import admin
-from Application.views import home,feeds,article,register
+from Application.views import home,feeds,feed,article,register
 from django.contrib.auth.views import login,logout
 from django.core.urlresolvers import reverse_lazy
 from django.conf import settings
@@ -25,8 +25,11 @@ import haystack.urls
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^$', home, name='home'),
+
     url(r'^feeds/', feeds, name='feeds'),
+    url(r'^feed/(?P<idFeed>\w+)/', feed, name='feed'),
     url(r'^article/(?P<idItem>\w+)/', article, name='article'),
+
     url(r'^register/', register, name='register'),
     url(r'^login/', login, {'template_name':'login.html'}, name='login'),
     url(r'^logout/', logout, {'next_page': reverse_lazy('home')}, name='logout'),

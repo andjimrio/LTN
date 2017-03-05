@@ -2,12 +2,10 @@
 # Create your views here.
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
-from django.http import HttpResponseRedirect
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
-from Application.rss import LINK_ABC,LINK_ELPAIS,LINK_ACEPRENSA
 from Application.populate import populate_rss
-from Application.queries import get_feeds_by_user,get_item
-from Application.web import get_article
+from Application.queries import get_feeds_by_user,get_item,get_feed
 from Application.forms import UserForm,UserProfileForm
 from Application.models import UserProfile,Feed
 from Application.index_utilities import identity,keywords
@@ -18,8 +16,16 @@ def home(request):
 @login_required
 def feeds(request):
     feedes = get_feeds_by_user(request.user.id)
+
     return render(request,'feeds.html',{'feedes':feedes})
 
+@login_required
+def feed(request, idFeed=None):
+    feeder = get_feed(idFeed)
+
+    return render(request,'feed.html',{'feed':feeder})
+
+@login_required
 def article(request, idItem=None):
     article = get_item(idItem)
     tags = keywords(idItem)

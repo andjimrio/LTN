@@ -21,9 +21,20 @@ def feeds(request):
 
 @login_required
 def feed(request, idFeed=None):
-    feeder = get_feed(idFeed)
+    page = request.GET.get('page')
 
-    return render(request,'feed.html',{'feed':feeder})
+    feeder = get_feed(idFeed)
+    paginator = Paginator(feeder.items.all(), 20)
+
+    try:
+        news = paginator.page(page)
+    except PageNotAnInteger:
+        news = paginator.page(1)
+    except EmptyPage:
+        news = paginator.page(paginator.num_pages)
+
+
+    return render(request,'feed.html',{'feed':feeder,'news':news})
 
 @login_required
 def article(request, idItem=None):

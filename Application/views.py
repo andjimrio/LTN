@@ -15,12 +15,6 @@ from Application.index_utilities import identity,keywords
 def home(request):
     return render(request,'index.html',{})
 
-def load(request):
-    populate_rss(LINK_ELPAIS)
-    populate_rss(LINK_ABC)
-    populate_rss(LINK_ACEPRENSA)
-    return HttpResponseRedirect('/')
-
 @login_required
 def feeds(request):
     feedes = get_feeds_by_user(request.user.id)

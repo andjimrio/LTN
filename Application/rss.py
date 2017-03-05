@@ -13,7 +13,7 @@ LINK_ACEPRENSA = 'http://www.aceprensa.com/rss/'
 def read_rss(link):
     rss = feedparser.parse(link)
     feeder = {'title':rss.feed.title,
-              'link':rss.feed.link,
+              'link':link,
               'description':rss.feed.description,
               'language':rss.feed.language}
 

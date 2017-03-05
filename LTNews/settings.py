@@ -55,7 +55,7 @@ MIDDLEWARE = [
 ]
 
 CRON_CLASSES = [
-    "Application.cron.cron",
+    "LTNews.cron.cron_update_rss",
     # ...
 ]
 

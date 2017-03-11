@@ -1,6 +1,7 @@
 from django_cron import CronJobBase, Schedule
 from Application.populate import populate_rss
 from Application.queries import all_feeds_link
+from django.core import management
 
 
 class cron_update_rss(CronJobBase):
@@ -17,4 +18,9 @@ class cron_update_rss(CronJobBase):
                 populate_rss(link['link'], printer=True)
                 #update_rss(ide['id'], printer=True)
             except:
-                print("Error de cron: ")
+                print("Error de cron")
+
+        try:
+            management.call_command('update_index')
+        except:
+            print("Error de haystack")

@@ -7,29 +7,50 @@
 {% block encabezado %}Feeds{% endblock %}
 
 {% block contenido %}
+    <br>
     <div class="container">
-        {% for feed in feedes %}
-            <h3 class="center"><a href="{% url 'feed' feed.id %}" class="{{ color_secondary }}-text">{{ feed.title }}</a></h3>
-            <h5 class="header center">{{ feed.description }}</h5>
-
-            <div class="row">
-                {% for item in feed.items.all %}
-                    <div class="col s12 m6 ">
-                        <div class="card">
-                            <div class="card-image">
-                                <img src="{{ item.image }}">
-                                <a class="btn-floating halfway-fab waves-effect waves-light {{ color_primary }}"
-                                    href="{% url 'article' item.id %}"><i class="material-icons">launch</i></a>
-                            </div>
-                            <div class="card-content">
-                                <span class="card-title">{{ item.title }}</span>
-                                <small>{{ item.pubDate }}</small>
-                                <p class="justify">{% reduce_text item.description %}</p>
-                            </div>
+        <div class="row">
+            {% for item in feedes %}
+                <div class="col s12 m6 ">
+                    <div class="card">
+                        <div class="card-image">
+                            <img src="{{ item.items__image }}">
+                            <a class="btn-floating halfway-fab waves-effect waves-light {{ color_primary }}"
+                                href="{% url 'article' item.items__id %}"><i class="material-icons">launch</i></a>
+                        </div>
+                        <div class="card-content">
+                            <span class="card-title">{{ item.items__title }}</span>
+                            <small>
+                                <a href="{% url 'feed' item.id%}">{{ item.title }}</a>
+                                |
+                                {{ item.items__pubDate }}</small>
+                            <p class="justify">{% reduce_text item.items__description %}</p>
                         </div>
                     </div>
+                </div>
+            {% endfor %}
+        </div>
+
+        {% if feedes.has_other_pages %}
+            <ul class="pagination">
+                {% if feedes.has_previous %}
+                    <li class="waves-effect"><a href="?page={{ feedes.previous_page_number }}"><i class="material-icons">chevron_left</i></a></li>
+                {% else %}
+                    <li class="disabled"><a><i class="material-icons">chevron_left</i></a></li>
+                {% endif %}
+                {% for i in feedes.paginator.page_range %}
+                    {% if feedes.number == i %}
+                        <li class="active {{ color_primary }}"><a>{{ i }}</a></li>
+                    {% else %}
+                        <li class="waves-effect"><a href="?page={{ i }}">{{ i }}</a></li>
+                    {% endif %}
                 {% endfor %}
-            </div>
-        {% endfor %}
+                {% if feedes.has_next %}
+                    <li class="waves-effect"><a href="?page={{ feedes.next_page_number }}"><i class="material-icons">chevron_right</i></a></li>
+                {% else %}
+                    <li class="disabled"><a><i class="material-icons">chevron_right</i></a></li>
+                {% endif %}
+            </ul>
+        {% endif %}
     </div>
 {% endblock %}

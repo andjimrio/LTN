@@ -5,7 +5,7 @@ from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 from Application.populate import populate_rss
-from Application.queries import get_feeds_by_user,get_item,get_feed
+from Application.queries import get_feeds_by_user,get_item,get_feed,get_last_items_by_user
 from Application.forms import UserForm,UserProfileForm
 from Application.models import UserProfile,Feed
 from Application.index_utilities import identity,keywords
@@ -15,7 +15,15 @@ def home(request):
 
 @login_required
 def feeds(request):
-    feedes = get_feeds_by_user(request.user.id)
+    page = request.GET.get('page')
+    paginator = Paginator( get_last_items_by_user(request.user.id), 20)
+
+    try:
+        feedes = paginator.page(page)
+    except PageNotAnInteger:
+        feedes = paginator.page(1)
+    except EmptyPage:
+        feedes = paginator.page(paginator.num_pages)
 
     return render(request,'feeds.html',{'feedes':feedes})
 

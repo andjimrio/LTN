@@ -9,6 +9,11 @@ class UserForm(forms.ModelForm):
     password = forms.CharField(widget=forms.PasswordInput())
     email = forms.EmailField(widget=forms.EmailInput(attrs={'class' : 'validate'}))
 
+    def __init__(self, user, *args, **kwargs):
+        super(UserForm, self).__init__(*args, **kwargs)
+        self.fields['username'].initial = user.username
+        self.fields['email'].initial = user.email
+
     class Meta:
         model = User
         fields = ('username','password','email')

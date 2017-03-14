@@ -14,6 +14,11 @@ def home(request):
     return render(request,'index.html',{})
 
 @login_required
+def profile(request):
+    feeds = get_feeds_by_user(request.user.id)
+    return render(request, 'profile.html', {'feeds':feeds})
+
+@login_required
 def feeds(request):
     page = request.GET.get('page')
     paginator = Paginator( get_last_items_by_user(request.user.id), 20)

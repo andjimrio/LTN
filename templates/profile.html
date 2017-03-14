@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block titulo %}Profile{% endblock %}
+
+{% block encabezado %}Lista de feeds{% endblock %}
+
+{% block contenido %}
+    <div class="container">
+        <div class="row">
+            <div class="col s12">
+                <h3 class="{{ color_secondary }}-text  center">Lista de Feeds</h3>
+                <br>
+
+                <ul class="collection">
+                    {% for feed in feeds %}
+                        <li class="collection-item avatar">
+                            <img src="http://pad1.whstatic.com/images/thumb/c/c6/Newspaper-Outline-5.jpg/708px-Newspaper-Outline-5.jpg" alt="" class="circle">
+                            <span class="title">{{ feed.title }}</span>
+                            <p>{{ feed.description }}<br>
+                            <small>{{ feed.link }}</small></p>
+
+                            <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
+                        </li>
+                    {% endfor %}
+                </ul>
+
+                <br>
+
+                <a class="btn waves-effect waves-light {{ color_primary }}" href="">
+                    Nuevo Feed <i class="material-icons right">send</i>
+                </a>
+            </div>
+        </div>
+    </div>
+{% endblock %}

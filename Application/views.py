@@ -1,60 +1,14 @@
 #encoding:utf-8
-# Create your views here.
+# Create your view here.
 from django.shortcuts import render
-from django.contrib.auth.decorators import login_required
-from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
-from Application.populate import populate_rss
-from Application.queries import get_feeds_by_user,get_item,get_feed,get_last_items_by_user
 from Application.forms import UserForm,UserProfileForm
 from Application.models import UserProfile,Feed
-from Application.index_utilities import identity,keywords
+from Application.utilities.populate_utilities import populate_rss
+
 
 def home(request):
     return render(request,'index.html',{})
-
-@login_required
-def profile(request):
-    feeds = get_feeds_by_user(request.user.id)
-    return render(request, 'profile.html', {'feeds':feeds})
-
-@login_required
-def feeds(request):
-    page = request.GET.get('page')
-    paginator = Paginator( get_last_items_by_user(request.user.id), 20)
-
-    try:
-        feedes = paginator.page(page)
-    except PageNotAnInteger:
-        feedes = paginator.page(1)
-    except EmptyPage:
-        feedes = paginator.page(paginator.num_pages)
-
-    return render(request,'feeds.html',{'feedes':feedes})
-
-@login_required
-def feed(request, idFeed=None):
-    page = request.GET.get('page')
-
-    feeder = get_feed(idFeed)
-    paginator = Paginator(feeder.items.all(), 20)
-
-    try:
-        news = paginator.page(page)
-    except PageNotAnInteger:
-        news = paginator.page(1)
-    except EmptyPage:
-        news = paginator.page(paginator.num_pages)
-
-
-    return render(request,'feed.html',{'feed':feeder,'news':news})
-
-@login_required
-def article(request, idItem=None):
-    article = get_item(idItem)
-    tags = keywords(idItem)
-    news = [get_item(new) for new in identity(idItem)]
-    return render(request,'article.html',{'article':article,'tags':tags,'news':news})
 
 def register(request):
     registered = False

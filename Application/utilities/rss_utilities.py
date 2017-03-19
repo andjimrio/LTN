@@ -2,9 +2,10 @@
 
 import feedparser
 from bs4 import BeautifulSoup
-from django.utils import timezone
 from dateutil.parser import parse
-from Application.web import get_from_rss
+from django.utils import timezone
+
+from Application.utilities.web_utilitites import get_from_rss
 
 LINK_ABC= 'http://www.abc.es/rss/feeds/abcPortada.xml'
 LINK_ELPAIS= 'http://ep00.epimg.net/rss/tags/ultimas_noticias.xml'

@@ -1,7 +1,8 @@
-from django_cron import CronJobBase, Schedule
-from Application.populate import populate_rss
-from Application.queries import all_feeds_link
 from django.core import management
+from django_cron import CronJobBase, Schedule
+
+from Application.utilities.populate_utilities import populate_rss
+from Application.utilities.queries_utilities import all_feeds_link
 
 
 class cron_update_rss(CronJobBase):

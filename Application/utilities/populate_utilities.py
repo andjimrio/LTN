@@ -1,5 +1,5 @@
 from Application.models import Feed,Item
-from Application.rss import read_rss
+from Application.utilities.rss_utilities import read_rss
 
 
 def populate_rss(link, printer=False):

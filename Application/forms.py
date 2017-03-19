@@ -24,3 +24,8 @@ class UserProfileForm(forms.Form):
     urls = forms.CharField(widget=forms.Textarea(attrs={'class' : 'materialize-textarea'}))
 
     pass
+
+class FeedForm(forms.Form):
+    url = forms.URLField(widget=forms.URLInput(attrs={'class' : 'validate'}))
+
+    pass

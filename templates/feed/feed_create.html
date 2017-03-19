@@ -10,22 +10,26 @@
             <div class="col s12 input-field">
                 <h3 class="{{ color_secondary }}-text  center">Añadir nuevo Feed</h3>
                 <br>
-        {% if form.errors %}
+        {% if feed_form.errors or error %}
             <ul class="collection with-header red-text text-darken-4">
                 <li class="collection-header"><h4>Errores</h4></li>
-                {% for error in  form.non_field_errors %}
+                {% for error in  feed_form.non_field_errors %}
                     <li class="collection-item">{{error|escape }}</li>
                 {% endfor %}
+                {% if error %}
+                    <li class="collection-item">El link no se procesó correctamente</li>
+                {% endif %}
             </ul>
             <br>
         {% endif %}
-        <form id="register" method="POST" action="{% url 'feed_create' %}">
+
+        <form id="feed_form" method="POST" action="{% url 'feed_create' %}">
             {% csrf_token %}
 
             {% for field in feed_form %}
             <div class="row">
                 <div class="col s12 input-field">
-                    <i class="material-icons prefix">mode_edit</i>
+                    <i class="material-icons prefix">language</i>
                     {{ field }}
                     {{ field.label_tag }}
                     <em class="error">{% for error in  field.errors %}{{ error }}{% endfor %}</em>

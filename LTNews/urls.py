@@ -21,19 +21,20 @@ from django.core.urlresolvers import reverse_lazy
 from django.contrib import admin
 
 from Application import views
-from Application.view import feed_view
-from Application.view import item_view
+from Application.view import feed_views
+from Application.view import item_views
 import haystack.urls
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^$', views.home, name='home'),
 
-    url(r'^feeds/', item_view.item_list, name='feeds'),
-    url(r'^article/(?P<idItem>\w+)/', item_view.item_view, name='article'),
+    url(r'^feed/view/(?P<idFeed>\w+)/', feed_views.feed_view, name='feed'),
+    url(r'^profile/', feed_views.feed_list, name='profile'),
+    url(r'^feed/create/', feed_views.feed_create, name='feed_create'),
 
-    url(r'^feed/(?P<idFeed>\w+)/', feed_view.feed_view, name='feed'),
-    url(r'^profile/', feed_view.feed_list, name='profile'),
+    url(r'^feeds/', item_views.item_list, name='feeds'),
+    url(r'^article/(?P<idItem>\w+)/', item_views.item_view, name='article'),
 
     url(r'^register/', views.register, name='register'),
     url(r'^login/', login, {'template_name':'login.html'}, name='login'),

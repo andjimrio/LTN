@@ -1,34 +1,36 @@
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 
-from Application.forms import UserForm,UserProfileForm
+from Application.forms import FeedForm
 from Application.models import UserProfile,Feed
 from Application.utilities.populate_utilities import populate_rss
 from Application.utilities.queries_utilities import get_feeds_by_user,get_feed
 
 @login_required
 def feed_create(request):
+    error = False
+
     if request.method == 'POST':
-        feed_form = UserProfileForm(request.POST)
+        feed_form = FeedForm(request.POST)
 
         if feed_form.is_valid():
             profile = UserProfile.objects.get(user=request.user)
-            for url in fee_form.data['urls'].split('\r\n'):
+            url = feed_form.data['url']
+            try:
                 ide = populate_rss(url)
                 profile.feeds.add(Feed.objects.get(id=ide))
-
-            registered = True
+                redirect('feed_list')
+            except:
+                error = True
 
         else:
-            print(user_form.errors, profile_form.errors)
+            print(feed_form.errors)
 
     else:
-        user_form = UserForm()
-        profile_form = UserProfileForm()
+        feed_form = FeedForm()
 
-    return render(request, 'register.html',{'user_form':user_form,'profile_form':profile_form,'registered':registered})
-    return
+    return render(request, 'feed/feed_create.html',{'feed_form':feed_form, 'error':error})
 
 
 @login_required

@@ -3,8 +3,11 @@ from Application.models import Feed,Item,UserProfile
 def all_feeds():
     return Feed.objects.all()
 
-def all_feeds_link():
-    return Feed.objects.all().values('link')
+def all_feeds_link(user_id=None):
+    if user_id == None:
+        return Feed.objects.all().values('link')
+    else:
+        return Feed.objects.all().exclude(users__user_id=user_id).values('link')
 
 def get_feeds_by_user(user_id):
     return UserProfile.objects.get(user__id=user_id).feeds.all()

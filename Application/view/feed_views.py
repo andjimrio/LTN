@@ -5,7 +5,7 @@ from django.shortcuts import render,redirect
 from Application.forms import FeedForm
 from Application.models import UserProfile,Feed
 from Application.utilities.populate_utilities import populate_rss
-from Application.utilities.queries_utilities import get_feeds_by_user,get_feed
+from Application.utilities.queries_utilities import get_feeds_by_user,get_feed,all_feeds_link
 
 @login_required
 def feed_create(request):
@@ -30,7 +30,9 @@ def feed_create(request):
     else:
         feed_form = FeedForm()
 
-    return render(request, 'feed/feed_create.html',{'feed_form':feed_form, 'error':error})
+    urls = all_feeds_link(request.user.id)
+
+    return render(request, 'feed/feed_create.html',{'feed_form':feed_form, 'error':error, 'urls':urls})
 
 
 @login_required

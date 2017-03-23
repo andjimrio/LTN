@@ -37,10 +37,10 @@ def feed_create(request):
 
 
 @login_required
-def feed_view(request, idFeed=None):
+def feed_view(request, feed_id=None):
     page = request.GET.get('page')
 
-    feeder = get_feed(idFeed)
+    feeder = get_feed(feed_id)
     paginator = Paginator(feeder.items.all(), 20)
 
     try:

@@ -20,7 +20,7 @@
  
             {% for result in page.object_list %}
                 <p>
-                    <a href="{% url 'article' result.object.id %}">{{ result.object.title }}</a>
+                    <a href="{% url 'item_view' result.object.id %}">{{ result.object.title }}</a>
                 </p>
             {% empty %}
                 <p>No results found.</p>

@@ -29,17 +29,21 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^$', views.home, name='home'),
 
-    url(r'^feed/view/(?P<idFeed>\w+)/', feed_views.feed_view, name='feed'),
-    url(r'^profile/', feed_views.feed_list, name='profile'),
+    #Feed
+    url(r'^feed/view/(?P<feed_id>\d+)/', feed_views.feed_view, name='feed_view'),
+    url(r'^feed/list/', feed_views.feed_list, name='feed_list'),
     url(r'^feed/create/', feed_views.feed_create, name='feed_create'),
-    url(r'^feed/delete/(?P<feed_id>\w+)/', feed_views.feed_delete, name='feed_delete'),
+    url(r'^feed/delete/(?P<feed_id>\d+)/', feed_views.feed_delete, name='feed_delete'),
 
-    url(r'^feeds/', item_views.item_list, name='feeds'),
-    url(r'^article/(?P<idItem>\w+)/', item_views.item_view, name='article'),
+    #Item
+    url(r'^item/list/', item_views.item_list, name='item_list'),
+    url(r'^item/view/(?P<item_id>\d+)/', item_views.item_view, name='item_view'),
 
+    #User
     url(r'^register/', views.register, name='register'),
     url(r'^login/', login, {'template_name':'login.html'}, name='login'),
     url(r'^logout/', logout, {'next_page': reverse_lazy('home')}, name='logout'),
 
+    #Otras
     url(r'^search/', include('haystack.urls')),
 ]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

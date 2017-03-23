@@ -13,7 +13,7 @@
             {% if user.is_authenticated %}
                 <h3>Bienvenido de nuevo, {{ user.username }}</h3>
                 <a class="btn-large waves-effect waves-light {{ color_secondary }} accent-1"
-                    href="{% url 'feeds' %}">Feeds</a>
+                    href="{% url 'item_list' %}">Noticias</a>
             {% else %}
                 <h3>Otra forma de entender el periódico digital</h3>
                 <a class="btn-large waves-effect waves-light {{ color_secondary }} accent-1"

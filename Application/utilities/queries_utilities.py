@@ -3,6 +3,12 @@ from Application.models import Feed,Item,UserProfile
 def all_feeds():
     return Feed.objects.all()
 
+def user_has_feed(user_id,feed_id):
+    return get_feeds_by_user(user_id).filter(id=feed_id).exists()
+
+def get_feed_link(link):
+    return Feed.objects.get(link=link).id
+
 def all_feeds_link(user_id=None):
     if user_id == None:
         return Feed.objects.all().values('link')
@@ -22,3 +28,6 @@ def get_item(id):
 
 def get_feed(id):
     return Feed.objects.get(id=id)
+
+def get_profile(user_id):
+    return UserProfile.objects.get(user=user_id)

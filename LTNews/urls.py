@@ -32,6 +32,7 @@ urlpatterns = [
     url(r'^feed/view/(?P<idFeed>\w+)/', feed_views.feed_view, name='feed'),
     url(r'^profile/', feed_views.feed_list, name='profile'),
     url(r'^feed/create/', feed_views.feed_create, name='feed_create'),
+    url(r'^feed/delete/(?P<feed_id>\w+)/', feed_views.feed_delete, name='feed_delete'),
 
     url(r'^feeds/', item_views.item_list, name='feeds'),
     url(r'^article/(?P<idItem>\w+)/', item_views.item_view, name='article'),

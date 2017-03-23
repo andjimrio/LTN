@@ -3,9 +3,10 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.shortcuts import render,redirect
 
 from Application.forms import FeedForm
-from Application.models import UserProfile,Feed
+from Application.models import Feed
 from Application.utilities.populate_utilities import populate_rss
-from Application.utilities.queries_utilities import get_feeds_by_user,get_feed,all_feeds_link
+from Application.utilities.queries_utilities import get_feeds_by_user,get_feed,all_feeds_link,\
+    user_has_feed,get_profile
 
 @login_required
 def feed_create(request):
@@ -15,12 +16,12 @@ def feed_create(request):
         feed_form = FeedForm(request.POST)
 
         if feed_form.is_valid():
-            profile = UserProfile.objects.get(user=request.user)
+            profile = get_profile(request.user)
             url = feed_form.data['url']
             try:
                 ide = populate_rss(url)
                 profile.feeds.add(Feed.objects.get(id=ide))
-                redirect('feed_list')
+                return redirect('profile')
             except:
                 error = True
 
@@ -57,3 +58,12 @@ def feed_view(request, idFeed=None):
 def feed_list(request):
     feeds = get_feeds_by_user(request.user.id)
     return render(request, 'feed/feed_list.html', {'feeds':feeds})
+
+@login_required
+def feed_delete(request, feed_id):
+    if user_has_feed(request.user.id, feed_id):
+        profile = get_profile(request.user)
+        profile.feeds.remove(get_feed(feed_id))
+        profile.save()
+
+    return redirect('profile')

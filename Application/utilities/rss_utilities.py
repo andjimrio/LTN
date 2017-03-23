@@ -16,17 +16,24 @@ def read_rss(link):
     feeder = {'title':rss.feed.title,
               'link':link,
               'description':rss.feed.description,
-              'language':rss.feed.language}
+              'language': redo_string('language',rss.feed)
+              }
 
     entries = [{'title':post.title,
                 'link':post.link,
                 'description':clean_html(post.description),
                 'image':get_from_rss(post.link)[0],
                 'article': get_from_rss(post.link)[1],
-                'creator':post.author if 'author' in post else "",
+                'creator': redo_string('author',post),
                 'pubDate': redo_date(post)}
                for post in rss.entries]
     return feeder,entries
+
+def redo_string(string, dict):
+    if string in dict:
+        return dict[string]
+    else:
+        return ""
 
 def redo_date(post):
     if 'published' in post:

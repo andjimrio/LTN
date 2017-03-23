@@ -7,7 +7,10 @@ def user_has_feed(user_id,feed_id):
     return get_feeds_by_user(user_id).filter(id=feed_id).exists()
 
 def get_feed_link(link):
-    return Feed.objects.get(link=link).id
+    if Feed.objects.filter(link=link).exists():
+        return Feed.objects.get(link=link).id
+    else:
+        return None
 
 def all_feeds_link(user_id=None):
     if user_id == None:

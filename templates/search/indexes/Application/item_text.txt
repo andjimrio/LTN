@@ -1,6 +1,6 @@
-{{object.ide}}
+{{object.id}}
 {{object.title}}
 {{object.article}}
 {{object.pubDate}}
 {{object.creator}}
-{{object.newspaper}}
+{{object.feed.title}}

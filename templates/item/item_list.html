@@ -14,6 +14,12 @@
                 <div class="col s12 m6 ">
                     {% show_card item.items__title item.items__image item.items__pubDate item.items__description color_primary item.items__id item.title item.id %}
                 </div>
+            {% empty %}
+                <ul class="collection">
+                    <a href="{% url 'feed_create' %}" class="collection-item">
+                        Añade tus periódicos favoritos
+                    </a>
+                </ul>
             {% endfor %}
         </div>
 

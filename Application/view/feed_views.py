@@ -21,7 +21,7 @@ def feed_create(request):
             try:
                 ide = populate_rss(url)
                 profile.feeds.add(Feed.objects.get(id=ide))
-                return redirect('profile')
+                return redirect('feed_list')
             except:
                 error = True
 
@@ -66,4 +66,4 @@ def feed_delete(request, feed_id):
         profile.feeds.remove(get_feed(feed_id))
         profile.save()
 
-    return redirect('profile')
+    return redirect('feed_list')

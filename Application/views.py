@@ -1,23 +1,20 @@
 #encoding:utf-8
 # Create your view here.
-from django.shortcuts import render
+from django.shortcuts import render,redirect
+from django.contrib.auth import authenticate, login
 
-from Application.forms import UserForm,UserProfileForm
+from Application.forms import UserForm
 from Application.models import UserProfile,Feed
-from Application.utilities.populate_utilities import populate_rss
 
 
 def home(request):
     return render(request,'index.html',{})
 
 def register(request):
-    registered = False
-
     if request.method == 'POST':
         user_form = UserForm(request.POST)
-        profile_form = UserProfileForm(request.POST)
 
-        if user_form.is_valid() and profile_form.is_valid():
+        if user_form.is_valid():
             user = user_form.save()
             user.set_password(user.password)
             user.save()
@@ -25,17 +22,13 @@ def register(request):
             profile = UserProfile()
             profile.user = user
             profile.save()
-            for url in profile_form.data['urls'].split('\r\n'):
-                ide = populate_rss(url)
-                profile.feeds.add(Feed.objects.get(id=ide))
 
-            registered = True
+            return redirect('feed_list')
 
         else:
-            print(user_form.errors, profile_form.errors)
+            print(user_form.errors)
 
     else:
         user_form = UserForm()
-        profile_form = UserProfileForm()
 
-    return render(request, 'register.html',{'user_form':user_form,'profile_form':profile_form,'registered':registered})
+    return render(request, 'register.html',{'user_form':user_form})

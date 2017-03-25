@@ -25,3 +25,20 @@ def reduce_text(text):
         return text[:text.find('.')+1]
     else:
         return text
+
+
+@register.simple_tag
+def reduce_title(text):
+    return text[:50] + "..."
+
+
+@register.inclusion_tag('tags/card.html')
+def show_card(title, image, pubDate, description, color_primary, item_id, newspaper=None, feed_id=None):
+    return {'title':title,
+            'image':image,
+            'pubDate':pubDate,
+            'description':description,
+            'item_id':item_id,
+            'color_primary':color_primary,
+            'newspaper':newspaper if newspaper != None else "",
+            'feed_id':feed_id if newspaper != None else ""}

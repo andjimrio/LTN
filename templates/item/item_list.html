@@ -2,9 +2,9 @@
 {% load static %}
 {% load apptags %}
 
-{% block titulo %}Feeds{% endblock %}
+{% block titulo %}Noticias{% endblock %}
 
-{% block encabezado %}Feeds{% endblock %}
+{% block encabezado %}Noticias{% endblock %}
 
 {% block contenido %}
     <br>
@@ -12,21 +12,7 @@
         <div class="row">
             {% for item in feedes %}
                 <div class="col s12 m6 ">
-                    <div class="card">
-                        <div class="card-image">
-                            <img src="{{ item.items__image }}">
-                            <a class="btn-floating halfway-fab waves-effect waves-light {{ color_primary }}"
-                                href="{% url 'item_view' item.items__id %}"><i class="material-icons">launch</i></a>
-                        </div>
-                        <div class="card-content">
-                            <span class="card-title">{{ item.items__title }}</span>
-                            <small>
-                                <a href="{% url 'feed_view' item.id%}">{{ item.title }}</a>
-                                |
-                                {{ item.items__pubDate }}</small>
-                            <p class="justify">{% reduce_text item.items__description %}</p>
-                        </div>
-                    </div>
+                    {% show_card item.items__title item.items__image item.items__pubDate item.items__description color_primary item.items__id item.title item.id %}
                 </div>
             {% endfor %}
         </div>

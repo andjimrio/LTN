@@ -1,0 +1,19 @@
+{% load apptags %}
+
+<div class="card">
+    <div class="card-image">
+        <img src="{{ image }}">
+        <a class="btn-floating halfway-fab waves-effect waves-light {{ color_primary }}"
+            href="{% url 'item_view' item_id %}"><i class="material-icons">launch</i></a>
+    </div>
+    <div class="card-content">
+        <span class="card-title">{{ title }}</span>
+        <small>
+            {% if newspaper != '' %}
+            <a href="{% url 'feed_view' feed_id %}">{{ newspaper }}</a>
+            |
+            {% endif %}
+            {{ pubDate }}</small>
+        <p class="justify">{% reduce_text description %}</p>
+    </div>
+</div>

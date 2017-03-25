@@ -17,26 +17,6 @@
             {% endfor %}
         </div>
 
-        {% if feedes.has_other_pages %}
-            <ul class="pagination">
-                {% if feedes.has_previous %}
-                    <li class="waves-effect"><a href="?page={{ feedes.previous_page_number }}"><i class="material-icons">chevron_left</i></a></li>
-                {% else %}
-                    <li class="disabled"><a><i class="material-icons">chevron_left</i></a></li>
-                {% endif %}
-                {% for i in feedes.paginator.page_range %}
-                    {% if feedes.number == i %}
-                        <li class="active {{ color_primary }}"><a>{{ i }}</a></li>
-                    {% else %}
-                        <li class="waves-effect"><a href="?page={{ i }}">{{ i }}</a></li>
-                    {% endif %}
-                {% endfor %}
-                {% if feedes.has_next %}
-                    <li class="waves-effect"><a href="?page={{ feedes.next_page_number }}"><i class="material-icons">chevron_right</i></a></li>
-                {% else %}
-                    <li class="disabled"><a><i class="material-icons">chevron_right</i></a></li>
-                {% endif %}
-            </ul>
-        {% endif %}
+        {% show_pagination feedes color_primary %}
     </div>
 {% endblock %}

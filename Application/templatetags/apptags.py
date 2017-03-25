@@ -42,3 +42,7 @@ def show_card(title, image, pubDate, description, color_primary, item_id, newspa
             'color_primary':color_primary,
             'newspaper':newspaper if newspaper != None else "",
             'feed_id':feed_id if newspaper != None else ""}
+
+@register.inclusion_tag('tags/pagination.html')
+def show_pagination(news,color_primary):
+    return {'news':news,'color_primary':color_primary}

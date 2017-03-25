@@ -3,14 +3,14 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.shortcuts import render
 
 from Application.utilities.index_utilities import identity,keywords
-from Application.utilities.queries_utilities import get_item,get_last_items_by_user,get_feeds_title_by_user
+from Application.utilities.queries_utilities import get_item,get_last_items_by_user
 
 
 @login_required
 def item_view(request, item_id=None):
     article = get_item(item_id)
     tags = keywords(item_id)
-    news = [new.object for new in identity(article,get_feeds_title_by_user(request.user.id))]
+    news = identity(article,request.user.id)
     return render(request, 'item/item_view.html', {'article':article, 'tags':tags, 'news':news})
 
 @login_required

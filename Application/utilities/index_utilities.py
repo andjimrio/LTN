@@ -2,7 +2,8 @@ from whoosh import index
 from whoosh.qparser import QueryParser
 from os.path import join,dirname,abspath,exists
 from haystack.query import SearchQuerySet
-from haystack.inputs import AutoQuery
+
+from Application.utilities.queries_utilities import exists_feeds_title_by_user
 
 PROJECT_DIR = dirname(dirname(dirname(abspath(__file__))))
 INDEX = join(PROJECT_DIR,"LTNews","whoosh_index")
@@ -34,10 +35,10 @@ def keywords(id):
 
     return keywords
 
-def identity(item,not_newspapers):
-    #newspapers = " or ".join([new['title']for new in not_newspapers])
-    #.filter(newspaper=AutoQuery(newspapers))
-    more_results = SearchQuerySet().more_like_this(item).all()
+def identity(item,user_id):
+    more_results_set = SearchQuerySet().more_like_this(item).all()
+    more_results = [new.object for new in more_results_set if exists_feeds_title_by_user(user_id,new.object.feed.id)]
+
     return more_results
 
 

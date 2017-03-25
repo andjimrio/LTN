@@ -21,6 +21,9 @@ def all_feeds_link(user_id=None):
 def get_feeds_by_user(user_id):
     return UserProfile.objects.get(user__id=user_id).feeds.all()
 
+def get_feeds_title_by_user(user_id):
+    return get_feeds_by_user(user_id).values('title').all()
+
 def get_last_items_by_user(user_id):
     return UserProfile.objects.get(user__id=user_id).feeds.all()\
         .values('id','title','items__id','items__title','items__description','items__pubDate','items__image')\

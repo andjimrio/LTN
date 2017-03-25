@@ -1,6 +1,8 @@
 from whoosh import index
 from whoosh.qparser import QueryParser
 from os.path import join,dirname,abspath,exists
+from haystack.query import SearchQuerySet
+from haystack.inputs import AutoQuery
 
 PROJECT_DIR = dirname(dirname(dirname(abspath(__file__))))
 INDEX = join(PROJECT_DIR,"LTNews","whoosh_index")
@@ -32,15 +34,10 @@ def keywords(id):
 
     return keywords
 
-def identity(id):
-    ix = get_index()
-    if ix == False:
-        return []
-    results = query_search(ix, "ide", str(id))
-    first_hit = results[0]
-    more_results = [more['ide'] for more in first_hit.more_like_this("article")]
-    close_query(ix)
-
+def identity(item,not_newspapers):
+    #newspapers = " or ".join([new['title']for new in not_newspapers])
+    #.filter(newspaper=AutoQuery(newspapers))
+    more_results = SearchQuerySet().more_like_this(item).all()
     return more_results
 
 

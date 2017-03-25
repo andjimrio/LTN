@@ -1,7 +1,7 @@
 from django.core import management
 from django_cron import CronJobBase, Schedule
 
-from Application.utilities.populate_utilities import populate_rss
+from Application.utilities.populate_utilities import update_feed
 from Application.utilities.queries_utilities import all_feeds_link
 
 
@@ -16,8 +16,7 @@ class cron_update_rss(CronJobBase):
         print("Actualizando entradas")
         for link in all_feeds_link():
             try:
-                populate_rss(link['link'], printer=True)
-                #update_rss(ide['id'], printer=True)
+                update_feed(link['link'], printer=True)
             except:
                 print("Error de cron")
 

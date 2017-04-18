@@ -76,6 +76,11 @@ class Item(models.Model):
     class Meta:
         ordering = ('-pubDate', )
 
+    def create_status(self):
+        for section in self.feed.section:
+            Status.objects.create(user=section.user,item=self)
+        pass
+
     pass
 
 

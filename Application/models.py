@@ -43,7 +43,7 @@ class Feed(models.Model):
     language = models.CharField(max_length=50)
     logo = models.URLField()
 
-    section = models.ManyToManyField(Section,related_name="feeds")
+    sections = models.ManyToManyField(Section,related_name="feeds")
 
     def __str__(self):
         return self.title

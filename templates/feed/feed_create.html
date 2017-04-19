@@ -61,11 +61,11 @@
 
 {% block javascript %}
     <script>
-    jQuery(document).ready(function($) {
-        $('input.autocomplete').autocomplete({
+    $(document).ready(function($) {
+        $('#id_url').autocomplete({
             data: {
                 {% for url in urls %}
-                    "{{ url.link }}":'',
+                    "{{ url.link_rss }}":'',
                 {% endfor %}
                 "": ''
             },
@@ -74,6 +74,21 @@
                 // Callback function when value is autocompleted.
             },
             minLength: 3, // The minimum length of the input for the autocomplete to start. Default: 1.
+        });
+    });
+    $(document).ready(function($) {
+        $('#id_section').autocomplete({
+            data: {
+                {% for section in sections %}
+                    "{{ section.title }}":'',
+                {% endfor %}
+                "": ''
+            },
+            limit: 20, // The max amount of results that can be shown at once. Default: Infinity.
+            onAutocomplete: function (val) {
+                // Callback function when value is autocompleted.
+            },
+            minLength: 1, // The minimum length of the input for the autocomplete to start. Default: 1.
         });
     });
     </script>

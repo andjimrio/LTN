@@ -33,7 +33,7 @@ urlpatterns = [
     url(r'^feed/view/(?P<feed_id>\d+)/', feed_views.feed_view, name='feed_view'),
     url(r'^feed/list/', feed_views.feed_list, name='feed_list'),
     url(r'^feed/create/', feed_views.feed_create, name='feed_create'),
-    url(r'^feed/delete/(?P<feed_id>\d+)/', feed_views.feed_delete, name='feed_delete'),
+    url(r'^feed/delete/(?P<section_id>\d+)/(?P<feed_id>\d+)/', feed_views.feed_delete, name='feed_delete'),
 
     #Item
     url(r'^item/list/', item_views.item_list, name='item_list'),

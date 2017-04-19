@@ -20,7 +20,8 @@
                                 <p>{{ feed.description }}<br>
                                 <small>{{ feed.link }}</small></p>
 
-                                <a href="{% url 'feed_delete' feed.id %}" class="secondary-content"><i class="material-icons">delete</i></a>
+                                <a href="{% url 'feed_delete' section.id feed.id %}"
+                                   class="secondary-content"><i class="material-icons">delete</i></a>
                             </li>
                         {% empty %}
                             <a href="{% url 'feed_create' %}" class="collection-item">

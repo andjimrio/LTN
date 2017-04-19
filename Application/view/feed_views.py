@@ -6,7 +6,7 @@ from Application.forms import FeedForm
 from Application.models import Feed,Section
 from Application.utilities.populate_utilities import populate_rss
 from Application.utilities.queries_utilities import get_feeds_by_user,get_feed,all_feeds_link,\
-    user_has_feed,get_profile,get_sections_by_user
+    user_has_feed,get_profile,get_sections_by_user,get_section
 
 @login_required
 def feed_create(request):
@@ -35,8 +35,10 @@ def feed_create(request):
         feed_form = FeedForm()
 
     urls = all_feeds_link(request.user.id)
+    sections = get_sections_by_user(request.user.id)
 
-    return render(request, 'feed/feed_create.html',{'feed_form':feed_form, 'error':error, 'urls':urls})
+    return render(request, 'feed/feed_create.html',
+                  {'feed_form':feed_form, 'error':error, 'urls':urls, 'sections':sections})
 
 
 @login_required
@@ -62,10 +64,10 @@ def feed_list(request):
     return render(request, 'feed/feed_list.html', {'sections':sections})
 
 @login_required
-def feed_delete(request, feed_id):
+def feed_delete(request, section_id, feed_id):
     if user_has_feed(request.user.id, feed_id):
-        profile = get_profile(request.user)
-        profile.feeds.remove(get_feed(feed_id))
-        profile.save()
+        section = get_section(section_id)
+        section.feeds.remove(get_feed(feed_id))
+        section.save()
 
     return redirect('feed_list')

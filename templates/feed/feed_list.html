@@ -8,27 +8,28 @@
     <div class="container">
         <div class="row">
             <div class="col s12">
-                <h3 class="{{ color_secondary }}-text  center">Lista de Feeds</h3>
-                <br>
+                {% for section in sections %}
+                    <h5 class="{{ color_secondary }}-text">{{ section.title }}</h5>
+                    <br>
 
-                <ul class="collection">
-                    {% for feed in feeds %}
-                        <li class="collection-item avatar">
-                            <img src="http://pad1.whstatic.com/images/thumb/c/c6/Newspaper-Outline-5.jpg/708px-Newspaper-Outline-5.jpg" alt="" class="circle">
-                            <span class="title"><a href="{% url 'feed_view' feed.id %}">{{ feed.title }}</a></span>
-                            <p>{{ feed.description }}<br>
-                            <small>{{ feed.link }}</small></p>
+                    <ul class="collection">
+                        {% for feed in section.feeds.all %}
+                            <li class="collection-item avatar">
+                                <img src="{{ feed.logo }}" alt="" class="circle">
+                                <span class="title"><a href="{% url 'feed_view' feed.id %}">{{ feed.title }}</a></span>
+                                <p>{{ feed.description }}<br>
+                                <small>{{ feed.link }}</small></p>
 
-                            <a href="{% url 'feed_delete' feed.id %}" class="secondary-content"><i class="material-icons">delete</i></a>
-                        </li>
-                    {% empty %}
-                        <a href="{% url 'feed_create' %}" class="collection-item">
-                            Añade tus periódicos favoritos
-                        </a>
-                    {% endfor %}
-                </ul>
-
-                <br>
+                                <a href="{% url 'feed_delete' feed.id %}" class="secondary-content"><i class="material-icons">delete</i></a>
+                            </li>
+                        {% empty %}
+                            <a href="{% url 'feed_create' %}" class="collection-item">
+                                Añade tus periódicos favoritos
+                            </a>
+                        {% endfor %}
+                    </ul>
+                    <br>
+                {% endfor %}
 
                 <a class="btn waves-effect waves-light {{ color_primary }}" href="{% url 'feed_create' %}">
                     Nuevo Feed <i class="material-icons right">send</i>

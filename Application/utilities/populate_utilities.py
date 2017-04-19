@@ -11,7 +11,7 @@ def populate_rss(link):
     for entry in entries:
         itemer,bool = Item.objects.get_or_create(feed_id=feeder.id, **entry)
 
-    return feeder.id
+    return feeder
 
 
 def update_feed(link, printer=False):

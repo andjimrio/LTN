@@ -1,5 +1,28 @@
 from Application.models import Feed,Item,UserProfile
 
+
+## SECTIONS
+
+def get_sections_by_user(user_id):
+    return UserProfile.objects.get(user__id=user_id).sections.all()
+
+
+
+## FEEDS
+
+def all_feeds_link(user_id=None):
+    if user_id == None:
+        return Feed.objects.all().values('link')
+    else:
+        return Feed.objects.all().exclude(sections__user__user_id=user_id).values('link_rss')
+
+
+
+
+
+
+
+
 def all_feeds():
     return Feed.objects.all()
 
@@ -12,11 +35,6 @@ def get_feed_link(link):
     else:
         return None
 
-def all_feeds_link(user_id=None):
-    if user_id == None:
-        return Feed.objects.all().values('link')
-    else:
-        return Feed.objects.all().exclude(section__user__user_id=user_id).values('link_rss')
 
 def get_feeds_by_user(user_id):
     return UserProfile.objects.get(user__id=user_id).feeds.all()

@@ -17,7 +17,7 @@ def read_rss(link):
               'logo':           redo_string(rss.feed, 'image', 'href')
               }
 
-    entries = [get_post(post) for post in rss.entries]
+    entries = [get_post(post) for post in rss.entries if get_post(post)]
 
     return feeder, entries
 
@@ -25,18 +25,24 @@ def read_rss(link):
 # Dado el diccionario que devuelve rss.entries lo convierte a otro
 #       con modelo Item
 def get_post(post):
-    article = get_article(post.link)
+    try:
+        article = get_article(post.link)
 
-    entry = {'title':        redo_string(post, 'title'),
-             'link':         redo_string(post, 'link'),
-             'description':  redo_string(post, 'description'),
-             'image':        article.top_image,
-             'article':      article.text,
-             'creator':      redo_string(post, 'author'),
-             'pubDate':      redo_date(post, 'published')
-            }
+        entry = {'title':        redo_string(post, 'title'),
+                 'link':         redo_string(post, 'link'),
+                 'description':  redo_string(post, 'description'),
+                 'image':        article.top_image,
+                 'article':      article.text,
+                 'creator':      redo_string(post, 'author'),
+                 'pubDate':      redo_date(post, 'published')
+                }
 
-    return entry
+        return entry
+    except:
+        print(post)
+        return None
+
+
 
 
 # Descarga y parsea un Article dado un link.

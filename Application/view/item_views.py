@@ -16,7 +16,7 @@ def item_view(request, item_id=None):
 @login_required
 def item_list(request):
     page = request.GET.get('page')
-    paginator = Paginator( get_last_items_by_user(request.user.id), 20)
+    paginator = Paginator(get_last_items_by_user(request.user.id), 20)
 
     try:
         feedes = paginator.page(page)

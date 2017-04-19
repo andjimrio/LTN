@@ -1,53 +1,33 @@
 from Application.models import Feed,Item
 from Application.utilities.rss_utilities import read_rss
-from Application.utilities.queries_utilities import get_feed_link
 
 
-def populate_rss(link, printer=False):
-    ide = get_feed_link(link)
-    if ide == None:
-        rss, entries = read_rss(link)
-        if Feed.objects.filter(title=rss['title'],link=rss['link']).exists():
-            feederId = Feed.objects.get(title=rss['title'],link=rss['link']).id
-        else:
-            feeder = Feed(**rss)
-            feeder.save()
-            feederId=feeder.id
+# Dado un link, parsea el rss y lo convierte a un Feed con sus
+#       respectivos Items
+def populate_rss(link):
+    rss, entries = read_rss(link)
+    feeder,bool = Feed.objects.get_or_create(**rss)
 
-        if printer:
-            print("\t"+rss['title'])
-            cont = 0
+    for entry in entries:
+        itemer,bool = Item.objects.get_or_create(feed_id=feeder.id, **entry)
 
-        for entry in entries:
-            if not Item.objects.filter(feed_id=feederId,title=entry['title']).exists():
-                itemer = Item(feed_id=feederId, **entry)
-                itemer.save()
-                if printer:
-                    cont += 1
+    return feeder.id
 
-        if printer:
-            print('\t\tActualizadas ' + str(cont) + ' entradas.')
-    else:
-        feederId = ide
-
-    return feederId
 
 def update_feed(link, printer=False):
     rss, entries = read_rss(link)
-    feederId = Feed.objects.get(title=rss['title'], link=rss['link']).id
+    feeder, bool = Feed.objects.get_or_create(**rss)
 
     if printer:
         print("\t" + rss['title'])
         cont = 0
 
     for entry in entries:
-        if not Item.objects.filter(feed_id=feederId, title=entry['title']).exists():
-            itemer = Item(feed_id=feederId, **entry)
-            itemer.save()
-            if printer:
-                cont += 1
+        itemer,bool = Item.objects.get_or_create(feed_id=feeder.id, **entry)
+        if printer and bool:
+            cont += 1
 
     if printer:
         print('\t\tActualizadas ' + str(cont) + ' entradas.')
 
-    return feederId
+    return feeder.id

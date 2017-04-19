@@ -21,8 +21,7 @@ class UserProfile(models.Model):
 class Section(models.Model):
     title = models.CharField(max_length=500)
     description = models.TextField()
-    user = models.ForeignKey(UserProfile, on_delete=models.CASCADE,
-                             related_name="sections")
+    user = models.ForeignKey(UserProfile, related_name="sections")
 
     def __str__(self):
         return self.title
@@ -44,8 +43,7 @@ class Feed(models.Model):
     language = models.CharField(max_length=50)
     logo = models.URLField()
 
-    section = models.ManyToManyField(Section, on_delete=models.CASCADE,
-                                related_name="feeds")
+    section = models.ManyToManyField(Section,related_name="feeds")
 
     def __str__(self):
         return self.title

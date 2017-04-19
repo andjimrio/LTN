@@ -12,7 +12,7 @@
         <div class="row">
             {% for item in feedes %}
                 <div class="col s12 m6 ">
-                    {% show_card item.items__title item.items__image item.items__pubDate item.items__description color_primary item.items__id item.title item.id %}
+                    {% show_card item.feeds__items__title item.feeds__items__image item.feeds__items__pubDate item.feeds__items__description color_primary item.feeds__items__id item.feeds__title item.feeds__id %}
                 </div>
             {% empty %}
                 <ul class="collection">

@@ -1,4 +1,5 @@
 from django import template
+from Application.utilities.web_utilitites import clean_html
 
 register = template.Library()
 
@@ -21,10 +22,7 @@ def pretty_text(text):
 
 @register.simple_tag
 def reduce_text(text):
-    if len(text)>150:
-        return text[:text.find('.')+1]
-    else:
-        return text
+    return clean_html(text)[:150]
 
 
 @register.simple_tag

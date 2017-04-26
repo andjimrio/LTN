@@ -23,7 +23,6 @@ from django.contrib import admin
 from Application import views
 from Application.view import feed_views
 from Application.view import item_views
-import haystack.urls
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
@@ -33,11 +32,12 @@ urlpatterns = [
     url(r'^feed/view/(?P<feed_id>\d+)/', feed_views.feed_view, name='feed_view'),
     url(r'^feed/list/', feed_views.feed_list, name='feed_list'),
     url(r'^feed/create/', feed_views.feed_create, name='feed_create'),
-    url(r'^feed/delete/(?P<feed_id>\d+)/', feed_views.feed_delete, name='feed_delete'),
+    url(r'^feed/delete/(?P<section_id>\d+)/(?P<feed_id>\d+)/', feed_views.feed_delete, name='feed_delete'),
 
     #Item
     url(r'^item/list/', item_views.item_list, name='item_list'),
     url(r'^item/view/(?P<item_id>\d+)/', item_views.item_view, name='item_view'),
+    url(r'^item/query/(?P<query>\w+)/', item_views.item_query, name='item_query'),
 
     #User
     url(r'^register/', views.register, name='register'),
@@ -45,5 +45,4 @@ urlpatterns = [
     url(r'^logout/', logout, {'next_page': reverse_lazy('home')}, name='logout'),
 
     #Otras
-    url(r'^search/', include('haystack.urls')),
 ]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

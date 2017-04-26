@@ -27,16 +27,24 @@
                 <form id="feed_form" method="POST" action="{% url 'feed_create' %}">
                     {% csrf_token %}
 
-                    {% for field in feed_form %}
                     <div class="row">
                         <div class="col s12 input-field">
                             <i class="material-icons prefix">language</i>
-                            {{ field }}
-                            {{ field.label_tag }}
-                            <em class="error">{% for error in  field.errors %}{{ error }}{% endfor %}</em>
+                            {{ feed_form.url }}
+                            {{ feed_form.url.label_tag }}
+                            <em class="error">
+                                {% for error in  field.errors %}{{ error }}{% endfor %}
+                            </em>
+                        </div>
+                        <div class="col s12 input-field">
+                            <i class="material-icons prefix">class</i>
+                            {{ feed_form.section }}
+                            {{ feed_form.section.label_tag }}
+                            <em class="error">
+                                {% for error in  field.errors %}{{ error }}{% endfor %}
+                            </em>
                         </div>
                     </div>
-                    {% endfor %}
 
                     <div class="row">
                         <div class="col s12 center">
@@ -53,11 +61,11 @@
 
 {% block javascript %}
     <script>
-    jQuery(document).ready(function($) {
-        $('input.autocomplete').autocomplete({
+    $(document).ready(function($) {
+        $('#id_url').autocomplete({
             data: {
                 {% for url in urls %}
-                    "{{ url.link }}":'',
+                    "{{ url.link_rss }}":'',
                 {% endfor %}
                 "": ''
             },
@@ -66,6 +74,21 @@
                 // Callback function when value is autocompleted.
             },
             minLength: 3, // The minimum length of the input for the autocomplete to start. Default: 1.
+        });
+    });
+    $(document).ready(function($) {
+        $('#id_section').autocomplete({
+            data: {
+                {% for section in sections %}
+                    "{{ section.title }}":'',
+                {% endfor %}
+                "": ''
+            },
+            limit: 20, // The max amount of results that can be shown at once. Default: Infinity.
+            onAutocomplete: function (val) {
+                // Callback function when value is autocompleted.
+            },
+            minLength: 1, // The minimum length of the input for the autocomplete to start. Default: 1.
         });
     });
     </script>

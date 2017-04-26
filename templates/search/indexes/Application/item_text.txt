@@ -1,6 +1,0 @@
-{{object.id}}
-{{object.title}}
-{{object.article}}
-{{object.pubDate}}
-{{object.creator}}
-{{object.feed.title}}

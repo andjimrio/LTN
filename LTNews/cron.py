@@ -1,4 +1,3 @@
-from django.core import management
 from django_cron import CronJobBase, Schedule
 
 from Application.utilities.populate_utilities import update_feed
@@ -16,11 +15,6 @@ class cron_update_rss(CronJobBase):
         print("Actualizando entradas")
         for link in all_feeds_link():
             try:
-                update_feed(link['link'], printer=True)
+                update_feed(link['link_rss'], printer=True)
             except:
                 print("Error de cron")
-
-        try:
-            management.call_command('update_index')
-        except:
-            print("Error de haystack")

@@ -40,7 +40,6 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'Application',
-    'haystack',
     'django_cron',
 ]
 
@@ -164,9 +163,4 @@ STATICFILES_DIRS = (
     os.path.join(PROY_DIR,'static'),
 )
 
-HAYSTACK_CONNECTIONS = {
-    'default': {
-        'ENGINE': 'haystack.backends.whoosh_backend.WhooshEngine',
-        'PATH': os.path.join(PROY_DIR, 'whoosh_index'),
-    },
-}
+WHOOSH_STORAGE_DIR = os.path.join(PROY_DIR, 'whoosh_index')

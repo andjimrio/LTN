@@ -2,17 +2,17 @@
 {% load static %}
 {% load apptags %}
 
-{% block titulo %}Noticias{% endblock %}
+{% block titulo %}Búsqueda: {{ query }}{% endblock %}
 
-{% block encabezado %}Noticias{% endblock %}
+{% block encabezado %}Búsqueda: <em>{{ query }}</em>{% endblock %}
 
 {% block contenido %}
     <br>
     <div class="container">
         <div class="row">
-            {% for item in feedes %}
+            {% for item in news %}
                 <div class="col s12 m6 ">
-                    {% show_card item.feeds__items__title item.feeds__items__image item.feeds__items__pubDate item.feeds__items__description color_primary item.feeds__items__id item.feeds__title item.feeds__id %}
+                    {% show_card item.title item.image item.pubDate item.description color_primary item.id %}
                 </div>
             {% empty %}
                 <ul class="collection">
@@ -23,6 +23,6 @@
             {% endfor %}
         </div>
 
-        {% show_pagination feedes color_primary %}
+        {% show_pagination news color_primary %}
     </div>
 {% endblock %}

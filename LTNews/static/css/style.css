@@ -1,4 +1,4 @@
-/*  1. FOOTER
+/* INI: FOOTER
         - Para que el footer se coloque al final
 */
 body {
@@ -10,9 +10,9 @@ body {
 main {
     flex: 1 0 auto;
 }
-/*  END 1. FOOTER*/
+/* FIN: FOOTER */
 
-/*  2. SIDENAV
+/* INI: SIDENAV
         - Para tener un menú lateral
 */
 header, main, footer {
@@ -24,8 +24,42 @@ header, main, footer {
     padding-left: 0;
   }
 }
-/*  END 2. SIDENAV*/
+/* FIN: SIDENAV */
 
+/* INI: LIST CARDS
+        - Se encarga de que cuadren y se ajusten todas las cards.
+*/
+.container-fix {
+    padding: 0px 30px 0px 30px;
+    width: inherit;
+}
+.row-fix {
+    column-count: 3;
+    column-gap: 1em;
+}
+.row-fix .col-fix {
+    display: inline-block;
+    margin: 0 0 1em;
+    width: 100%;
+    left: inherit;
+    right: inherit;
+    float: inherit;
+}
+@media screen and (max-width: 900px) {
+    .row-fix {
+        column-count: 2;
+    }
+}
+@media screen and (max-width: 600px) {
+    .row-fix {
+        column-count: 1;
+    }
+}
+/* FIN: LIST CARDS */
+
+/* INI: INDEX
+        - Para el menu inicial.
+*/
 .intro {
     height: 100vh;
     text-align: center
@@ -45,7 +79,11 @@ header, main, footer {
     background: url("/static/img/internet.jpg") center no-repeat;
     background-size: cover
 }
+/* FIN: INDEX */
 
+/* INI: GENERAL
+        - Elementos generales para todos los archivos.
+*/
 .error {
     font-size: 0.8rem;
     color: #b71c1c;
@@ -54,3 +92,4 @@ header, main, footer {
 .justify {
   text-align: justify
 }
+/* FIN: GENERAL */

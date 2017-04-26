@@ -8,10 +8,10 @@
 
 {% block contenido %}
     <br>
-    <div class="container">
-        <div class="row">
+    <div class="container-fix">
+        <div class="row-fix">
             {% for item in feedes %}
-                <div class="col s12 m6 ">
+                <div class="col-fix">
                     {% show_card item.feeds__items__title item.feeds__items__image item.feeds__items__pubDate item.feeds__items__description color_secondary item.feeds__items__id item.feeds__title item.feeds__id %}
                 </div>
             {% empty %}

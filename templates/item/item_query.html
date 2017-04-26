@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load apptags %}
+
+{% block titulo %}Búsqueda: {{ query }}{% endblock %}
+
+{% block encabezado %}Búsqueda: <em>{{ query }}</em>{% endblock %}
+
+{% block contenido %}
+    <br>
+    <div class="container">
+        <div class="row">
+            {% for item in news %}
+                <div class="col s12 m6 ">
+                    {% show_card item.title item.image item.pubDate item.description color_primary item.id %}
+                </div>
+            {% empty %}
+                <ul class="collection">
+                    <a href="{% url 'feed_create' %}" class="collection-item">
+                        Añade tus periódicos favoritos
+                    </a>
+                </ul>
+            {% endfor %}
+        </div>
+
+        {% show_pagination news color_primary %}
+    </div>
+{% endblock %}

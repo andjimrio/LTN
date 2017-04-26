@@ -22,7 +22,7 @@
             <h6 class="{{ color_secondary }}-text">Etiquetas</h6>
             <br>
             {% for tag in tags %}
-                <div class="chip">{{ tag }}</div>
+                <div class="chip"><a href="{% url 'item_query' tag %}">{{ tag }}</a></div>
             {% endfor %}
         </div>
 

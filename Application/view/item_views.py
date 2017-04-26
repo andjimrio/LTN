@@ -2,7 +2,7 @@ from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.shortcuts import render
 
-from Application.utilities.index_utilities import get_item_keywords,get_item_similarity
+from Application.utilities.index_utilities import get_item_keywords,get_item_similarity,get_item_query
 from Application.utilities.queries_utilities import get_item,get_last_items_by_user
 
 
@@ -29,3 +29,16 @@ def item_list(request):
 
 
 
+@login_required
+def item_query(request,query):
+    page = request.GET.get('page')
+    paginator = Paginator(get_item_query(query), 20)
+
+    try:
+        news = paginator.page(page)
+    except PageNotAnInteger:
+        news = paginator.page(1)
+    except EmptyPage:
+        news = paginator.page(paginator.num_pages)
+
+    return render(request, 'item/item_query.html', {'news': news, 'query': query})

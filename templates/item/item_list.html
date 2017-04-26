@@ -4,11 +4,11 @@
 
 {% block titulo %}Noticias{% endblock %}
 
-{% block encabezado %}Noticias{% endblock %}
-
 {% block contenido %}
-    <br>
     <div class="container-fix">
+        <h3 class="center">
+            <a class="{{ color_secondary }}-text">Noticias</a></h3>
+
         <div class="row-fix">
             {% for item in feedes %}
                 <div class="col-fix">

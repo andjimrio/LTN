@@ -3,8 +3,6 @@
 
 {% block titulo %}{% reduce_title article.title %}{% endblock %}
 
-{% block encabezado %}{% reduce_title article.title %}{% endblock %}
-
 {% block contenido %}
     <div class="container center">
         <h4 class="{{ color_secondary }}-text" href="{{ article.link }}">{{ article.title }}</h4>

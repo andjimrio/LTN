@@ -6,13 +6,13 @@
 {% block encabezado %}Inicio{% endblock %}
 
 {% block contenido %}
-    <div class="row intro valign-wrapper {{ color_primary }} accent-2 no-margin">
+    <div class="row intro valign-wrapper {{ color_primary }} lighten-1 no-margin">
         <div class="container white-text">
             <h1 class="header">LT-News</h1>
 
             {% if user.is_authenticated %}
                 <h3>Bienvenido de nuevo, {{ user.username }}</h3>
-                <a class="btn-large waves-effect waves-light {{ color_secondary }} accent-1"
+                <a class="btn-large waves-effect waves-light {{ color_secondary }}"
                     href="{% url 'item_list' %}">Noticias</a>
             {% else %}
                 <h3>Otra forma de entender el periódico digital</h3>

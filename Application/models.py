@@ -2,6 +2,8 @@
 from django.db import models
 from django.contrib.auth.models import User
 
+from Application.managers import WhooshManager
+
 
 #   Clase que contiene la información del usuario. Se relaciona con el
 # User que define Django.
@@ -67,6 +69,9 @@ class Item(models.Model):
 
     feed = models.ForeignKey(Feed, on_delete=models.CASCADE,
                              related_name="items")
+
+    # The first argument is the default query field
+    objects = WhooshManager('title', fields=['title', 'article'])
 
     def __str__(self):
         return self.title

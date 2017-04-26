@@ -16,7 +16,7 @@ def get_section(section_id):
 
 def all_feeds_link(user_id=None):
     if user_id == None:
-        return Feed.objects.all().values('link')
+        return Feed.objects.all().values('link_rss')
     else:
         return Feed.objects.all().exclude(sections__user__user_id=user_id).values('link_rss')
 

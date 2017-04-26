@@ -23,7 +23,6 @@ from django.contrib import admin
 from Application import views
 from Application.view import feed_views
 from Application.view import item_views
-import haystack.urls
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
@@ -45,5 +44,4 @@ urlpatterns = [
     url(r'^logout/', logout, {'next_page': reverse_lazy('home')}, name='logout'),
 
     #Otras
-    url(r'^search/', include('haystack.urls')),
 ]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

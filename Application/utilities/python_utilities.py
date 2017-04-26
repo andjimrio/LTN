@@ -27,3 +27,7 @@ def redo_date(dic, string):
             pass
 
     return timezone.now()
+
+
+def only_keys(dic, keys):
+    return {x: dic[x] for x in dic if x in keys}

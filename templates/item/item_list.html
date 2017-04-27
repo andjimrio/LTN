@@ -23,6 +23,23 @@
             {% endfor %}
         </div>
 
-        {% show_pagination feedes color_primary %}
+        {% if feedes.has_other_pages %}
+            {% if feedes.has_next %}
+                <div class="center">
+                    <a class="waves-effect waves-light btn {{ color_primary }}"
+                       href="?actual={{ feedes.number }}&page={{ feedes.next_page_number }}">
+                        <i class="material-icons right">forward</i>Visto y seguir
+                    </a>
+                </div>
+            {% else %}
+                <div class="center">
+                    <a class="waves-effect waves-light btn {{ color_primary }}"
+                       href="?actual={{ feedes.number }}">
+                        <i class="material-icons right">move_to_inbox</i>Visto
+                    </a>
+                </div>
+            {% endif %}
+    {% endif %}
     </div>
+    <br>
 {% endblock %}

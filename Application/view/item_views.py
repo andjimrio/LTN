@@ -16,11 +16,14 @@ def item_view(request, item_id=None):
 
     status = get_status_by_user_item(request.user.id, item_id)
     status.as_read()
-    print(like)
+    status.save()
+
     if like == 'True':
         status.as_like()
+        status.save()
     elif like == 'False':
         status.as_unlike()
+        status.save()
 
     return render(request, 'item/item_view.html',
                   {'article': article, 'tags': tags, 'news': news,
@@ -28,8 +31,17 @@ def item_view(request, item_id=None):
 
 @login_required
 def item_list(request):
+    actual = request.GET.get('actual')
     page = request.GET.get('page')
     paginator = Paginator(get_last_items_by_user(request.user.id), 20)
+
+    if actual is not None:
+        ids = [x['feeds__items__id'] for x in paginator.page(actual)]
+        for item_id in ids:
+            print(item_id)
+            status = get_status_by_user_item(request.user.id, item_id)
+            status.as_view()
+            status.save()
 
     try:
         feedes = paginator.page(page)

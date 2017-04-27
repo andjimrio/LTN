@@ -107,6 +107,7 @@ class Status(models.Model):
         pass
 
     def as_read(self):
+        self.view = True
         self.read = True
         pass
 

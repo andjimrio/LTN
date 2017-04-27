@@ -1,4 +1,4 @@
-from Application.models import Feed,Item,UserProfile,Section
+from Application.models import Feed,Item,UserProfile,Section,Status
 
 
 ## SECTIONS
@@ -60,3 +60,9 @@ def get_item(id):
 
 def get_profile(user_id):
     return UserProfile.objects.get(user=user_id)
+
+
+## STATUS
+
+def get_status_by_user_item(user_id,item_id):
+    return Status.objects.get(user_id=get_profile(user_id).id,item_id=item_id)

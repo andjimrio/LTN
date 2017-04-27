@@ -27,7 +27,7 @@ def item_view(request, item_id=None):
 
     return render(request, 'item/item_view.html',
                   {'article': article, 'tags': tags, 'news': news,
-                   'status':status})
+                   'status': status})
 
 @login_required
 def item_list(request):
@@ -36,7 +36,7 @@ def item_list(request):
     paginator = Paginator(get_last_items_by_user(request.user.id), 20)
 
     if actual is not None:
-        ids = [x['feeds__items__id'] for x in paginator.page(actual)]
+        ids = [x['item_id'] for x in paginator.page(actual)]
         for item_id in ids:
             print(item_id)
             status = get_status_by_user_item(request.user.id, item_id)
@@ -50,7 +50,7 @@ def item_list(request):
     except EmptyPage:
         feedes = paginator.page(paginator.num_pages)
 
-    return render(request, 'item/item_list.html', {'feedes':feedes})
+    return render(request, 'item/item_list.html', {'feedes': feedes})
 
 
 

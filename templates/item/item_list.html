@@ -12,7 +12,7 @@
         <div class="row-fix">
             {% for item in feedes %}
                 <div class="col-fix">
-                    {% show_card item.feeds__items__title item.feeds__items__image item.feeds__items__pubDate item.feeds__items__description color_secondary item.feeds__items__id item.feeds__title item.feeds__id %}
+                    {% show_card item.item__title item.item__image item.item__pubDate item.item__description color_secondary item.item_id item.item__feed__title item.item__feed_id %}
                 </div>
             {% empty %}
                 <ul class="collection">
@@ -23,23 +23,21 @@
             {% endfor %}
         </div>
 
-        {% if feedes.has_other_pages %}
-            {% if feedes.has_next %}
-                <div class="center">
-                    <a class="waves-effect waves-light btn {{ color_primary }}"
-                       href="?actual={{ feedes.number }}&page={{ feedes.next_page_number }}">
-                        <i class="material-icons right">forward</i>Visto y seguir
-                    </a>
-                </div>
-            {% else %}
-                <div class="center">
-                    <a class="waves-effect waves-light btn {{ color_primary }}"
-                       href="?actual={{ feedes.number }}">
-                        <i class="material-icons right">move_to_inbox</i>Visto
-                    </a>
-                </div>
-            {% endif %}
-    {% endif %}
+        {% if feedes.has_next %}
+            <div class="center">
+                <a class="waves-effect waves-light btn {{ color_primary }}"
+                   href="?actual={{ feedes.number }}&page={{ feedes.next_page_number }}">
+                    <i class="material-icons right">forward</i>Visto y seguir
+                </a>
+            </div>
+        {% else %}
+            <div class="center">
+                <a class="waves-effect waves-light btn {{ color_primary }}"
+                   href="?actual={{ feedes.number }}">
+                    <i class="material-icons right">move_to_inbox</i>Visto
+                </a>
+            </div>
+        {% endif %}
     </div>
     <br>
 {% endblock %}

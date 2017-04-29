@@ -2,7 +2,9 @@
 
 import feedparser
 from newspaper import Article
+
 from Application.utilities.python_utilities import redo_string,redo_date
+from Application.utilities.web_utilitites import clean_html
 
 
 # Dado un link, lo parsea y lo convierte y devuelve un diccionario del
@@ -28,11 +30,16 @@ def get_post(post):
     try:
         article = get_article(post.link)
 
+        top_image = article.top_image
+        text = article.text
+        if text == '':
+            text = clean_html(redo_string(post, 'description'))
+
         entry = {'title':        redo_string(post, 'title'),
                  'link':         redo_string(post, 'link'),
                  'description':  redo_string(post, 'description'),
-                 'image':        article.top_image,
-                 'article':      article.text,
+                 'image':        top_image,
+                 'article':      text,
                  'creator':      redo_string(post, 'author'),
                  'pubDate':      redo_date(post, 'published')
                 }

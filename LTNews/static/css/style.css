@@ -60,6 +60,10 @@ header, main, footer {
 /* INI: INDEX
         - Para el menu inicial.
 */
+
+/* - - - - - - - - - - - - - - - - - - - - - - -
+   Home
+   - - - - - - - - - - - - - - - - - - - - - - - */
 .intro {
     /*height: 100vh;*/
     text-align: center
@@ -69,6 +73,10 @@ header, main, footer {
     margin: 0
 }
 
+
+/* - - - - - - - - - - - - - - - - - - - - - - -
+   Start
+   - - - - - - - - - - - - - - - - - - - - - - - */
 .primo-start-1 {
     height: 400px;
     background: url("/static/img/newspaper.jpg") center no-repeat;
@@ -79,6 +87,59 @@ header, main, footer {
     background: url("/static/img/internet.jpg") center no-repeat;
     background-size: cover
 }
+
+/* - - - - - - - - - - - - - - - - - - - - - - -
+   Service
+   - - - - - - - - - - - - - - - - - - - - - - - */
+.icon-block {
+  padding: 0 15px;
+}
+
+.icon-block .material-icons {
+  font-size: 3.56rem;
+}
+
+.pad-bot {
+  padding-bottom: 50px;
+}
+
+/* - - - - - - - - - - - - - - - - - - - - - - -
+   Team
+   - - - - - - - - - - - - - - - - - - - - - - - */
+
+.team-col {
+  margin-bottom: 30px;
+}
+
+.primo-team {
+  border-radius: 999px;
+  height: 250px;
+  width: auto;
+  -webkit-transition: 0.25s all linear;
+  transition: 0.25s all linear;
+}
+
+.primo-team:hover {
+  box-shadow: 0 5px 11px 0 rgba(0, 0, 0, 0.18), 0 4px 15px 0 rgba(0, 0, 0, 0.15);
+}
+
+@media (max-width:480px) {
+  .primo-team {
+    width: 100%;
+    height: auto;
+  }
+}
+
+.fa-circle {
+  -webkit-transition: 0.25s all linear;
+  transition: 0.25s all linear;
+}
+
+a:hover .fa-circle {
+  color: #80d8ff !important;
+  /* light-blue accent-1 */
+}
+
 /* FIN: INDEX */
 
 /* INI: GENERAL

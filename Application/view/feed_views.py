@@ -3,10 +3,9 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.shortcuts import render,redirect
 
 from Application.forms import FeedForm
-from Application.models import Feed,Section
 from Application.utilities.populate_utilities import populate_rss
-from Application.utilities.queries_utilities import get_feeds_by_user,get_feed,all_feeds_link,\
-    user_has_feed,get_profile,get_sections_by_user,get_section
+from Application.utilities.queries_utilities import get_feed,all_feeds_link,\
+    user_has_feed,get_sections_by_user,get_section
 
 @login_required
 def feed_create(request):
@@ -16,15 +15,10 @@ def feed_create(request):
         feed_form = FeedForm(request.POST)
 
         if feed_form.is_valid():
-            profile = get_profile(request.user)
             url = feed_form.data['url']
             title_section = feed_form.data['section']
-            section, cond = Section.objects.get_or_create(title=title_section,
-                                                          user=get_profile(request.user.id))
 
-            feed = populate_rss(url)
-            feed.sections.add(section)
-            feed.save()
+            feed = populate_rss(url,title_section,request.user.id)
 
             return redirect('feed_list')
 

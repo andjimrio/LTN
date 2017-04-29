@@ -61,7 +61,7 @@ header, main, footer {
         - Para el menu inicial.
 */
 .intro {
-    height: 100vh;
+    /*height: 100vh;*/
     text-align: center
 }
 

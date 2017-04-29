@@ -79,9 +79,13 @@ class Item(models.Model):
     class Meta:
         ordering = ('-pubDate', )
 
-    def create_status(self):
-        for section in self.feed.section:
-            Status.objects.create(user=section.user,item=self)
+    def __create_status(self):
+        for section in self.feed.sections.all():
+            status,created = Status.objects.get_or_create(user_id=section.user.id, item_id=self.id)
+        pass
+
+    def on_save(self):
+        self.__create_status()
         pass
 
     pass
@@ -98,8 +102,29 @@ class Status(models.Model):
                              related_name="statuses")
     item = models.OneToOneField(Item)
 
+    def as_view(self):
+        self.view = True
+        self.save()
+        pass
+
+    def as_read(self):
+        self.view = True
+        self.read = True
+        self.save()
+        pass
+
+    def as_like(self):
+        self.like = True
+        self.save()
+        pass
+
+    def as_unlike(self):
+        self.like = False
+        self.save()
+        pass
+
     def __str__(self):
-        return "{}: {}/{}/{}".format(self.user.username,self.view,
+        return "{}-{}: {}/{}/{}".format(self.item.id,self.user.user.username,self.view,
                                      self.read,self.like)
     pass
 

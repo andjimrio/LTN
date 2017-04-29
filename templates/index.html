@@ -5,20 +5,21 @@
 
 {% block contenido %}
     <div class="row intro valign-wrapper {{ color_primary }} lighten-1 no-margin">
-        <div class="container white-text">
-            <h1 class="header">LT-News</h1>
+        <div class="container white-text row">
+            <img class="responsive-img" src="{% static 'img/icon.png' %}">
+            <h4 class="">Otra forma de entender el periódico digital</h4>
 
-            {% if user.is_authenticated %}
-                <h3>Bienvenido de nuevo, {{ user.username }}</h3>
-                <a class="btn-large waves-effect waves-light {{ color_secondary }}"
-                    href="{% url 'item_list' %}">Noticias</a>
-            {% else %}
-                <h3>Otra forma de entender el periódico digital</h3>
-                <a class="btn-large waves-effect waves-light {{ color_secondary }} accent-1"
-                    href="{% url 'register' %}">Registrarse</a>
-                <a class="btn-large waves-effect waves-light {{ color_secondary }} lighten-1"
-                    href="{% url 'login' %}">Login</a>
-            {% endif %}
+            <div class="col s12">
+                {% if user.is_authenticated %}
+                    <a class="btn-large waves-effect waves-light {{ color_secondary }}"
+                        href="{% url 'item_list' %}">Noticias</a>
+                {% else %}
+                    <a class="btn-large waves-effect waves-light {{ color_secondary }} accent-1"
+                        href="{% url 'register' %}">Registrarse</a>
+                    <a class="btn-large waves-effect waves-light {{ color_secondary }} lighten-1"
+                        href="{% url 'login' %}">Login</a>
+                {% endif %}
+            </div>
         </div>
     </div>
 

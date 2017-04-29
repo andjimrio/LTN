@@ -1,4 +1,10 @@
-from Application.models import Feed,Item,UserProfile,Section
+from Application.models import Feed,Item,UserProfile,Section,Status
+
+
+## USERPROFILE
+
+def get_profile(user_id):
+    return UserProfile.objects.get(user=user_id)
 
 
 ## SECTIONS
@@ -9,7 +15,6 @@ def get_sections_by_user(user_id):
 
 def get_section(section_id):
     return Section.objects.get(id=section_id)
-
 
 
 ## FEEDS
@@ -37,7 +42,6 @@ def all_feeds():
     return Feed.objects.all()
 
 
-
 def get_feed_link(link):
     if Feed.objects.filter(link=link).exists():
         return Feed.objects.get(link=link).id
@@ -48,15 +52,27 @@ def get_feed_link(link):
 def exists_feeds_title_by_user(user_id,feed_id):
     return get_feeds_by_user(user_id).filter(id=feed_id).exists()
 
-def get_last_items_by_user(user_id):
-    return UserProfile.objects.get(user__id=user_id).sections.all()\
-        .values('feeds__id','feeds__title','feeds__items__id','feeds__items__title',
-                'feeds__items__description','feeds__items__pubDate','feeds__items__image')\
-        .order_by('-feeds__items__pubDate')
+
+## ITEM
 
 def get_item(id):
     return Item.objects.get(id=id)
 
 
-def get_profile(user_id):
-    return UserProfile.objects.get(user=user_id)
+def get_last_items_by_user(user_id, unview=False):
+    if unview:
+        return UserProfile.objects.get(user__id=user_id).sections.all()\
+            .values('feeds__id','feeds__title','feeds__items__id','feeds__items__title',
+                    'feeds__items__description','feeds__items__pubDate','feeds__items__image')\
+            .order_by('-feeds__items__pubDate')
+    else:
+        return UserProfile.objects.get(user__id=user_id).statuses.all().\
+            filter(view=False).\
+            values('item__feed_id','item__feed__title','item_id','item__title',
+                   'item__description','item__pubDate','item__image').\
+            order_by('-item__pubDate')
+
+## STATUS
+
+def get_status_by_user_item(user_id,item_id):
+    return Status.objects.get(user_id=get_profile(user_id).id,item_id=item_id)

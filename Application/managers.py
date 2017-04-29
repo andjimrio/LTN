@@ -82,6 +82,8 @@ class WhooshManager(models.Manager):
             writer.update_document(**dct)
         writer.commit()
 
+        instance.on_save()
+
     def post_delete_callback(self, sender, instance, **kwargs):
         pass
 

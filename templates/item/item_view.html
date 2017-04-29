@@ -17,7 +17,7 @@
     <div class="container">
         <div class="section">
             <blockquote>{{ article.creator }} | {{ article.pubDate }}</blockquote>
-            {{ status }}
+
             <p class="justify">{% autoescape off %}{% pretty_text article.article %}{% endautoescape %}</p>
             <div class="center">
                 {% if not status.like %}

@@ -81,7 +81,7 @@ class Item(models.Model):
 
     def __create_status(self):
         for section in self.feed.sections.all():
-            Status.objects.get_or_create(user_id=section.user.id, item_id=self.id)
+            status,created = Status.objects.get_or_create(user_id=section.user.id, item_id=self.id)
         pass
 
     def on_save(self):
@@ -104,19 +104,23 @@ class Status(models.Model):
 
     def as_view(self):
         self.view = True
+        self.save()
         pass
 
     def as_read(self):
         self.view = True
         self.read = True
+        self.save()
         pass
 
     def as_like(self):
         self.like = True
+        self.save()
         pass
 
     def as_unlike(self):
         self.like = False
+        self.save()
         pass
 
     def __str__(self):

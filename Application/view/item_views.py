@@ -16,14 +16,11 @@ def item_view(request, item_id=None):
 
     status = get_status_by_user_item(request.user.id, item_id)
     status.as_read()
-    status.save()
 
     if like == 'True':
         status.as_like()
-        status.save()
     elif like == 'False':
         status.as_unlike()
-        status.save()
 
     return render(request, 'item/item_view.html',
                   {'article': article, 'tags': tags, 'news': news,

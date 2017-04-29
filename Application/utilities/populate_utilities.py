@@ -1,13 +1,17 @@
-from Application.models import Feed,Item
+from Application.models import Feed,Item,Section
+from Application.utilities.queries_utilities import get_profile
 from Application.utilities.rss_utilities import read_rss
-from Application.utilities.python_utilities import only_keys
 
 
 # Dado un link, parsea el rss y lo convierte a un Feed con sus
 #       respectivos Items
-def populate_rss(link):
+def populate_rss(link,title_section,user_id):
     rss, entries = read_rss(link)
     feeder,bool = Feed.objects.get_or_create(**rss)
+    section, cond = Section.objects.get_or_create(title=title_section,
+                                                  user=get_profile(user_id))
+    feeder.sections.add(section)
+    feeder.save()
 
     for entry in entries:
         if not Item.objects.filter(link=entry['link']).exists():

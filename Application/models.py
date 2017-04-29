@@ -1,6 +1,7 @@
 #encoding:utf-8
 from django.db import models
 from django.contrib.auth.models import User
+from math import log,floor
 
 from Application.managers import WhooshManager
 
@@ -79,6 +80,12 @@ class Item(models.Model):
     class Meta:
         ordering = ('-pubDate', )
 
+    def get_key_number(self):
+        return floor(log(len(self.article)))
+
+    def __create_keywords(self):
+        pass
+
     def __create_status(self):
         for section in self.feed.sections.all():
             status,created = Status.objects.get_or_create(user_id=section.user.id, item_id=self.id)
@@ -86,6 +93,7 @@ class Item(models.Model):
 
     def on_save(self):
         self.__create_status()
+        self.__create_keywords()
         pass
 
     pass

@@ -10,7 +10,7 @@ def item_view(request, item_id=None):
     like = request.GET.get('like')
 
     item = get_item(item_id)
-    tags = get_item_keywords(item_id, len(item.article))
+    tags = get_item_keywords(item_id, item.get_key_number())
     news = get_item_similarity(item_id)
 
     status = get_status_by_user_item(request.user.id, item_id)

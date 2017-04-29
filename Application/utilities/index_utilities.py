@@ -1,8 +1,9 @@
 from Application.models import Item
+from math import log,floor
 
 
-def get_item_keywords(item_id):
-    keywords = Item.objects.get_keywords('article', item_id)
+def get_item_keywords(item_id, len_article):
+    keywords = Item.objects.get_keywords('article', item_id, floor(log(len_article)))
     return keywords
 
 

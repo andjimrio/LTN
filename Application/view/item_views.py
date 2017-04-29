@@ -5,13 +5,12 @@ from django.shortcuts import render
 from Application.utilities.index_utilities import get_item_keywords,get_item_similarity,get_item_query
 from Application.utilities.queries_utilities import get_item,get_last_items_by_user,get_status_by_user_item
 
-
 @login_required
 def item_view(request, item_id=None):
     like = request.GET.get('like')
 
-    article = get_item(item_id)
-    tags = get_item_keywords(item_id)
+    item = get_item(item_id)
+    tags = get_item_keywords(item_id, len(item.article))
     news = get_item_similarity(item_id)
 
     status = get_status_by_user_item(request.user.id, item_id)
@@ -23,7 +22,7 @@ def item_view(request, item_id=None):
         status.as_unlike()
 
     return render(request, 'item/item_view.html',
-                  {'article': article, 'tags': tags, 'news': news,
+                  {'item': item, 'tags': tags, 'news': news,
                    'status': status})
 
 @login_required

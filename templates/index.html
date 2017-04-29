@@ -13,12 +13,12 @@
                 <h4>Otra forma de entender el periódico digital</h4>
                 <div class="col s12">
                     {% if user.is_authenticated %}
-                        <a class="btn-large waves-effect waves-light {{ color_secondary }}"
+                        <a class="btn-large btn-flat waves-effect waves-light {{ color_secondary }}-text"
                             href="{% url 'item_list' %}">Noticias</a>
                     {% else %}
-                        <a class="btn-large waves-effect waves-light {{ color_secondary }} darken-2"
+                        <a class="btn-large btn-flat waves-effect waves-light {{ color_secondary }}-text text-darken-2"
                             href="{% url 'register' %}">Registrarse</a>
-                        <a class="btn-large waves-effect waves-light {{ color_secondary }} lighten-2"
+                        <a class="btn-large btn-flat waves-effect waves-light {{ color_secondary }}-text text-lighten-2"
                             href="{% url 'login' %}">Login</a>
                     {% endif %}
                 </div>

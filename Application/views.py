@@ -22,6 +22,13 @@ def register(request):
 
             UserProfile.objects.get_or_create(user_id=user.id)
 
+            # Para el auto-login al crear un usuario
+            new_user = authenticate(request, username=user_form.cleaned_data['username'],
+                                    password=user_form.cleaned_data['password'])
+
+            if user is not None:
+                login(request, new_user)
+
             return redirect('feed_list')
 
         else:

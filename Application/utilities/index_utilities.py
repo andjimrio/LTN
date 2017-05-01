@@ -1,8 +1,8 @@
 from Application.models import Item
 
 
-def get_item_keywords(item_id):
-    keywords = Item.objects.get_keywords('article', item_id)
+def get_item_keywords(item_id, num_terms):
+    keywords = Item.objects.get_keywords('article', item_id, num_terms)
     return keywords
 
 

@@ -15,11 +15,13 @@
                     {% show_card item.item__title item.item__image item.item__pubDate item.item__description color_secondary item.item_id item.item__feed__title item.item__feed_id %}
                 </div>
             {% empty %}
-                <ul class="collection">
-                    <a href="{% url 'feed_create' %}" class="collection-item">
-                        Añade tus periódicos favoritos
-                    </a>
-                </ul>
+                <div class="col-fix">
+                    <ul class="collection center">
+                        <a href="{% url 'feed_create' %}" class="collection-item">
+                            Añade tus periódicos favoritos
+                        </a>
+                    </ul>
+                </div>
             {% endfor %}
         </div>
 
@@ -30,7 +32,7 @@
                     <i class="material-icons right">forward</i>Visto y seguir
                 </a>
             </div>
-        {% else %}
+        {% elif feedes %}
             <div class="center">
                 <a class="waves-effect waves-light btn {{ color_primary }}"
                    href="?actual={{ feedes.number }}">

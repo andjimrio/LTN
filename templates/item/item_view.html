@@ -1,24 +1,24 @@
 {% extends 'base.html' %}
 {% load apptags %}
 
-{% block titulo %}{% reduce_title article.title %}{% endblock %}
+{% block titulo %}{% reduce_title item.title %}{% endblock %}
 
 {% block contenido %}
     <div class="container center">
-        <h4 class="{{ color_secondary }}-text" href="{{ article.link }}">{{ article.title }}</h4>
+        <h4 class="{{ color_secondary }}-text" href="{{ item.link }}">{{ item.title }}</h4>
     </div>
 
     {% if article.image != '' %}
         <div class="parallax-container">
-            <div class="parallax"><img src="{{ article.image }}" /></div>
+            <div class="parallax"><img src="{{ item.image }}" /></div>
         </div>
     {% endif %}
 
     <div class="container">
         <div class="section">
-            <blockquote>{{ article.creator }} | {{ article.pubDate }}</blockquote>
+            <blockquote>{{ item.creator }} | {{ item.pubDate }}</blockquote>
 
-            <p class="justify">{% autoescape off %}{% pretty_text article.article %}{% endautoescape %}</p>
+            <p class="justify">{% autoescape off %}{% pretty_text item.article %}{% endautoescape %}</p>
             <div class="center">
                 {% if not status.like %}
                     <a class="waves-effect waves-light btn {{ color_primary }}" href="?like=True">

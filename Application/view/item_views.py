@@ -34,10 +34,12 @@ def item_list(request):
     if actual is not None:
         ids = [x['item_id'] for x in paginator.page(actual)]
         for item_id in ids:
-            print(item_id)
             status = get_status_by_user_item(request.user.id, item_id)
             status.as_view()
-            status.save()
+
+        if page is not None:
+            page = int(page)-1
+
 
     try:
         feedes = paginator.page(page)

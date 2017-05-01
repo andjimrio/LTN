@@ -4,11 +4,12 @@ from django.shortcuts import render,redirect
 from django.contrib.auth import authenticate, login
 
 from Application.forms import UserForm
-from Application.models import UserProfile,Feed
+from Application.models import UserProfile
 
 
 def home(request):
-    return render(request,'index.html',{})
+    return render(request, 'index.html', {})
+
 
 def register(request):
     if request.method == 'POST':
@@ -19,9 +20,7 @@ def register(request):
             user.set_password(user.password)
             user.save()
 
-            profile = UserProfile()
-            profile.user = user
-            profile.save()
+            UserProfile.objects.get_or_create(user_id=user.id)
 
             return redirect('feed_list')
 

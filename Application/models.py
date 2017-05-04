@@ -142,6 +142,14 @@ class Status(models.Model):
         self.save()
         pass
 
+    def get_score(self):
+        if self.like:
+            return 10
+        elif self.read:
+            return 1
+        else:
+            return 0
+
     def __str__(self):
         return "{}-{}: {}/{}/{}".format(self.item.id, self.user.user.username, self.view,
                                         self.read, self.like)

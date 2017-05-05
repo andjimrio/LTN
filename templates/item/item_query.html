@@ -15,11 +15,13 @@
                     {% show_card item.title item.image item.pubDate item.description color_secondary item.id %}
                 </div>
             {% empty %}
-                <ul class="collection">
-                    <a href="{% url 'feed_create' %}" class="collection-item">
-                        Añade tus periódicos favoritos
-                    </a>
-                </ul>
+                <div class="col-fix">
+                    <ul class="collection">
+                        <a href="{% url 'feed_create' %}" class="collection-item">
+                            Añade tus periódicos favoritos
+                        </a>
+                    </ul>
+                </div>
             {% endfor %}
         </div>
 

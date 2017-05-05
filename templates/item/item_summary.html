@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block titulo %}Resumen diario{% endblock %}
+
+{% block contenido %}
+    <div class="container">
+        <div class="section">
+            <h3 class="center">
+                <a class="{{ color_secondary }}-text">Resumen diario de noticias</a></h3>
+        </div>
+        <div class="section row">
+            <div class="col s12">
+                {% for section, keyword_counters in summary_keywords.items %}
+                    <div class="section">
+                        <h5 class="{{ color_primary }}-text">{{ section }}</h5>
+                        <ul class="collapsible" data-collapsible="accordion">
+                            {% for keyword_counter in keyword_counters %}
+                                <li>
+                                    <div class="collapsible-header">
+                                        <span class="new badge" data-badge-caption="noticias">{{ keyword_counter.counts }}</span>
+                                        {{ keyword_counter.keyword }}
+                                    </div>
+                                    <div class="collapsible-body"><span>Puede ver este titular en:
+                                        {% for item_id,item_title in keyword_counter.items.items %}
+                                            '{{ item_title }}',
+                                        {% endfor %}
+                                    </span></div>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

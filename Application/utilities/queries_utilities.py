@@ -1,4 +1,4 @@
-from django.db.models import Sum
+from django.utils import timezone
 
 from Application.models import Feed, Item, UserProfile, Section,\
     Status, Keyword
@@ -63,6 +63,13 @@ def get_last_items_by_user(user_id, unview=False):
             values('item__feed_id','item__feed__title','item_id','item__title',
                    'item__description','item__pubDate','item__image').\
             order_by('-item__pubDate')
+
+
+def get_item_today_by_section(section_id):
+    end_date = timezone.now()
+    start_date = end_date - timezone.timedelta(days=1)
+    return Section.objects.filter(id=section_id).filter(feeds__items__pubDate__range=[start_date, end_date])\
+        .values('feeds__items__id','feeds__items__title')
 
 
 # STATUS

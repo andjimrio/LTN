@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load apptags %}
+
+{% block titulo %}Noticias recomendadas{% endblock %}
+
+{% block contenido %}
+    <div class="container-fix">
+        <h3 class="center">Te puede interesar...</h3>
+
+        <div class="row-fix">
+            {% for item in news %}
+                <div class="col-fix">
+                    {% show_card item.title item.image item.pubDate item.description color_secondary item.id item.feed.title item.feed.id %}
+                </div>
+            {% empty %}
+                <div class="col-fix">
+                    <ul class="collection">
+                        <a class="collection-item">
+                            En breve tendremos noticias que le puedan interesar
+                        </a>
+                    </ul>
+                </div>
+            {% endfor %}
+        </div>
+
+        {% show_pagination news color_primary %}
+    </div>
+{% endblock %}

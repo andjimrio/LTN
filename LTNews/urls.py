@@ -38,6 +38,7 @@ urlpatterns = [
     url(r'^item/list/', item_views.item_list, name='item_list'),
     url(r'^item/view/(?P<item_id>\d+)/', item_views.item_view, name='item_view'),
     url(r'^item/query/(?P<query>.+)/', item_views.item_query, name='item_query'),
+    url(r'^item/recommend/', item_views.item_recommend, name='item_recommend'),
 
     #User
     url(r'^register/', views.register, name='register'),

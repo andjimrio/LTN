@@ -2,8 +2,10 @@ from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.shortcuts import render
 
-from Application.utilities.index_utilities import get_item_keywords,get_item_similarity,get_item_query
-from Application.utilities.queries_utilities import get_item,get_last_items_by_user,get_status_by_user_item
+from Application.utilities.queries_utilities import get_item, get_last_items_by_user, get_status_by_user_item
+from Application.utilities.index_utilities import get_item_keywords, get_item_similarity, get_item_query, \
+    get_item_recommend
+
 
 @login_required
 def item_view(request, item_id=None):
@@ -24,6 +26,7 @@ def item_view(request, item_id=None):
     return render(request, 'item/item_view.html',
                   {'item': item, 'tags': tags, 'news': news,
                    'status': status})
+
 
 @login_required
 def item_list(request):
@@ -51,9 +54,8 @@ def item_list(request):
     return render(request, 'item/item_list.html', {'feedes': feedes})
 
 
-
 @login_required
-def item_query(request,query):
+def item_query(request, query):
     page = request.GET.get('page')
     paginator = Paginator(get_item_query(query), 20)
 
@@ -65,3 +67,18 @@ def item_query(request,query):
         news = paginator.page(paginator.num_pages)
 
     return render(request, 'item/item_query.html', {'news': news, 'query': query})
+
+
+@login_required
+def item_recommend(request):
+    page = request.GET.get('page')
+    paginator = Paginator(get_item_recommend(request.user.id), 20)
+
+    try:
+        news = paginator.page(page)
+    except PageNotAnInteger:
+        news = paginator.page(1)
+    except EmptyPage:
+        news = paginator.page(paginator.num_pages)
+
+    return render(request, 'item/item_recommend.html', {'news': news})

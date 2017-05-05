@@ -79,5 +79,5 @@ def get_filtered_status_by_profile(profile_id):
 # KEYWORDS
 
 def get_keywords_by_user(user_id):
-    return Keyword.objects.filter(users__user_id=user_id).all()
+    return Keyword.objects.filter(users__user=user_id).all()
 

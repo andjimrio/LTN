@@ -2,6 +2,7 @@ from django.utils import timezone
 
 from Application.models import Feed, Item, UserProfile, Section,\
     Status, Keyword
+from django.db.models import Max,Sum,Count,Avg
 
 
 # USERPROFILE
@@ -83,8 +84,21 @@ def get_filtered_status_by_profile(profile_id):
         .union(Status.objects.filter(user_id=profile_id).filter(like=True))
 
 
+def get_status_read_stats_by_user(profile_id):
+    return Status.objects.filter(user_id=profile_id, view=True) \
+        .values('item__feed__sections__title')\
+        .annotate(total=Count('id'))
+
+
+def get_status_like_stats_by_user(profile_id):
+    return Status.objects.filter(user_id=profile_id, like=True) \
+        .values('item__feed__sections__title')\
+        .annotate(total=Count('id'))
+
+
 # KEYWORDS
 
 def get_keywords_by_user(user_id):
     return Keyword.objects.filter(users__user=user_id).all()
+
 

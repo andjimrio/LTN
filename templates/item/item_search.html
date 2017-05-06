@@ -23,15 +23,15 @@
             <form id="register" method="POST" action="{% url 'item_search' %}">
                 {% csrf_token %}
 
-                {% for field in form %}
                 <div class="row">
-                    <div class="col s12 input-field">
-                        {{ field }}
-                        {{ field.label_tag }}
-                        <em class="error">{% for error in  field.errors %}{{ error }}{% endfor %}</em>
-                    </div>
+                    {% for field in form %}
+                        <div class="col s12 m6 input-field">
+                            {{ field }}
+                            {{ field.label_tag }}
+                            <em class="error">{% for error in  field.errors %}{{ error }}{% endfor %}</em>
+                        </div>
+                    {% endfor %}
                 </div>
-                {% endfor %}
 
                 <div class="row">
                     <div class="col s12 center">
@@ -64,5 +64,13 @@
 
             {% show_pagination news color_primary %}
         </div>
+    {% endif %}
+{% endblock %}
+
+{% block javascript %}
+    {% if news %}
+        <script>
+            Materialize.toast('Su búsqueda posee {{ news|length }} noticias', 4000);
+        </script>
     {% endif %}
 {% endblock %}

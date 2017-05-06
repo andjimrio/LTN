@@ -89,12 +89,23 @@ def item_recommend(request):
 
 @login_required
 def item_search(request):
+    page = request.GET.get('page')
     news = None
+
     if request.method == 'POST':
         search_form = ItemSearchForm(request.POST)
 
         if search_form.is_valid():
-            news = advanced_search(search_form.data['creator'])
+            query = advanced_search(search_form.data['title'], search_form.data['creator'])
+            paginator = Paginator(query, 20)
+
+            try:
+                news = paginator.page(page)
+            except PageNotAnInteger:
+                news = paginator.page(1)
+            except EmptyPage:
+                news = paginator.page(paginator.num_pages)
+
         else:
             print(search_form.errors)
     else:
@@ -142,7 +153,7 @@ class SectionSummaryKeywords:
 class KeywordCounter:
     def __init__(self, keyword, item_id, item_title):
         self.keyword = keyword
-        self.counts = 0
+        self.counts = 1
         self.items = dict()
         self.items[item_id] = item_title
 

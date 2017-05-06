@@ -2,7 +2,7 @@ from django.utils import timezone
 
 from Application.models import Feed, Item, UserProfile, Section,\
     Status, Keyword
-from django.db.models import Max,Sum,Count,Avg
+from django.db.models import Count
 
 
 # USERPROFILE

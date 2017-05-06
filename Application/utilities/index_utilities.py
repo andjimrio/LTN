@@ -18,8 +18,8 @@ def get_item_query(query):
 
 
 def get_item_recommend(user_id):
-    keys_user = get_keywords_by_user(user_id)
-    results = Item.objects.query('article', " OR ".join([x.term for x in keys_user]))\
+    keys_user = [x.term for x in get_keywords_by_user(user_id)]
+    results = Item.objects.query_list_or('article', keys_user)\
         .filter(statuses__user__user_id=user_id)\
         .exclude(statuses__view=True)\
         .order_by('-pubDate')

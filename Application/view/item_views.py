@@ -46,7 +46,6 @@ def item_list(request):
         if page is not None:
             page = int(page)-1
 
-
     try:
         feedes = paginator.page(page)
     except PageNotAnInteger:

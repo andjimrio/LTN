@@ -4,8 +4,9 @@ from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.shortcuts import render
 
+from Application.forms import ItemSearchForm
 from Application.utilities.queries_utilities import get_item, get_last_items_by_user, get_status_by_user_item,\
-    get_item_today_by_section, get_sections_by_user
+    get_item_today_by_section, get_sections_by_user, advanced_search
 from Application.utilities.index_utilities import get_item_keywords, get_item_similarity, get_item_query, \
     get_item_recommend
 
@@ -84,6 +85,22 @@ def item_recommend(request):
         news = paginator.page(paginator.num_pages)
 
     return render(request, 'item/item_recommend.html', {'news': news})
+
+
+@login_required
+def item_search(request):
+    news = None
+    if request.method == 'POST':
+        search_form = ItemSearchForm(request.POST)
+
+        if search_form.is_valid():
+            news = advanced_search(search_form.data['creator'])
+        else:
+            print(search_form.errors)
+    else:
+        search_form = ItemSearchForm()
+
+    return render(request, 'item/item_search.html', {'news': news, 'form': search_form})
 
 
 @login_required

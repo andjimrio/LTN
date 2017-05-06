@@ -42,6 +42,7 @@ urlpatterns = [
     url(r'^item/query/(?P<query>.+)/', item_views.item_query, name='item_query'),
     url(r'^item/recommend/', item_views.item_recommend, name='item_recommend'),
     url(r'^item/summary/', item_views.item_summary, name='item_summary'),
+    url(r'^item/search/', item_views.item_search, name='item_search'),
 
     # User
     url(r'^register/', views.register, name='register'),

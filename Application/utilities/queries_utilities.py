@@ -73,6 +73,10 @@ def get_item_today_by_section(section_id):
         .values('feeds__items__id','feeds__items__title')
 
 
+def advanced_search(creator):
+    return Item.objects.filter(creator__icontains=creator).all()
+
+
 # STATUS
 
 def get_status_by_user_item(user_id, item_id):

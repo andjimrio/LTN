@@ -55,6 +55,29 @@ header, main, footer {
         column-count: 1;
     }
 }
+
+.row-fix-m {
+    column-count: 2;
+    column-gap: 1em;
+}
+.row-fix-m .col-fix {
+    display: inline-block;
+    margin: 0 0 1em;
+    width: 100%;
+    left: inherit;
+    right: inherit;
+    float: inherit;
+}
+@media screen and (max-width: 900px) {
+    .row-fix-m {
+        column-count: 2;
+    }
+}
+@media screen and (max-width: 600px) {
+    .row-fix-m {
+        column-count: 1;
+    }
+}
 /* FIN: LIST CARDS */
 
 /* INI: INDEX

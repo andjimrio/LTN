@@ -1,14 +1,16 @@
-#encoding:utf-8
+# encoding:utf-8
 from django.db import models
 from django.contrib.auth.models import User
-from math import log,floor
+from math import log, floor
 
 from Application.managers import WhooshManager
 
 
-#   Clase que contiene la información del usuario. Se relaciona con el
-# User que define Django.
 class UserProfile(models.Model):
+    """Entidad UserProfile:
+    Clase que contiene la información del usuario. Se relaciona con el
+    User que define Django.
+    """
     image = models.URLField()
 
     user = models.OneToOneField(User)
@@ -19,16 +21,18 @@ class UserProfile(models.Model):
     pass
 
 
-#   Representa la clasificación que hace el usuario de sus canales de
-# noticias.
 class Section(models.Model):
+    """Entidad Section:
+    Representa la clasificación que hace el usuario de sus canales de
+    noticias.
+    """
     title = models.CharField(max_length=500)
     description = models.TextField()
+
     user = models.ForeignKey(UserProfile, related_name="sections")
 
     def __str__(self):
         return self.title
-
 
     class Meta:
         ordering = ('title',)
@@ -36,9 +40,11 @@ class Section(models.Model):
     pass
 
 
-#   Representa al canal de noticias: al periódico. Contiene su
-# información esencial y se relaciona con Section
 class Feed(models.Model):
+    """Entidad Feed:
+    Representa al canal de noticias: al periódico. Contiene su
+    información esencial y se relaciona con Section.
+    """
     title = models.CharField(max_length=500)
     link_rss = models.URLField()
     link_web = models.URLField()
@@ -46,7 +52,7 @@ class Feed(models.Model):
     language = models.CharField(max_length=50)
     logo = models.URLField()
 
-    sections = models.ManyToManyField(Section,related_name="feeds")
+    sections = models.ManyToManyField(Section, related_name="feeds")
 
     def __str__(self):
         return self.title
@@ -57,9 +63,11 @@ class Feed(models.Model):
     pass
 
 
-#   Representa a una noticia. Este se relaciona con el diario y por
-# defecto se ordena por la fecha de publicación de manera descendente.
 class Item(models.Model):
+    """Entidad Item:
+    Representa a una noticia. Este se relaciona con el diario y por
+    defecto se ordena por la fecha de publicación de manera descendente.
+    """
     title = models.CharField(max_length=500)
     link = models.URLField()
     description = models.TextField()
@@ -88,7 +96,7 @@ class Item(models.Model):
 
     def __create_status(self):
         for section in self.feed.sections.all():
-            status,created = Status.objects.get_or_create(user_id=section.user.id, item_id=self.id)
+            Status.objects.get_or_create(user_id=section.user.id, item_id=self.id)
         pass
 
     def on_save(self):
@@ -99,16 +107,19 @@ class Item(models.Model):
     pass
 
 
-#   Contiene la información de un usuario con respecto a una noticia.
-# Por defecto se inicializa a falso los tres atributos.
 class Status(models.Model):
+    """Entidad Status:
+    Contiene la información de un usuario con respecto a una noticia.
+    Por defecto se inicializa a falso los tres atributos.
+    """
     view = models.BooleanField(default=False)
     read = models.BooleanField(default=False)
     like = models.BooleanField(default=False)
 
     user = models.ForeignKey(UserProfile, on_delete=models.CASCADE,
                              related_name="statuses")
-    item = models.OneToOneField(Item)
+    item = models.ForeignKey(Item, on_delete=models.CASCADE,
+                             related_name="statuses")
 
     def as_view(self):
         self.view = True
@@ -131,21 +142,46 @@ class Status(models.Model):
         self.save()
         pass
 
+    def get_score(self):
+        if self.like:
+            return 10
+        elif self.read:
+            return 1
+        else:
+            return 0
+
     def __str__(self):
-        return "{}-{}: {}/{}/{}".format(self.item.id,self.user.user.username,self.view,
-                                     self.read,self.like)
+        return "{}-{}: {}/{}/{}".format(self.item.id, self.user.user.username, self.view,
+                                        self.read, self.like)
     pass
 
 
-#   Término más representantivo tanto para el usuario como para una
-# noticia.
 class Keyword(models.Model):
+    """Entidad Keyword:
+    Representa las palabras claves asociadas a un usuario. Estas servirán
+    para el para el sistema de recomendación.
+    """
     term = models.CharField(max_length=250)
 
     users = models.ManyToManyField(UserProfile, related_name="keywords")
-    items = models.ManyToManyField(Item, related_name="keywords")
 
     def __str__(self):
         return self.term
 
+    pass
+
+
+class Comment(models.Model):
+    """Entidad Comment:
+    Representa un comentario de un usuario en un Item."""
+    description = models.TextField()
+    pubDate = models.DateTimeField(auto_now=True)
+
+    user = models.ForeignKey(UserProfile, on_delete=models.CASCADE,
+                             related_name="comments")
+    item = models.ForeignKey(Item, on_delete=models.CASCADE,
+                             related_name="comments")
+
+    def __str__(self):
+        return "{}-{}".format(self.item.id, self.user.user.username)
     pass

@@ -30,9 +30,9 @@
                         <div class="background">
                             <img src="{% static 'img/newspaper.jpg' %}">
                         </div>
-                        <a href="#!user"><img class="circle" src="{% static 'img/icon_circle.png' %}"></a>
-                        <a href="#!name"><span class="white-text name">{{ user.username }}</span></a>
-                        <a href="#!email"><span class="white-text email">{{ user.email }}</span></a>
+                        <a href="{% url 'profile_view' %}"><img class="circle" src="{% static 'img/icon_circle.png' %}"></a>
+                        <a href="{% url 'profile_view' %}"><span class="white-text name">{{ user.username }}</span></a>
+                        <a href="{% url 'profile_view' %}"><span class="white-text email">{{ user.email }}</span></a>
                     </div>
                 </li>
 
@@ -40,9 +40,20 @@
                     <i class="material-icons left">view_list</i>Noticias
                 </a></li>
                 <li><a href="{% url 'feed_list' %}">
-                    <i class="material-icons left">library_books</i>Feeds
+                    <i class="material-icons left">library_books</i>Periódicos
                 </a></li>
+                <li><a href="{% url 'item_recommend' %}">
+                    <i class="material-icons left">grade</i>Recomendaciones
+                </a></li>
+                <li><a href="{% url 'item_summary' %}">
+                    <i class="material-icons left">whatshot</i>Resumen
+                </a></li>
+                <li><a href="{% url 'item_search' %}">
+                    <i class="material-icons left">search</i>Buscar
+                </a></li>
+
                 <li class="divider"></li>
+
                 <li><a href="{% url 'logout' %}">
                     <i class="material-icons left">exit_to_app</i>Logout
                 </a></li>
@@ -101,6 +112,7 @@
     <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
             crossorigin="anonymous"></script>
     <script src="{% static "js/materialize.min.js" %}"></script>
+    <script src="{% static "js/Chart.min.js" %}"></script>
     <script src="{% static "js/init.js" %}"></script>
 
     {% block javascript %}{% endblock %}

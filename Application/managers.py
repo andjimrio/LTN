@@ -43,7 +43,7 @@ field_mapping = {
 
 class WhooshManager(models.Manager):
     def __init__(self, *args, **kwargs):
-        self.default = kwargs.pop("default", None)
+        self.default = args[0] if args else kwargs.pop("default", None)
         self.fields = kwargs.pop('fields', []) + ['id']
         self.real_time = kwargs.pop('real_time', True)
 
@@ -91,18 +91,31 @@ class WhooshManager(models.Manager):
         results = self.__query_search(field, query)
         return self.filter(id__in=[r['id'] for r in results])
 
-    def get_keywords(self,field, item_id, num_terms=20):
+    def query_list_and(self, field, query_list):
+        query = self.__list_to_query(query_list, 'AND')
+        return self.query(field, query)
+
+    def query_list_or(self, field, query_list):
+        query = self.__list_to_query(query_list, 'OR')
+        return self.query(field, query)
+
+    def get_keywords(self, field, item_id, num_terms=20):
         results = self.__query_search('id', item_id)
         return [keyword for keyword, score in results.key_terms(field, numterms=num_terms)]
 
-    def get_more_like_this(self, field, item_id):
+    def get_more_like_this(self, field, item_id, limit=None):
         results = self.__query_search('id', item_id)
         first_hit = results[0]
-        return self.filter(id__in=[r['id'] for r in first_hit.more_like_this(field)])
+        return self.filter(id__in=[r['id'] for r in first_hit.more_like_this(field, top=limit)])
 
     @staticmethod
-    def __query_search(field, search):
+    def __query_search(field, search, limit=None):
         index = open_dir(STORAGE_DIR)
         query = QueryParser(field, index.schema).parse(str(search))
-        results = index.searcher().search(query)
+        results = index.searcher().search(query, limit=limit)
         return results
+
+    @staticmethod
+    def __list_to_query(query_list, word):
+        and_or = " {} ".format(word)
+        return and_or.join(query_list)

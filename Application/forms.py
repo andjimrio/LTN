@@ -22,3 +22,10 @@ class FeedForm(forms.Form):
     section = forms.CharField(widget=forms.TextInput(attrs={'class': 'validate'}))
 
     pass
+
+
+class ItemSearchForm(forms.Form):
+    title = forms.CharField(required=False, widget=forms.TextInput(attrs={'class': 'validate'}))
+    creator = forms.CharField(required=False, widget=forms.TextInput(attrs={'class': 'validate'}))
+
+    pass

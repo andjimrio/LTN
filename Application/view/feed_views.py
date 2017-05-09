@@ -1,11 +1,12 @@
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
-from django.shortcuts import render,redirect
+from django.shortcuts import render, redirect
 
 from Application.forms import FeedForm
 from Application.utilities.populate_utilities import populate_rss
-from Application.utilities.queries_utilities import get_feed,all_feeds_link,\
-    user_has_feed,get_sections_by_user,get_section
+from Application.utilities.queries_utilities import get_feed, all_feeds_link, user_has_feed, get_sections_by_user, \
+    get_section
+
 
 @login_required
 def feed_create(request):
@@ -18,7 +19,7 @@ def feed_create(request):
             url = feed_form.data['url']
             title_section = feed_form.data['section']
 
-            feed = populate_rss(url,title_section,request.user.id)
+            feed = populate_rss(url, title_section, request.user.id)
 
             return redirect('feed_list')
 
@@ -32,7 +33,7 @@ def feed_create(request):
     sections = get_sections_by_user(request.user.id)
 
     return render(request, 'feed/feed_create.html',
-                  {'feed_form':feed_form, 'error':error, 'urls':urls, 'sections':sections})
+                  {'feed_form': feed_form, 'error': error, 'urls': urls, 'sections': sections})
 
 
 @login_required
@@ -49,13 +50,14 @@ def feed_view(request, feed_id=None):
     except EmptyPage:
         news = paginator.page(paginator.num_pages)
 
-    return render(request, 'feed/feed_view.html', {'feed':feeder, 'news':news})
+    return render(request, 'feed/feed_view.html', {'feed': feeder, 'news': news})
 
 
 @login_required
 def feed_list(request):
     sections = get_sections_by_user(request.user.id)
-    return render(request, 'feed/feed_list.html', {'sections':sections})
+    return render(request, 'feed/feed_list.html', {'sections': sections})
+
 
 @login_required
 def feed_delete(request, section_id, feed_id):

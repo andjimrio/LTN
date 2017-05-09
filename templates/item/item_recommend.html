@@ -2,23 +2,22 @@
 {% load static %}
 {% load apptags %}
 
-{% block titulo %}Búsqueda: {{ query }}{% endblock %}
+{% block titulo %}Noticias recomendadas{% endblock %}
 
 {% block contenido %}
     <div class="container-fix">
-        <h3 class="center">
-            <a class="{{ color_secondary }}-text">Búsqueda: <em>{{ query }}</em></a></h3>
+        <h3 class="center">Te puede interesar...</h3>
 
         <div class="row-fix">
             {% for item in news %}
                 <div class="col-fix">
-                    {% show_card item.title item.image item.pubDate item.description color_secondary item.id %}
+                    {% show_card item.title item.image item.pubDate item.description color_secondary item.id item.feed.title item.feed.id %}
                 </div>
             {% empty %}
                 <div class="col-fix">
                     <ul class="collection">
-                        <a href="{% url 'feed_create' %}" class="collection-item">
-                            Añade tus periódicos favoritos
+                        <a class="collection-item">
+                            En breve tendremos noticias que le puedan interesar
                         </a>
                     </ul>
                 </div>

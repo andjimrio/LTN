@@ -47,10 +47,10 @@
             <h6 class="center {{ color_secondary }}-text">Noticias recomendadas</h6>
             <br>
 
-            <div class="row">
+            <div class="row-fix-m">
                 {% for item in news %}
-                    <div class="col s12 m6 ">
-                        {% show_card item.title item.image item.pubDate item.description color_primary item.id item.feed.title item.feed.id %}
+                    <div class="col-fix">
+                        {% show_card item.title item.image item.pubDate item.description color_secondary item.id item.feed.title item.feed.id %}
                     </div>
                 {% endfor %}
             </div>

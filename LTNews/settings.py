@@ -28,7 +28,7 @@ SECRET_KEY = 'id(pu606k)*c2vs24atw3$2+_5$elfs)2lpf6(6@7%p2x=*1*d'
 DEBUG = True
 
 ALLOWED_HOSTS = ["lt-news.herokuapp.com", "www.lt-news.herokuapp.com", "localhost",
-                 "127.0.0.1", "95.85.22.119"]
+                 "127.0.0.1", "95.85.22.119", "lt-news.mooo.com", "www.lt-news.mooo.com"]
 
 
 # Application definition

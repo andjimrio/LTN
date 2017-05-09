@@ -26,7 +26,7 @@
                 <h4 class="center">Sus intereses</h4>
                 <div class="chips">
                     {% for keyword in profile.keywords.all %}
-                        <div class="chip">{{ keyword }}</div>
+                        <div class="chip"><a href="{% url 'item_query' keyword %}">{{ keyword }}</a></div>
                     {% endfor %}
                 </div>
             </div>

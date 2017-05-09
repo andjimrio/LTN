@@ -7,8 +7,8 @@ def get_item_keywords(item_id, num_terms):
     return keywords
 
 
-def get_item_similarity(item_id):
-    more_results = Item.objects.get_more_like_this('article', item_id)
+def get_item_similarity(item_id, limit):
+    more_results = Item.objects.get_more_like_this('article', item_id, limit)
     return more_results
 
 

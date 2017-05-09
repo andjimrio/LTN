@@ -17,7 +17,7 @@ def item_view(request, item_id=None):
 
     item = get_item(item_id)
     tags = get_item_keywords(item_id, item.get_key_number())
-    news = get_item_similarity(item_id)
+    news = get_item_similarity(item_id, 6)
 
     status = get_status_by_user_item(request.user.id, item_id)
     status.as_read()

@@ -12,7 +12,9 @@
             <div class="col s12">
                 {% for section in sections %}
                     <ul class="collection with-header">
-                        <li class="collection-header {{ color_primary }}-text"><h4>{{ section.title }}</h4></li>
+                        <li class="collection-header {{ color_primary }}-text">
+                            <h4>{{ section.title }}</h4>
+                        </li>
 
                         {% for feed in section.feeds.all %}
                             <li class="collection-item avatar">

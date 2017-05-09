@@ -103,16 +103,16 @@ class WhooshManager(models.Manager):
         results = self.__query_search('id', item_id)
         return [keyword for keyword, score in results.key_terms(field, numterms=num_terms)]
 
-    def get_more_like_this(self, field, item_id):
+    def get_more_like_this(self, field, item_id, limit=None):
         results = self.__query_search('id', item_id)
         first_hit = results[0]
-        return self.filter(id__in=[r['id'] for r in first_hit.more_like_this(field)])
+        return self.filter(id__in=[r['id'] for r in first_hit.more_like_this(field, top=limit)])
 
     @staticmethod
-    def __query_search(field, search):
+    def __query_search(field, search, limit=None):
         index = open_dir(STORAGE_DIR)
         query = QueryParser(field, index.schema).parse(str(search))
-        results = index.searcher().search(query, limit=None)
+        results = index.searcher().search(query, limit=limit)
         return results
 
     @staticmethod

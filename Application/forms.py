@@ -2,7 +2,8 @@
 
 from django import forms
 from django.contrib.auth.models import User
-from django.contrib.auth import authenticate
+
+from Application.utilities.queries_utilities import all_feeds
 
 
 class UserForm(forms.ModelForm):
@@ -25,7 +26,8 @@ class FeedForm(forms.Form):
 
 
 class ItemSearchForm(forms.Form):
-    title = forms.CharField(required=False, widget=forms.TextInput(attrs={'class': 'validate'}))
-    creator = forms.CharField(required=False, widget=forms.TextInput(attrs={'class': 'validate'}))
+    title = forms.CharField(label="Título", required=False, widget=forms.TextInput(attrs={'class': 'validate'}))
+    creator = forms.CharField(label="Autor", required=False, widget=forms.TextInput(attrs={'class': 'validate'}))
+    feed = forms.ModelChoiceField(label="Periódico", required=False, queryset=all_feeds())
 
     pass

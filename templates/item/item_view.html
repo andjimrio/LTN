@@ -5,7 +5,7 @@
 
 {% block contenido %}
     <div class="container center">
-        <h4 class="{{ color_secondary }}-text" href="{{ item.link }}">{{ item.title }}</h4>
+        <h4 class="{{ color_secondary }}-text">{{ item.title }}</h4>
     </div>
 
     {% if article.image != '' %}
@@ -29,6 +29,9 @@
                         <i class="material-icons left">clear</i>Me gusta
                     </a>
                 {% endif %}
+                <a class="waves-effect waves-light btn {{ color_secondary }}" href="{{ item.link }}">
+                    <i class="material-icons left">launch</i>Ir a la web
+                </a>
             </div>
         </div>
 

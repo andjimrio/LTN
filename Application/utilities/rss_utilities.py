@@ -19,7 +19,7 @@ def read_rss(link):
               'logo':           redo_string(rss.feed, 'image', 'href')
               }
 
-    entries = [get_post(post) for post in rss.entries if get_post(post)]
+    entries = [get_post(post) for post in rss.entries]
 
     return feeder, entries
 

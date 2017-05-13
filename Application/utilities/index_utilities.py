@@ -17,6 +17,11 @@ def get_item_query(query):
     return results
 
 
+def query_multifield_dict(dict_query):
+    results = Item.objects.query_multifield_dict(dict_query)
+    return results
+
+
 def get_item_recommend(user_id):
     keys_user = [x.term for x in get_keywords_by_user(user_id)]
     results = Item.objects.query_list_or('article', keys_user)\

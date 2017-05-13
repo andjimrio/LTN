@@ -80,7 +80,7 @@ class Item(models.Model):
                              related_name="items")
 
     # The first argument is the default query field
-    objects = WhooshManager('title', fields=['title', 'article'])
+    objects = WhooshManager('article', fields=['title', 'article', 'description', 'creator', 'feed'])
 
     def __str__(self):
         return self.title

@@ -6,9 +6,9 @@ from django.shortcuts import render
 
 from Application.forms import ItemSearchForm
 from Application.utilities.queries_utilities import get_item, get_last_items_by_user, get_status_by_user_item,\
-    get_item_today_by_section, get_sections_by_user, advanced_search
+    get_item_today_by_section, get_sections_by_user
 from Application.utilities.index_utilities import get_item_keywords, get_item_similarity, get_item_query, \
-    get_item_recommend
+    get_item_recommend, query_multifield_dict
 
 
 @login_required
@@ -96,7 +96,7 @@ def item_search(request):
         search_form = ItemSearchForm(request.POST)
 
         if search_form.is_valid():
-            query = advanced_search(search_form.data['title'], search_form.data['creator'])
+            query = query_multifield_dict(search_form.cleaned_data)
             paginator = Paginator(query, 20)
 
             try:

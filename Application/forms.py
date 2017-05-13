@@ -9,7 +9,6 @@ from Application.utilities.queries_utilities import all_feeds
 class UserForm(forms.ModelForm):
     username = forms.CharField(widget=forms.TextInput(attrs={'class': 'validate'}))
     password = forms.CharField(widget=forms.PasswordInput())
-    email = forms.EmailField(widget=forms.EmailInput(attrs={'class': 'validate'}))
 
     class Meta:
         model = User
@@ -28,6 +27,7 @@ class FeedForm(forms.Form):
 class ItemSearchForm(forms.Form):
     title = forms.CharField(label="Título", required=False, widget=forms.TextInput(attrs={'class': 'validate'}))
     creator = forms.CharField(label="Autor", required=False, widget=forms.TextInput(attrs={'class': 'validate'}))
+    description = forms.CharField(label="Descripción", required=False, widget=forms.TextInput(attrs={'class': 'validate'}))
     feed = forms.ModelChoiceField(label="Periódico", required=False, queryset=all_feeds())
 
     pass

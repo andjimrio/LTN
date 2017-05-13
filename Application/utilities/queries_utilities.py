@@ -77,15 +77,6 @@ def get_item_today_by_section(section_id):
         .values('feeds__items__id','feeds__items__title')
 
 
-def advanced_search(title, creator):
-    if title == '':
-        return Item.objects.filter(Q(creator__icontains=creator))
-    elif creator == '':
-        return Item.objects.filter(Q(title__icontains=title))
-    else:
-        return Item.objects.filter(Q(title__icontains=title) | Q(creator__icontains=creator))
-
-
 # STATUS
 
 def get_status_by_user_item(user_id, item_id):

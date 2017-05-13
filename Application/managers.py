@@ -5,9 +5,9 @@ from django.conf import settings
 from django.core.exceptions import ImproperlyConfigured
 from django.db.models.signals import post_save, post_delete, class_prepared
 
-from whoosh.fields import Schema, STORED, ID, KEYWORD, TEXT
+from whoosh.fields import Schema, STORED, ID, KEYWORD, TEXT, DATETIME
 from whoosh.index import create_in, open_dir, exists_in
-from whoosh.qparser import QueryParser
+from whoosh.qparser import QueryParser, MultifieldParser
 
 try:
     STORAGE_DIR = settings.WHOOSH_STORAGE_DIR
@@ -21,7 +21,7 @@ field_mapping = {
     'CharField': TEXT(stored=True),
     'CommaSeparatedIntegerField': STORED,
     'DateField': ID,
-    'DateTimeField': ID,
+    'DateTimeField': DATETIME,
     'DecimalField': STORED,
     'EmailField': ID,
     'FileField': ID,
@@ -38,6 +38,7 @@ field_mapping = {
     'TextField': TEXT(stored=True),
     'TimeField': ID,
     'URLField': ID,
+    'ForeignKey': TEXT(stored=True),
 }
 
 
@@ -99,6 +100,14 @@ class WhooshManager(models.Manager):
         query = self.__list_to_query(query_list, 'OR')
         return self.query(field, query)
 
+    def query_multifield(self, fields, query):
+        results = self.__query_multifield_search(fields, query)
+        return self.filter(id__in=[r['id'] for r in results])
+
+    def query_multifield_dict(self, dict_data):
+        fields, query = self.__dict_to_query(dict_data)
+        return self.query_multifield(fields, query)
+
     def get_keywords(self, field, item_id, num_terms=20):
         results = self.__query_search('id', item_id)
         return [keyword for keyword, score in results.key_terms(field, numterms=num_terms)]
@@ -116,6 +125,26 @@ class WhooshManager(models.Manager):
         return results
 
     @staticmethod
+    def __query_multifield_search(fields, search, limit=None):
+        index = open_dir(STORAGE_DIR)
+        query = MultifieldParser(fields, index.schema).parse(str(search))
+        results = index.searcher().search(query, limit=limit)
+        return results
+
+    @staticmethod
     def __list_to_query(query_list, word):
         and_or = " {} ".format(word)
         return and_or.join(query_list)
+
+    @staticmethod
+    def __dict_to_query(dict_data):
+        fields = []
+        queries = []
+
+        for key, value in dict_data.items():
+            if value != '' and value is not None:
+                fields.append(key)
+                queries.append("{}:{}".format(key, value))
+
+        query = " ".join(queries)
+        return fields, query

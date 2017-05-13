@@ -36,9 +36,11 @@
                         <div class="background">
                             <img src="{% static 'img/newspaper.jpg' %}">
                         </div>
-                        <a href="{% url 'profile_view' %}"><img class="circle" src="{% static 'img/icon_circle.png' %}"></a>
-                        <a href="{% url 'profile_view' %}"><span class="white-text name">{{ user.username }}</span></a>
-                        <a href="{% url 'profile_view' %}"><span class="white-text email">{{ user.email }}</span></a>
+                        <img class="circle" src="{% static 'img/icon_circle.png' %}">
+                        <span class="white-text name">{{ user.username }}</span>
+                        <a href="{% url 'profile_view' %}"><span class="white-text email">
+                            <i class="material-icons right">arrow_drop_down</i>{{ user.email }}</span>
+                        </a>
                     </div>
                 </li>
 

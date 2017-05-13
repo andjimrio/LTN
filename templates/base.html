@@ -17,10 +17,16 @@
 </head>
 <body>
     <header>
-        <nav class="{{ color_primary }}" role="navigation">
+        <nav class="nav-extended {{ color_primary }}" role="navigation">
             <div class="nav-wrapper container">
                 <a href="{% url 'home' %}" class="brand-logo">LT-News</a>
                 <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
+            </div>
+            <div class="nav-content container">
+                <span class="nav-title"><strong>{% block header %}{% endblock %}</strong></span>
+                <a class="btn-floating btn-large halfway-fab waves-effect waves-light {{ color_secondary }}">
+                    <i class="material-icons">translate</i>
+                </a>
             </div>
         </nav>
         <ul id="nav-mobile" class="side-nav fixed">
@@ -46,7 +52,7 @@
                     <i class="material-icons left">grade</i>Recomendaciones
                 </a></li>
                 <li><a href="{% url 'item_summary' %}">
-                    <i class="material-icons left">whatshot</i>Resumen
+                    <i class="material-icons left">whatshot</i>Actualidad
                 </a></li>
                 <li><a href="{% url 'item_search' %}">
                     <i class="material-icons left">search</i>Buscar

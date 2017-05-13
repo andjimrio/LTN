@@ -12,6 +12,9 @@ def home(request):
 
 
 def register(request):
+    if request.user.is_authenticated:
+        return redirect('home')
+
     if request.method == 'POST':
         user_form = UserForm(request.POST)
 
@@ -37,4 +40,4 @@ def register(request):
     else:
         user_form = UserForm()
 
-    return render(request, 'register.html',{'user_form':user_form})
+    return render(request, 'register.html', {'user_form': user_form})

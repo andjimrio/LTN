@@ -1,13 +1,13 @@
 {% extends 'base.html' %}
 
 {% block titulo %}Añadir Feed{% endblock %}
+{% block header %}Añadir nuevo Feed{% endblock %}
 
 {% block contenido %}
     <div class="container">
         <div class="row">
             <div class="col s12">
-                <h3 class="{{ color_secondary }}-text  center">Añadir nuevo Feed</h3>
-                <br>
+            <br>
 
                 {% if feed_form.errors or error %}
                     <ul class="collection with-header red-text text-darken-4">

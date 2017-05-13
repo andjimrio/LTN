@@ -65,6 +65,4 @@ if __name__ == '__main__':
     LINK_ELPAIS = 'http://ep00.epimg.net/rss/tags/ultimas_noticias.xml'
     LINK_ACEPRENSA = 'http://www.aceprensa.com/rss/'
 
-    read_rss(LINK_ELPAIS)[1][0]
-    read_rss(LINK_ACEPRENSA)[1][0]
-    read_rss(LINK_ABC)[1][0]
+    print(read_rss(LINK_ELPAIS))

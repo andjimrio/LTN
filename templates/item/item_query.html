@@ -3,12 +3,11 @@
 {% load apptags %}
 
 {% block titulo %}Búsqueda: {{ query }}{% endblock %}
+{% block header %}{{ query }}{% endblock %}
 
 {% block contenido %}
     <div class="container-fix">
-        <h3 class="center">
-            <a class="{{ color_secondary }}-text">Búsqueda: <em>{{ query }}</em></a></h3>
-
+        <br>
         <div class="row-fix">
             {% for item in news %}
                 <div class="col-fix">

@@ -2,12 +2,9 @@
 {% load apptags %}
 
 {% block titulo %}{% reduce_title item.title %}{% endblock %}
+{% block header %}{{ item.title }}{% endblock %}
 
 {% block contenido %}
-    <div class="container center">
-        <h4 class="{{ color_secondary }}-text">{{ item.title }}</h4>
-    </div>
-
     {% if article.image != '' %}
         <div class="parallax-container">
             <div class="parallax"><img src="{{ item.image }}" /></div>

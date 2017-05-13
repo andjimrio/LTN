@@ -154,6 +154,7 @@ class KeywordCounter:
     def __init__(self, keyword, item_id, item_title):
         self.keyword = keyword
         self.counts = 1
+        self.sample_title = item_title
         self.items = dict()
         self.items[item_id] = item_title
 

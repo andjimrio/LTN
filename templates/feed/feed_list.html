@@ -1,13 +1,11 @@
 {% extends 'base.html' %}
 
 {% block titulo %}Tus Feeds{% endblock %}
+{% block header %}Tus Feeds{% endblock %}
 
 {% block contenido %}
     <div class="container">
-        <div class="section">
-            <h3 class="center">
-                <a class="{{ color_secondary }}-text">Tus Feeds</a></h3>
-        </div>
+        <br>
         <div class="section row">
             <div class="col s12">
                 {% for section in sections %}
@@ -43,8 +41,8 @@
             </div>
         </div>
         <div class="section center">
-            <a class="btn waves-effect waves-light {{ color_primary }}" href="{% url 'feed_create' %}">
-                Nuevo Feed <i class="material-icons right">send</i>
+            <a class="btn waves-effect waves-light {{ color_secondary }}" href="{% url 'feed_create' %}">
+                Nuevo Feed <i class="material-icons right">library_books</i>
             </a>
         </div>
     </div>

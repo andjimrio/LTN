@@ -3,13 +3,11 @@
 {% load apptags %}
 
 {% block titulo %}{{ feed.title }}{% endblock %}
+{% block header %}{{ feed.title }}{% endblock %}
 
 {% block contenido %}
     <div class="container-fix">
-        <h3 class="center">
-            <a href="{{ feed.link }}" class="{{ color_secondary }}-text">{{ feed.description }}</a></h3>
-        <br>
-
+        <br><br>
         <div class="row-fix">
             {% for item in news %}
                 <div class="col-fix">

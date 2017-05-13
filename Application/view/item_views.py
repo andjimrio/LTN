@@ -99,6 +99,7 @@ def item_search(request):
 
         if search_form.is_valid():
             cleaned_data = search_form.cleaned_data
+            cleaned_data['feed'] = cleaned_data['feed'].title
             request.session['cleaned_data'] = search_form.cleaned_data
 
         else:
@@ -108,7 +109,8 @@ def item_search(request):
     else:
         search_form = ItemSearchForm(request.user)
 
-    if cleaned_data is not None:
+    if cleaned_data:
+        print(cleaned_data)
         query = query_multifield_dict(cleaned_data)
         paginator = Paginator(query, 20)
 

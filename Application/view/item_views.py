@@ -91,27 +91,36 @@ def item_recommend(request):
 def item_search(request):
     page = request.GET.get('page')
     news = None
+    total = 0
+    cleaned_data = request.session.get('cleaned_data', None)
 
     if request.method == 'POST':
-        search_form = ItemSearchForm(request.POST)
+        search_form = ItemSearchForm(request.user, request.POST)
 
         if search_form.is_valid():
-            query = query_multifield_dict(search_form.cleaned_data)
-            paginator = Paginator(query, 20)
-
-            try:
-                news = paginator.page(page)
-            except PageNotAnInteger:
-                news = paginator.page(1)
-            except EmptyPage:
-                news = paginator.page(paginator.num_pages)
+            cleaned_data = search_form.cleaned_data
+            request.session['cleaned_data'] = search_form.cleaned_data
 
         else:
             print(search_form.errors)
+    elif cleaned_data:
+        search_form = ItemSearchForm(request.user, initial=cleaned_data)
     else:
-        search_form = ItemSearchForm()
+        search_form = ItemSearchForm(request.user)
 
-    return render(request, 'item/item_search.html', {'news': news, 'form': search_form})
+    if cleaned_data is not None:
+        query = query_multifield_dict(cleaned_data)
+        paginator = Paginator(query, 20)
+
+        try:
+            news = paginator.page(page)
+        except PageNotAnInteger:
+            news = paginator.page(1)
+            total = len(query)
+        except EmptyPage:
+            news = paginator.page(paginator.num_pages)
+
+    return render(request, 'item/item_search.html', {'news': news, 'form': search_form, 'total': total})
 
 
 @login_required

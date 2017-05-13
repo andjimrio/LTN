@@ -1,9 +1,7 @@
-#encoding:utf-8
-
 from django import forms
 from django.contrib.auth.models import User
 
-from Application.utilities.queries_utilities import all_feeds
+from Application.utilities.queries_utilities import get_feeds_by_user
 
 
 class UserForm(forms.ModelForm):
@@ -28,6 +26,11 @@ class ItemSearchForm(forms.Form):
     title = forms.CharField(label="Título", required=False, widget=forms.TextInput(attrs={'class': 'validate'}))
     creator = forms.CharField(label="Autor", required=False, widget=forms.TextInput(attrs={'class': 'validate'}))
     description = forms.CharField(label="Descripción", required=False, widget=forms.TextInput(attrs={'class': 'validate'}))
-    feed = forms.ModelChoiceField(label="Periódico", required=False, queryset=all_feeds())
+    feed = forms.ModelChoiceField(label="Periódico", required=False, queryset=None)
+
+    def __init__(self, user, *args, **kwargs):
+        super(ItemSearchForm, self).__init__(*args, **kwargs)
+
+        self.fields['feed'].queryset = get_feeds_by_user(user)
 
     pass

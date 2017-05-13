@@ -66,19 +66,20 @@ def list_colors(number):
 
 @register.inclusion_tag('tags/card.html')
 def show_card(title, image, pubDate, description, color_primary, item_id, newspaper=None, feed_id=None):
-    if item_id == None:
-        return {'error':True}
+    if item_id is None:
+        return {'error': True}
     else:
-        return {'title':title,
-                'image':image,
-                'pubDate':pubDate,
-                'description':description,
-                'item_id':item_id,
-                'color_primary':color_primary,
-                'newspaper':newspaper if newspaper != None else "",
-                'feed_id':feed_id if newspaper != None else "",
-                'error':False}
+        return {'title': title,
+                'image': image,
+                'pubDate': pubDate,
+                'description': description,
+                'item_id': item_id,
+                'color_primary': color_primary,
+                'newspaper': newspaper if newspaper else "",
+                'feed_id': feed_id if newspaper else "",
+                'error': False}
+
 
 @register.inclusion_tag('tags/pagination.html')
-def show_pagination(news,color_primary):
-    return {'news':news,'color_primary':color_primary}
+def show_pagination(news, color_primary):
+    return {'news': news, 'color_primary': color_primary}

@@ -69,7 +69,7 @@
 {% block javascript %}
     {% if news %}
         <script>
-            Materialize.toast('Su búsqueda posee {{ news|length }} noticias', 4000);
+            Materialize.toast('Su búsqueda posee {{ total }} noticias', 4000);
         </script>
     {% endif %}
 {% endblock %}

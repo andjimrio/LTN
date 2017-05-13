@@ -46,10 +46,6 @@ def get_feed(feed_id):
     return Feed.objects.get(id=feed_id)
 
 
-def all_feeds():
-    return Feed.objects.all()
-
-
 # ITEM
 
 def get_item(item_id):

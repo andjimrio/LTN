@@ -21,7 +21,10 @@ def feed_create(request):
 
             feed = populate_rss(url, title_section, request.user.id)
 
-            return redirect('feed_list')
+            if feed:
+                return redirect('feed_list')
+            else:
+                error = True
 
         else:
             print(feed_form.errors)

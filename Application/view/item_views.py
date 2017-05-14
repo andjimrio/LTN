@@ -27,6 +27,8 @@ def item_view(request, item_id=None):
     elif like == 'False':
         status.as_unlike()
 
+    print(item.description)
+
     return render(request, 'item/item_view.html',
                   {'item': item, 'tags': tags, 'news': news,
                    'status': status})
@@ -99,7 +101,8 @@ def item_search(request):
 
         if search_form.is_valid():
             cleaned_data = search_form.cleaned_data
-            cleaned_data['feed'] = cleaned_data['feed'].title
+            if cleaned_data['feed']:
+                cleaned_data['feed'] = cleaned_data['feed'].title
             request.session['cleaned_data'] = search_form.cleaned_data
 
         else:

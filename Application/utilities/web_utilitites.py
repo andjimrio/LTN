@@ -14,3 +14,18 @@ def extract_img_html(html_doc):
         imgs.append(img['src'])
 
     return imgs[0]
+
+
+def reconvert_html(html_doc):
+    soup = BeautifulSoup(html_doc, 'html.parser')
+
+    for img in soup.findAll("img"):
+        img['class'] = img.get('class', []) + ['responsive-img']
+
+    for p in soup.findAll("p"):
+        p['class'] = p.get('class', []) + ['justify']
+
+    for div in soup.findAll("div"):
+        div['class'] = div.get('class', []) + ['center']
+
+    return soup.prettify("utf-8")

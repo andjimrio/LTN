@@ -15,7 +15,7 @@
         <div class="section">
             <blockquote>{{ item.creator }} | {{ item.pubDate }}</blockquote>
 
-            <p class="justify">{% autoescape off %}{% pretty_text item.article %}{% endautoescape %}</p>
+            <p class="justify">{% autoescape off %}{% pretty_text item.description %}{% endautoescape %}</p>
             <div class="center">
                 {% if not status.like %}
                     <a class="waves-effect waves-light btn {{ color_primary }}" href="?like=True">

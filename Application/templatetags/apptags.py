@@ -1,6 +1,7 @@
 from django import template
 from random import sample
-from Application.utilities.web_utilitites import clean_html
+
+from Application.utilities.web_utilitites import clean_html, reconvert_html
 
 register = template.Library()
 
@@ -14,12 +15,10 @@ def get_value_from_dict(dict_data, key):
         return dict_data[key]
     pass
 
+
 @register.simple_tag
 def pretty_text(text):
-    dict = {"\n":"<br/>"}
-    for k,v in dict.items():
-        text = text.replace(k,v)
-    return text
+    return reconvert_html(text)
 
 
 @register.simple_tag

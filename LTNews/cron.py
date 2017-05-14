@@ -42,7 +42,7 @@ class CalculeKeywords(CronJobBase):
         print('Calculando keywords por cada usuario')
 
         for profile in all_profile():
-            print('INI {}'.format(profile.user.username))
+            print('\tINI {}'.format(profile.user.username))
             cont_user = Counter()
             for status in get_filtered_status_by_profile(profile.id):
                 for tag in get_item_keywords(status.item.id, status.item.get_key_number()):
@@ -55,6 +55,6 @@ class CalculeKeywords(CronJobBase):
                 keyword.users.add(profile)
                 keyword.save()
 
-            print('FIN {}'.format(profile.user.username))
+            print('\tFIN {}'.format(profile.user.username))
         pass
     pass

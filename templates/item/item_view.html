@@ -13,7 +13,15 @@
 
     <div class="container">
         <div class="section">
-            <blockquote>{{ item.creator }} | {{ item.pubDate }}</blockquote>
+            <blockquote>
+                <a href="{% url 'feed_view' item.feed.id %}">
+                    {{ item.feed.title }}
+                </a>
+                {% if item.creator %}
+                    @{{ item.creator }}
+                {% endif %}
+                | {{ item.pubDate }}
+            </blockquote>
 
             <p class="justify">{% autoescape off %}{% pretty_text item.description %}{% endautoescape %}</p>
             <div class="center">

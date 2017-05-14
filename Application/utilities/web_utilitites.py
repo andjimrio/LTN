@@ -19,6 +19,10 @@ def extract_img_html(html_doc):
 def reconvert_html(html_doc):
     soup = BeautifulSoup(html_doc, 'html.parser')
 
+    first_img = soup.find('img')
+    if first_img:
+        first_img['src'] = ''
+
     for img in soup.findAll("img"):
         img['class'] = img.get('class', []) + ['responsive-img']
 

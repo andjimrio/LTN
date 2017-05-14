@@ -3,8 +3,8 @@
 import feedparser
 from newspaper import Article
 
-from Application.utilities.python_utilities import redo_string,redo_date
-from Application.utilities.web_utilitites import clean_html
+from Application.utilities.python_utilities import redo_string, redo_date
+from Application.utilities.web_utilitites import clean_html, extract_img_html
 
 
 def read_rss(link):
@@ -43,22 +43,27 @@ def get_post(post):
 
         top_image = article.top_image
         text = article.text
-        if text == '':
-            text = clean_html(redo_string(post, 'description'))
-
-        entry = {'title':        redo_string(post, 'title'),
-                 'link':         redo_string(post, 'link'),
-                 'description':  redo_string(post, 'description'),
-                 'image':        top_image,
-                 'article':      text,
-                 'creator':      redo_string(post, 'author'),
-                 'pubDate':      redo_date(post, 'published')
-                }
-
-        return entry
     except:
-        print(post)
-        return None
+        print("ERROR-Article")
+        print("\t"+post.title)
+        print("\t"+post.link)
+
+    if text == '':
+        text = clean_html(redo_string(post, 'description'))
+
+    if top_image == '':
+        top_image = extract_img_html(redo_string(post, 'description'))
+
+    entry = {'title': redo_string(post, 'title'),
+             'link': redo_string(post, 'link'),
+             'description': redo_string(post, 'description'),
+             'image': top_image,
+             'article': text,
+             'creator': redo_string(post, 'author'),
+             'pubDate': redo_date(post, 'published')
+             }
+
+    return entry
 
 
 def get_article(link):
@@ -78,6 +83,7 @@ if __name__ == '__main__':
     LINK_ABC = 'http://www.abc.es/rss/feeds/abcPortada.xml'
     LINK_ELPAIS = 'http://ep00.epimg.net/rss/tags/ultimas_noticias.xml'
     LINK_ACEPRENSA = 'http://www.aceprensa.com/rss/'
+    LINK_EAL = 'http://feeds.feedburner.com/elandroidelibre'
 
-    print(feedparser.parse("http://elpais.com/"))
-    #print(read_rss(LINK_ELPAIS))
+    #print(feedparser.parse("http://elpais.com/"))
+    print(read_rss(LINK_ABC)[0][0].pubDate)

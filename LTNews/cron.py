@@ -7,6 +7,7 @@ from Application.utilities.queries_utilities import all_feeds_link, all_profile,
     get_filtered_status_by_profile
 
 from Application.models import Keyword
+from django.utils import timezone
 
 
 class UpdateRSS(CronJobBase):
@@ -18,6 +19,7 @@ class UpdateRSS(CronJobBase):
     code = 'cron.UpdateRSS'
 
     def do(self):
+        print(timezone.now())
         print("Actualizando entradas")
         for link in all_feeds_link():
             try:

@@ -27,8 +27,6 @@ def item_view(request, item_id=None):
     elif like == 'False':
         status.as_unlike()
 
-    print(item.description)
-
     return render(request, 'item/item_view.html',
                   {'item': item, 'tags': tags, 'news': news,
                    'status': status})

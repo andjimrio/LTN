@@ -1,5 +1,7 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load i18n %}
+{% load l10n %}
 
 {% block titulo %}Inicio{% endblock %}
 
@@ -14,12 +16,12 @@
                 <div class="col s12">
                     {% if user.is_authenticated %}
                         <a class="btn-large btn-flat waves-effect waves-light {{ color_secondary }}-text"
-                            href="{% url 'item_list' %}">Noticias</a>
+                            href="{% url 'item_list' %}">{% trans 'news' %}</a>
                     {% else %}
                         <a class="btn-large btn-flat waves-effect waves-light {{ color_secondary }}-text text-darken-2"
-                            href="{% url 'register' %}">Registrarse</a>
+                            href="{% url 'register' %}">{% trans 'register' %}</a>
                         <a class="btn-large btn-flat waves-effect waves-light {{ color_secondary }}-text text-lighten-2"
-                            href="{% url 'login' %}">Acceder</a>
+                            href="{% url 'login' %}">{% trans 'login' %}</a>
                     {% endif %}
                 </div>
             </div>

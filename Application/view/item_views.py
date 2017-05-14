@@ -1,4 +1,5 @@
 from collections import Counter
+from math import floor, log
 
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
@@ -135,7 +136,7 @@ def item_summary(request):
             for keyword in get_item_keywords(item['feeds__items__id'], 8):
                 section_summary_keywords.add_keyword(keyword, item['feeds__items__id'], item['feeds__items__title'])
 
-        summary_keywords[section.title] = section_summary_keywords.most_common(5)
+        summary_keywords[section.title] = section_summary_keywords.most_common()
 
     return render(request, 'item/item_summary.html', {'summary_keywords': summary_keywords})
 
@@ -155,7 +156,9 @@ class SectionSummaryKeywords:
 
         self.counts_counters[keyword] += 1
 
-    def most_common(self, number):
+    def most_common(self, number=None):
+        if not number:
+            number = floor(log(len(self.counts_counters)))
         return [self.keywords_counters[keyword[0]] for keyword in self.counts_counters.most_common(number)]
 
     def __str__(self):

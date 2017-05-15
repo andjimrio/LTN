@@ -19,14 +19,14 @@ class UpdateRSS(CronJobBase):
     code = 'cron.UpdateRSS'
 
     def do(self):
-        print(timezone.now())
-        print("Actualizando entradas")
+        print("INI CRON1 - Actualizando entradas ({})".format(timezone.now()))
         for link in all_feeds_link():
             try:
                 update_feed(link['link_rss'], printer=True)
             except:
                 print("Error de cron")
         pass
+        print("FIN CRON1 - Actualizando entradas ({})".format(timezone.now()))
     pass
 
 
@@ -39,7 +39,7 @@ class CalculeKeywords(CronJobBase):
     code = 'cron.CalculeKeywords'
 
     def do(self):
-        print('Calculando keywords por cada usuario')
+        print('INI CRON 2 - Calculando keywords por cada usuario ({})'.format(timezone.now()))
 
         for profile in all_profile():
             print('\tINI {}'.format(profile.user.username))
@@ -57,4 +57,6 @@ class CalculeKeywords(CronJobBase):
 
             print('\tFIN {}'.format(profile.user.username))
         pass
+
+        print('FIN CRON 2 - Calculando keywords por cada usuario ({})'.format(timezone.now()))
     pass

@@ -1,5 +1,5 @@
 from Application.models import Feed, Item, Section
-from Application.utilities.queries_utilities import get_profile
+from Application.utilities.queries_utilities import get_profile, get_feed_id_by_link
 from Application.utilities.rss_utilities import read_rss
 
 
@@ -25,7 +25,7 @@ def populate_rss(link, title_section, user_id):
 
 def update_feed(link, printer=False):
     rss, entries = read_rss(link)
-    feeder, bool = Feed.objects.get_or_create(**rss)
+    feed_id = get_feed_id_by_link(link)
 
     if printer:
         print("\t" + rss['title'])
@@ -33,7 +33,7 @@ def update_feed(link, printer=False):
 
     for entry in entries:
         if not Item.objects.filter(link=entry['link']).exists():
-            Item.objects.get_or_create(feed_id=feeder.id, **entry)
+            Item.objects.get_or_create(feed_id=feed_id, **entry)
 
             if printer:
                 cont += 1
@@ -41,4 +41,4 @@ def update_feed(link, printer=False):
     if printer:
         print('\t\tActualizadas ' + str(cont) + ' entradas.')
 
-    return feeder.id
+    return feed_id

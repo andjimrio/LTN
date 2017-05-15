@@ -1,7 +1,12 @@
 {% extends 'base.html' %}
 
-{% block titulo %}Noticias de actualidad{% endblock %}
-{% block header %}Noticias de actualidad{% endblock %}
+{% load i18n %}
+{% load l10n %}
+{% load static %}
+{% load apptags %}
+
+{% block titulo %}{% trans 'summary_news' %}{% endblock %}
+{% block header %}{% trans 'summary_news' %}{% endblock %}
 
 {% block contenido %}
     <div class="container">
@@ -17,7 +22,7 @@
                                         <span class="new badge {{ color_secondary }}" data-badge-caption=": {{ keyword_counter.keyword }}">{{ keyword_counter.counts }}</span>
                                         {{ keyword_counter.sample_title }}
                                     </div>
-                                    <div class="collapsible-body"><span>Noticias sobre el tema '{{ keyword_counter.keyword }}':
+                                    <div class="collapsible-body"><span>{% trans 'news_about' %} '{{ keyword_counter.keyword }}':
                                         {% for item_id,item_title in keyword_counter.items.items %}
                                             <br><a href="{% url 'item_view' item_id %}">{{ item_title }}</a>
                                         {% endfor %}

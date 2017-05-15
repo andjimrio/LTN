@@ -19,11 +19,11 @@ msgstr ""
 
 #: LTNews/settings.py:35
 msgid "English"
-msgstr ""
+msgstr "English"
 
 #: LTNews/settings.py:36
 msgid "Spanish"
-msgstr ""
+msgstr "Spanish"
 
 
 #: General
@@ -31,6 +31,9 @@ msgid "news"
 msgstr "News"
 msgid "newspapers"
 msgstr "Newspapers"
+msgid "tags"
+msgstr "Tags"
+
 msgid "recommends"
 msgstr "Recommends"
 msgid "outstanding"
@@ -43,3 +46,58 @@ msgid "logout"
 msgstr "Log out"
 msgid "register"
 msgstr "Register"
+msgid "translate"
+msgstr "Español"
+msgid "errors"
+msgstr "Errors"
+msgid "stats"
+msgstr "Stats"
+msgid "submit"
+msgstr "Submit"
+
+
+#: Buttons
+msgid "view"
+msgstr "View"
+msgid "view_follow"
+msgstr "View & Follow"
+msgid "add_feed"
+msgstr "Add your favourite feeds here"
+msgid "add_recommend"
+msgstr "Soon we will add news that may interest you"
+
+
+#: Views
+msgid "recommend_news"
+msgstr "Recommend news"
+msgid "search_news"
+msgstr "News finder"
+msgid "summary_news"
+msgstr "Outstanding news"
+msgid "profile"
+msgstr "Your profile"
+msgid "new_feed"
+msgstr "Add new feed"
+msgid "your_feeds"
+msgstr "Your feeds"
+
+
+#: Modals
+msgid "query_has"
+msgstr "Your query has: "
+msgid "news_about"
+msgstr "News about "
+msgid "like"
+msgstr "I like"
+msgid "dislike"
+msgstr "I don't like"
+msgid "launch_web"
+msgstr "See in web"
+msgid "interests"
+msgstr "Your interests"
+msgid "read_section"
+msgstr "Read by sections"
+msgid "like_section"
+msgstr "Like by sections"
+msgid "link_not_process"
+msgstr "Link not processing correctly"

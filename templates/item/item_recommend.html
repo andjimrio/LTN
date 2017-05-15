@@ -2,8 +2,8 @@
 {% load static %}
 {% load apptags %}
 
-{% block titulo %}Noticias recomendadas{% endblock %}
-{% block header %}Noticias recomendadas{% endblock %}
+{% block titulo %}{% trans 'recommend_news' %}{% endblock %}
+{% block header %}{% trans 'recommend_news' %}{% endblock %}
 
 {% block contenido %}
     <div class="container-fix">
@@ -17,7 +17,7 @@
                 <div class="col-fix">
                     <ul class="collection">
                         <a class="collection-item">
-                            En breve tendremos noticias que le puedan interesar
+                            {% trans 'add_recommend' %}
                         </a>
                     </ul>
                 </div>

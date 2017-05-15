@@ -1,7 +1,12 @@
 {% extends 'base.html' %}
 
-{% block titulo %}Añadir Feed{% endblock %}
-{% block header %}Añadir nuevo Feed{% endblock %}
+{% load i18n %}
+{% load l10n %}
+{% load static %}
+{% load apptags %}
+
+{% block titulo %}{% trans 'new_feed' %}{% endblock %}
+{% block header %}{% trans 'new_feed' %}{% endblock %}
 
 {% block contenido %}
     <div class="container">
@@ -11,12 +16,12 @@
 
                 {% if feed_form.errors or error %}
                     <ul class="collection with-header red-text text-darken-4">
-                        <li class="collection-header"><h4>Errores</h4></li>
+                        <li class="collection-header"><h4>{% trans 'errors' %}</h4></li>
                         {% for error in  feed_form.non_field_errors %}
                             <li class="collection-item">{{error|escape }}</li>
                         {% endfor %}
                         {% if error %}
-                            <li class="collection-item">El link no se procesó correctamente</li>
+                            <li class="collection-item">{% trans 'link_not_process' %}</li>
                         {% endif %}
                     </ul>
                     <br>

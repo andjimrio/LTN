@@ -26,7 +26,7 @@
             </div>
             <div class="nav-content container">
                 <span class="nav-title"><strong>{% block header %}{% endblock %}</strong></span>
-                <a href="#" id="flag" class="btn-floating btn-large halfway-fab waves-effect waves-light {{ color_secondary }}">
+                <a class="btn-floating btn-large halfway-fab waves-effect waves-light {{ color_secondary }}">
                     <i class="material-icons">translate</i>
                 </a>
             </div>
@@ -61,18 +61,24 @@
                 <li><a href="{% url 'item_search' %}">
                     <i class="material-icons left">search</i>{% trans 'search' %}
                 </a></li>
-
-                <li class="divider"></li>
-
-                <li><a href="{% url 'logout' %}">
-                    <i class="material-icons left">exit_to_app</i>{% trans 'logout' %}
-                </a></li>
             {% else %}
                 <li><a href="{% url 'register' %}">
                     <i class="material-icons left">system_update_alt</i>{% trans 'register' %}
                 </a></li>
                 <li><a href="{% url 'login' %}">
                     <i class="material-icons left">input</i>{% trans 'login' %}
+                </a></li>
+            {% endif %}
+
+            <li class="divider"></li>
+
+            <li><a href="#" id="flag" >
+                <i class="material-icons left">translate</i>{% trans 'translate' %}
+            </a></li>
+
+            {% if user.is_authenticated %}
+                <li><a href="{% url 'logout' %}">
+                    <i class="material-icons left">exit_to_app</i>{% trans 'logout' %}
                 </a></li>
             {% endif %}
         </ul>

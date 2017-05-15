@@ -20,11 +20,11 @@ msgstr ""
 
 #: LTNews/settings.py:35
 msgid "English"
-msgstr ""
+msgstr "Inglés"
 
 #: LTNews/settings.py:36
 msgid "Spanish"
-msgstr ""
+msgstr "Español"
 
 
 #: General
@@ -32,6 +32,9 @@ msgid "news"
 msgstr "Noticias"
 msgid "newspapers"
 msgstr "Periódicos"
+msgid "tags"
+msgstr "Etiquetas"
+
 msgid "recommends"
 msgstr "Recomendaciones"
 msgid "outstanding"
@@ -44,3 +47,58 @@ msgid "logout"
 msgstr "Salir"
 msgid "register"
 msgstr "Registrarse"
+msgid "translate"
+msgstr "English"
+msgid "errors"
+msgstr "Errores"
+msgid "stats"
+msgstr "Gráficas"
+msgid "submit"
+msgstr "Confirmar"
+
+
+#: Buttons
+msgid "view"
+msgstr "Visto"
+msgid "view_follow"
+msgstr "Visto y Seguir"
+msgid "add_feed"
+msgstr "Añade tus feeds favoritos aquí"
+msgid "add_recommend"
+msgstr "Pronto añadiremos noticias que pueden interesarte"
+
+
+#: Views
+msgid "recommend_news"
+msgstr "Noticias recomendadas"
+msgid "search_news"
+msgstr "Buscador de noticias"
+msgid "summary_news"
+msgstr "Noticias de actualidad"
+msgid "profile"
+msgstr "Tu perfil"
+msgid "new_feed"
+msgstr "Añadir nuevo feed"
+msgid "your_feeds"
+msgstr "Tus feeds"
+
+
+#: Modals
+msgid "query_has"
+msgstr "Tu búsqueda posee: "
+msgid "news_about"
+msgstr "Noticias sobre "
+msgid "like"
+msgstr "Me gusta"
+msgid "dislike"
+msgstr "No me gusta"
+msgid "launch_web"
+msgstr "Ver en la web"
+msgid "interests"
+msgstr "Tus intereses"
+msgid "read_section"
+msgstr "Leídos por sección"
+msgid "like_section"
+msgstr "Gustados por sección"
+msgid "link_not_process"
+msgstr "El link no se procesó correctamente"

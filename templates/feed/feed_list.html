@@ -1,7 +1,12 @@
 {% extends 'base.html' %}
 
-{% block titulo %}Tus Feeds{% endblock %}
-{% block header %}Tus Feeds{% endblock %}
+{% load i18n %}
+{% load l10n %}
+{% load static %}
+{% load apptags %}
+
+{% block titulo %}{% trans 'your_feeds' %}{% endblock %}
+{% block header %}{% trans 'your_feeds' %}{% endblock %}
 
 {% block contenido %}
     <div class="container">
@@ -26,7 +31,7 @@
                             </li>
                         {% empty %}
                             <a href="{% url 'feed_create' %}" class="collection-item">
-                                Añade tus periódicos favoritos
+                                {% trans 'add_feed' %}
                             </a>
                         {% endfor %}
                     </ul>
@@ -34,7 +39,7 @@
                 {% empty %}
                     <ul class="collection">
                         <a href="{% url 'feed_create' %}" class="collection-item">
-                            Añade tus periódicos favoritos
+                            {% trans 'add_feed' %}
                         </a>
                     </ul>
                 {% endfor %}
@@ -42,7 +47,7 @@
         </div>
         <div class="section center">
             <a class="btn waves-effect waves-light {{ color_secondary }}" href="{% url 'feed_create' %}">
-                Nuevo Feed <i class="material-icons right">library_books</i>
+                {% trans 'new_feed' %} <i class="material-icons right">library_books</i>
             </a>
         </div>
     </div>

@@ -1,8 +1,11 @@
 {% extends 'base.html' %}
+
+{% load i18n %}
+{% load l10n %}
 {% load static %}
 {% load apptags %}
 
-{% block titulo %}Búsqueda: {{ query }}{% endblock %}
+{% block titulo %}{{ query }}{% endblock %}
 {% block header %}{{ query }}{% endblock %}
 
 {% block contenido %}
@@ -17,7 +20,7 @@
                 <div class="col-fix">
                     <ul class="collection">
                         <a href="{% url 'feed_create' %}" class="collection-item">
-                            Añade tus periódicos favoritos
+                            {% trans 'add_feed' %}
                         </a>
                     </ul>
                 </div>

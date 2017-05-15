@@ -1,9 +1,12 @@
 {% extends 'base.html' %}
+
+{% load i18n %}
+{% load l10n %}
 {% load static %}
 {% load apptags %}
 
-{% block titulo %}Su pefil{% endblock %}
-{% block header %}Su pefil{% endblock %}
+{% block titulo %}{% trans 'profile' %}{% endblock %}
+{% block header %}{% trans 'profile' %}{% endblock %}
 
 {% block contenido %}
     <div class="container">
@@ -24,7 +27,7 @@
 
         <div class="section row">
             <div class="col s12">
-                <h4 class="center">Sus intereses</h4>
+                <h4 class="center">{% trans 'interests' %}</h4>
                 <div class="chips">
                     {% for keyword in profile.keywords.all %}
                         <div class="chip"><a href="{% url 'item_query' keyword %}">{{ keyword }}</a></div>
@@ -37,7 +40,7 @@
 
         <div class="section row">
             <div class="col s12">
-                <h4 class="center">Gráficas</h4>
+                <h4 class="center">{% trans 'stats' %}</h4>
                 <div class="col s12 m6">
                     <canvas id="read_chart"></canvas>
                 </div>
@@ -96,7 +99,7 @@
         options: {
             title: {
                 display: true,
-                text: 'Leídos por sección'
+                text: '{% trans 'read_section' %}'
             }
         }
     });
@@ -107,7 +110,7 @@
         options: {
             title: {
                 display: true,
-                text: 'Gustados por sección'
+                text: '{% trans 'like_section' %}'
             }
         }
     });

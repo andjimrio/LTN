@@ -26,14 +26,36 @@ msgid "Spanish"
 msgstr "Spanish"
 
 
-#: General
+#: Model
 msgid "news"
 msgstr "News"
 msgid "newspapers"
 msgstr "Newspapers"
+msgid "newspaper"
+msgstr "Newspaper"
 msgid "tags"
 msgstr "Tags"
+msgid "section"
+msgstr "Section"
+msgid "username"
+msgstr "Username"
+msgid "email"
+msgstr "Email"
+msgid "password"
+msgstr "Password"
+msgid "repassword"
+msgstr "Confirm your password"
+msgid "link"
+msgstr "Link your feed rss"
+msgid "title"
+msgstr "Title"
+msgid "creator"
+msgstr "Author"
+msgid "description"
+msgstr "Description"
 
+
+#: General
 msgid "recommends"
 msgstr "Recommends"
 msgid "outstanding"

@@ -39,7 +39,7 @@ class CalculeKeywords(CronJobBase):
     code = 'cron.CalculeKeywords'
 
     def do(self):
-        print('INI CRON 2 - Calculando keywords por cada usuario ({})'.format(timezone.now()))
+        print('INI CRON2 - Calculando keywords por cada usuario ({})'.format(timezone.now()))
 
         for profile in all_profile():
             print('\tINI {}'.format(profile.user.username))
@@ -58,5 +58,5 @@ class CalculeKeywords(CronJobBase):
             print('\tFIN {}'.format(profile.user.username))
         pass
 
-        print('FIN CRON 2 - Calculando keywords por cada usuario ({})'.format(timezone.now()))
+        print('FIN CRON2 - Calculando keywords por cada usuario ({})'.format(timezone.now()))
     pass

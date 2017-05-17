@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.conf import settings
 from django.conf.urls.static import static
-from django.conf.urls import url
+from django.conf.urls import url, include
 from django.contrib.auth.views import login, logout
 from django.core.urlresolvers import reverse_lazy
 from django.contrib import admin
@@ -25,6 +25,7 @@ from Application.view import feed_views, item_views, profile_views
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
+    url(r'^i18n/', include('django.conf.urls.i18n')),
     url(r'^$', views.home, name='home'),
 
     # Profile

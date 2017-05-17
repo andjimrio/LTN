@@ -157,8 +157,10 @@ class SectionSummaryKeywords:
         self.counts_counters[keyword] += 1
 
     def most_common(self, number=None):
-        if not number:
+        if not number and self.counts_counters:
             number = floor(log(len(self.counts_counters)))
+        else:
+            number = 0
         return [self.keywords_counters[keyword[0]] for keyword in self.counts_counters.most_common(number)]
 
     def __str__(self):

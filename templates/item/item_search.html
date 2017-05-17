@@ -1,9 +1,12 @@
 {% extends 'base.html' %}
+
+{% load i18n %}
+{% load l10n %}
 {% load static %}
 {% load apptags %}
 
-{% block titulo %}Buscador de  noticias{% endblock %}
-{% block header %}Buscador de  noticias{% endblock %}
+{% block titulo %}{% trans 'search_news' %}{% endblock %}
+{% block header %}{% trans 'search_news' %}{% endblock %}
 
 {% block contenido %}
     <div class="container">
@@ -11,7 +14,7 @@
             {% if form.errors %}
                 <div class="col s12">
                 <ul class="collection with-header red-text text-darken-4">
-                    <li class="collection-header"><h4>Errores</h4></li>
+                    <li class="collection-header"><h4>{% trans 'errors' %}</h4></li>
                     {% for error in  form.non_field_errors %}
                         <li class="collection-item">{{error|escape }}</li>
                     {% endfor %}
@@ -54,7 +57,7 @@
                     <div class="col-fix">
                         <ul class="collection">
                             <a href="{% url 'feed_create' %}" class="collection-item">
-                                Añade tus periódicos favoritos
+                                {% trans 'add_feed' %}
                             </a>
                         </ul>
                     </div>
@@ -69,7 +72,7 @@
 {% block javascript %}
     {% if news %}
         <script>
-            Materialize.toast('Su búsqueda posee {{ total }} noticias', 4000);
+            Materialize.toast('{% trans 'query_has' %} {{ total }} {% trans 'news' %}', 4000);
         </script>
     {% endif %}
 {% endblock %}

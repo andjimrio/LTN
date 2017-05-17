@@ -1,9 +1,12 @@
 {% extends 'base.html' %}
+
+{% load i18n %}
+{% load l10n %}
 {% load static %}
 {% load apptags %}
 
-{% block titulo %}Noticias{% endblock %}
-{% block header %}Noticias{% endblock %}
+{% block titulo %}{% trans 'news' %}{% endblock %}
+{% block header %}{% trans 'news' %}{% endblock %}
 
 {% block contenido %}
     <div class="container-fix">
@@ -17,7 +20,7 @@
                 <div class="col-fix">
                     <ul class="collection center">
                         <a href="{% url 'feed_create' %}" class="collection-item">
-                            Añade tus periódicos favoritos
+                            {% trans 'add_feed' %}
                         </a>
                     </ul>
                 </div>
@@ -28,14 +31,14 @@
             <div class="center">
                 <a class="waves-effect waves-light btn {{ color_primary }}"
                    href="?actual={{ feedes.number }}&page={{ feedes.next_page_number }}">
-                    <i class="material-icons right">forward</i>Visto y seguir
+                    <i class="material-icons right">forward</i>{% trans 'view_follow' %}
                 </a>
             </div>
         {% elif feedes %}
             <div class="center">
                 <a class="waves-effect waves-light btn {{ color_primary }}"
                    href="?actual={{ feedes.number }}">
-                    <i class="material-icons right">move_to_inbox</i>Visto
+                    <i class="material-icons right">move_to_inbox</i>{% trans 'view' %}
                 </a>
             </div>
         {% endif %}

@@ -92,14 +92,12 @@
         <div class="container">
             <div class="row">
                 <div class="col l6 s12">
-                    <h5 class="white-text">¿Por qué LT-News?</h5>
-                    <p class="grey-text text-lighten-4 justify">Surge de la necesidad de todos de informarse, pero la enormidad
-                        de medios y el poquísimo tiempo nos hace excusarnos de la gran tarea de leer y formarse una
-                        opinión propia de lo que ocurre a nuestro alrededor.</p>
+                    <h5 class="white-text">{% trans 'footer_title1' %}</h5>
+                    <p class="grey-text text-lighten-4 justify">{% trans 'footer_subtitle1' %}</p>
                 </div>
 
                 <div class="col l3 s12">
-                    <h5 class="white-text">Herramientas</h5>
+                    <h5 class="white-text">{% trans 'footer_title2' %}</h5>
                     <ul>
                         <li><a class="white-text" href="https://www.python.org/">Python</a></li>
                         <li><a class="white-text" href="https://www.djangoproject.com/">Django</a></li>
@@ -108,7 +106,7 @@
                     </ul>
                 </div>
                 <div class="col l3 s12">
-                    <h5 class="white-text">Aplicaciones</h5>
+                    <h5 class="white-text">{% trans 'footer_title3' %}</h5>
                     <ul>
                         <li><a class="white-text" href="http://newspaper.readthedocs.io/en/latest/">Newspaper</a></li>
                         <li><a class="white-text" href="http://django-cron.readthedocs.io/en/latest/index.html">Django-cron</a></li>
@@ -120,7 +118,7 @@
 
         <div class="footer-copyright">
             <div class="container">
-                Copyright: <a class="{{ color_secondary }}-text text-lighten-3" href="https://github.com/andjimrio">Andrés M. Jiménez</a>
+                Copyright: <a class="{{ color_secondary }}-text text-lighten-3" href="https://github.com/andjimrio">{% trans 'andjimrio' %}</a>
             </div>
         </div>
     </footer>

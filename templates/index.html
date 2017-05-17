@@ -12,7 +12,7 @@
                 <img class="responsive-img" src="{% static 'img/icon.png' %}">
             </div>
             <div class="section">
-                <h4>Otra forma de entender el periódico digital</h4>
+                <h4>{% trans 'subtitle' %}</h4>
                 <div class="col s12">
                     {% if user.is_authenticated %}
                         <a class="btn-large btn-flat waves-effect waves-light {{ color_secondary }}-text"
@@ -31,11 +31,8 @@
     <div class="row no-margin" id="start">
         <div class="col s12 m6 l6">
             <section class="container section">
-                <h5 class="section">Une periódicos</h5>
-                <p class="justify">LTNews es solo un lector de tus periódicos favoritos. Regístarte y podrás ver las noticias más recientes...
-                    o más antiguas de tus diarios. Además, en un único lugar.</p>
-                <p class="justify">Una vez que inicies sesión tendrás una ventana llamada <em>Feeds</em> donde estarán tus periódicos. Es por
-                    tanto, ideal para aquellos que deseen leer las noticias de actualidad en un solo lugar y de distintas fuentes.</p>
+                <h5 class="section center">{% trans 'index_title1' %}</h5>
+                <p class="justify">{% trans 'index_subtitle1' %}</p>
             </section>
         </div>
 
@@ -44,12 +41,8 @@
     <div class="row no-margin">
         <div class="col s12 m6 l6 push-m6 push-l6">
             <section class="container section">
-                <h5 class="center">Aprende de ti</h5>
-                <p class="justify">LTNews aprende tu forma de leer las noticias, detectará de los principales temas los favoritos, te aconsejará noticias
-                    para leer... Hará de la prensa digital, un mundo nuevo para ti; del periódico largo y aburrido, convencional, un portal
-                    en que te recomendará noticias.</p>
-                <p class="justify">Esto es posible gracias a las herramientas de recomendación y la minería de datos... Si te interesa este tema, podrás
-                    ver el código en GitHub, ya que esta herramienta es de código abierto.</p>
+                <h5 class="section center">{% trans 'index_title2' %}</h5>
+                <p class="justify">{% trans 'index_subtitle2' %}</p>
             </section>
         </div>
         <div class="col s12 m6 l6 pull-m6 pull-l6 primo-start-2"></div>
@@ -60,7 +53,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col s12">
-                        <h4 class="center">Características</h4>
+                        <h4 class="center">{% trans 'features' %}</h4>
                     </div>
                 </div>
 
@@ -70,9 +63,8 @@
                             <div class="center {{ color_primary }}-text">
                                 <i class="material-icons">rss_feed</i>
                             </div>
-                            <h5 class="center">Leer noticias</h5>
-
-                            <p class="justify">LT-News es, en definitiva, un lector de noticias de tus periódicos favoritos. En él podrás seguir a cualquier periódico online o blog. ¿Cómo? A través de su servicio RSS.</p>
+                            <h5 class="center">{% trans 'features_title1' %}</h5>
+                            <p class="justify">{% trans 'features_subtitle1' %}</p>
                         </div>
                     </div>
                     <div class="col s12 m4">
@@ -80,9 +72,8 @@
                             <div class="center {{ color_primary }}-text">
                                 <i class="material-icons">group_work</i>
                             </div>
-                            <h5 class="center">Agrupa noticias</h5>
-
-                            <p class="justify">LT-News agrupa noticias relacionas. Esto te hará más fácil el enterarte que dicen otros periódicos de la misma noticia, así como la evolución de un acontencimiento.</p>
+                            <h5 class="center">{% trans 'features_title2' %}</h5>
+                            <p class="justify">{% trans 'features_subtitle2' %}</p>
                         </div>
                     </div>
                     <div class="col s12 m4">
@@ -90,9 +81,8 @@
                             <div class="center {{ color_primary }}-text">
                                 <i class="material-icons">person</i>
                             </div>
-                            <h5 class="center">Hecho para ti</h5>
-
-                            <p class="justify">A medida que vayas utilizando LT-News te ira conociendo más y más. Te recomendará noticias en base a tus gustos. Así nunca te perderás entre la infidad de noticias.</p>
+                            <h5 class="center">{% trans 'features_title3' %}</h5>
+                            <p class="justify">{% trans 'features_subtitle3' %}</p>
                         </div>
                     </div>
                 </div>
@@ -103,7 +93,7 @@
     <div class="container pad-bot">
         <div class="row">
             <div class="col s12 center">
-                <h4>Autor</h4>
+                <h4>{% trans 'author' %}</h4>
             </div>
         </div>
 
@@ -114,11 +104,10 @@
                 </div>
             </div>
             <div class="col s12 m6">
-                <h5 class="{{ color_primary }}-text text-darken-2">Andrés M. Jiménez</h5>
-                <h6 class="{{ color_primary }}-text">Ingeniero Informático</h6>
+                <h5 class="{{ color_primary }}-text text-darken-2">{% trans 'andjimrio' %}</h5>
+                <h6 class="{{ color_primary }}-text">{% trans 'andjimrio_profession' %}</h6>
                 <div class="divider"></div>
-                <p class="justify">Esta página que se presenta es mi Trabajo Fin de Grado. Nace se una idea que tuve en segundo curso y que ha ido evolucionando hasta convertirse en LT-News.
-                    <br>Su objetivo es hacer del océano de la prensa diaria un vaso asequible para cada cual, que le permita ser tomado en el momento que el usuario quiera.</p>
+                <p class="justify">{% trans 'andjimrio_about' %}</p>
             </div>
         </div>
         <div class="divider"></div>

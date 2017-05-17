@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% load i18n %}
+{% load l10n %}
+{% load static %}
+{% load apptags %}
+
+{% block titulo %}{{ section.title }}{% endblock %}
+{% block header %}{{ section.title }}{% endblock %}
+
+{% block contenido %}
+    <div class="container section">
+        <h5>{{ section.description }}</h5>
+
+        <ul class="collection with-header">
+             <li class="collection-header"><h4 class="{{ color_primary }}-text">{% trans 'feeds' %}</h4></li>
+            {% for feed in section.feeds.all %}
+                <li class="collection-item">
+                    <div>{{ feed.title }}<a href="{% url 'feed_view' feed.id %}" class="secondary-content">
+                        <i class="material-icons {{ color_secondary }}-text">send</i></a>
+                    </div>
+                </li>
+            {% endfor %}
+        </ul>
+
+        <div class="divider"></div>
+    </div>
+
+    <div class="container-fix">
+        <br><br>
+        <div class="row-fix">
+            {% for item in news %}
+                <div class="col-fix">
+                    {% show_card item.items__title item.items__image item.items__pubDate item.items__description color_secondary item.items__id item.title item.id %}
+                </div>
+            {% endfor %}
+        </div>
+
+        {% show_pagination news color_primary %}
+
+    </div>
+{% endblock %}

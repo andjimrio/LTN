@@ -21,7 +21,7 @@ from django.core.urlresolvers import reverse_lazy
 from django.contrib import admin
 
 from Application import views
-from Application.view import feed_views, item_views, profile_views
+from Application.view import feed_views, item_views, profile_views, section_views
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
@@ -30,6 +30,9 @@ urlpatterns = [
 
     # Profile
     url(r'^profile/view/', profile_views.profile_view, name='profile_view'),
+
+    # Section
+    url(r'^section/view/(?P<section_id>\d+)/', section_views.section_view, name='section_view'),
 
     # Feed
     url(r'^feed/view/(?P<feed_id>\d+)/', feed_views.feed_view, name='feed_view'),

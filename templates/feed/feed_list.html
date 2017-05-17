@@ -16,7 +16,9 @@
                 {% for section in sections %}
                     <ul class="collection with-header">
                         <li class="collection-header {{ color_primary }}-text">
-                            <h4>{{ section.title }}</h4>
+                            <h4><a class="{{ color_primary }}-text" href="{% url 'section_view' section.id %}">
+                                {{ section.title }}
+                            </a></h4>
                         </li>
 
                         {% for feed in section.feeds.all %}

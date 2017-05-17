@@ -25,6 +25,13 @@ def get_section(section_id):
     return Section.objects.get(id=section_id)
 
 
+def get_section_items(section_id):
+    return Section.objects.get(id=section_id).feeds.all()\
+        .values('id', 'title', 'items__id', 'items__title', 'items__description',
+                'items__pubDate', 'items__image')\
+        .order_by('-items__pubDate')
+
+
 # FEEDS
 
 def all_feeds_link(user_id=None):

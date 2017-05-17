@@ -7,6 +7,7 @@
 
 {% block titulo %}{% reduce_title item.title %}{% endblock %}
 {% block header %}{{ item.title }}{% endblock %}
+{% block not_header_button %}{% endblock %}
 
 {% block contenido %}
     {% if article.image != '' %}

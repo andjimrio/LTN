@@ -32,12 +32,18 @@
                 <a href="{% url 'home' %}" class="brand-logo">LT-News</a>
                 <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
             </div>
-            <div class="nav-content container">
-                <span class="nav-title"><strong>{% block header %}{% endblock %}</strong></span>
-                <a class="btn-floating btn-large halfway-fab waves-effect waves-light {{ color_secondary }}">
-                    <i class="material-icons">translate</i>
-                </a>
-            </div>
+            {% block not_header %}
+                <div class="nav-content container">
+                    <span class="nav-title"><strong>{% block header %}{% endblock %}</strong></span>
+
+                    {% block not_header_button %}
+                        <a class="btn-floating btn-large halfway-fab waves-effect waves-light {{ color_secondary }}"
+                           href="{% block header_href %}{% endblock %}">
+                            <i class="material-icons">{% block header_icon %}{% endblock %}</i>
+                        </a>
+                    {% endblock %}
+                </div>
+            {% endblock %}
         </nav>
         <ul id="nav-mobile" class="side-nav fixed">
             {% if user.is_authenticated %}

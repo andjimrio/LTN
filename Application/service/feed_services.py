@@ -1,6 +1,10 @@
 from Application.models import Feed
 
 
+def create_feed(**dict_feed):
+    return Feed.objects.get_or_create(**dict_feed)
+
+
 def get_feed(feed_id):
     return Feed.objects.get(id=feed_id)
 

@@ -1,5 +1,14 @@
-from django.utils import timezone
-from django.db.models import Count, Q
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
-from Application.models import Feed, Item, UserProfile, Section,\
-    Status, Keyword
+
+def get_pagination(page, query):
+    paginator = Paginator(query, 20)
+
+    try:
+        news = paginator.page(page)
+    except PageNotAnInteger:
+        news = paginator.page(1)
+    except EmptyPage:
+        news = paginator.page(paginator.num_pages)
+
+    return news

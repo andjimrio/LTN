@@ -1,15 +1,13 @@
 from Application.models import Feed, Item
-from Application.service.feed_services import get_feed_id_by_link
+from Application.service.feed_services import get_feed_id_by_link, create_feed
 from Application.service.section_services import create_section
 from Application.utilities.rss_utilities import read_rss
 
 
-# Dado un link, parsea el rss y lo convierte a un Feed con sus
-#       respectivos Items
 def populate_rss(link, title_section, user_id):
     rss, entries = read_rss(link)
     if rss:
-        feeder, bool = Feed.objects.get_or_create(**rss)
+        feeder = create_feed(**rss)[0]
         section = create_section(title_section, user_id)[0]
         feeder.sections.add(section)
         feeder.save()

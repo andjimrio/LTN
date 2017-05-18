@@ -1,9 +1,9 @@
 from django.contrib.auth.decorators import login_required
-from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.shortcuts import render, redirect
 
 from Application.forms import FeedForm
 from Application.utilities.populate_utilities import populate_rss
+from Application.services import get_pagination
 from Application.service.feed_services import get_feed, all_feeds_link, user_has_feed
 from Application.service.section_services import get_sections_by_user, get_section
 
@@ -40,18 +40,9 @@ def feed_create(request):
 
 
 @login_required
-def feed_view(request, feed_id=None):
-    page = request.GET.get('page')
-
+def feed_view(request, feed_id):
     feeder = get_feed(feed_id)
-    paginator = Paginator(feeder.items.all(), 20)
-
-    try:
-        news = paginator.page(page)
-    except PageNotAnInteger:
-        news = paginator.page(1)
-    except EmptyPage:
-        news = paginator.page(paginator.num_pages)
+    news = get_pagination(request.GET.get('page'), feeder.items.all())
 
     return render(request, 'feed/feed_view.html', {'feed': feeder, 'news': news})
 

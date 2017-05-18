@@ -1,14 +1,16 @@
 from collections import Counter
 from math import floor, log
 
-from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 
 from Application.forms import ItemSearchForm
 from Application.service.item_services import get_item, get_last_items_by_user, get_status_by_user_item,\
-    get_item_today_by_section
-from Application.service.section_services import  get_sections_by_user
+    get_item_today_by_section, get_item_query, get_item_keywords, get_item_similarity, query_multifield_dict, \
+    get_item_recommend
+from Application.service.section_services import get_sections_by_user
+from Application.services import get_pagination
 
 
 @login_required
@@ -59,15 +61,7 @@ def item_list(request):
 
 @login_required
 def item_query(request, query):
-    page = request.GET.get('page')
-    paginator = Paginator(get_item_query(query), 20)
-
-    try:
-        news = paginator.page(page)
-    except PageNotAnInteger:
-        news = paginator.page(1)
-    except EmptyPage:
-        news = paginator.page(paginator.num_pages)
+    news = get_pagination(request.GET.get('page'), get_item_query(query))
 
     return render(request, 'item/item_query.html', {'news': news, 'query': query})
 
@@ -89,7 +83,6 @@ def item_recommend(request):
 
 @login_required
 def item_search(request):
-    page = request.GET.get('page')
     news = None
     total = 0
     cleaned_data = request.session.get('cleaned_data', None)
@@ -111,17 +104,7 @@ def item_search(request):
         search_form = ItemSearchForm(request.user)
 
     if cleaned_data:
-        print(cleaned_data)
-        query = query_multifield_dict(cleaned_data)
-        paginator = Paginator(query, 20)
-
-        try:
-            news = paginator.page(page)
-        except PageNotAnInteger:
-            news = paginator.page(1)
-            total = len(query)
-        except EmptyPage:
-            news = paginator.page(paginator.num_pages)
+        news = get_pagination(request.GET.get('page'), query_multifield_dict(cleaned_data))
 
     return render(request, 'item/item_search.html', {'news': news, 'form': search_form, 'total': total})
 

@@ -1,5 +1,6 @@
-from Application.models import Feed, Item, Section
-from Application.utilities.queries_utilities import get_profile, get_feed_id_by_link
+from Application.models import Feed, Item
+from Application.service.feed_services import get_feed_id_by_link
+from Application.service.section_services import create_section
 from Application.utilities.rss_utilities import read_rss
 
 
@@ -9,8 +10,7 @@ def populate_rss(link, title_section, user_id):
     rss, entries = read_rss(link)
     if rss:
         feeder, bool = Feed.objects.get_or_create(**rss)
-        section, cond = Section.objects.get_or_create(title=title_section,
-                                                      user=get_profile(user_id))
+        section = create_section(title_section, user_id)[0]
         feeder.sections.add(section)
         feeder.save()
 

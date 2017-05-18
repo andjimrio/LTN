@@ -2,7 +2,7 @@ from django import forms
 from django.contrib.auth.models import User
 from django.utils.translation import ugettext_lazy as _
 
-from Application.utilities.queries_utilities import get_feeds_by_user
+from Application.service.feed_services import get_feeds_by_user
 
 
 class UserForm(forms.ModelForm):

@@ -7,7 +7,8 @@
 
 {% block titulo %}{% trans 'your_feeds' %}{% endblock %}
 {% block header %}{% trans 'your_feeds' %}{% endblock %}
-{% block not_header_button %}{% endblock %}
+{% block header_icon %}library_books{% endblock %}
+{% block header_href %}{% url 'feed_create' %}{% endblock %}
 
 {% block contenido %}
     <div class="container">

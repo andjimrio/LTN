@@ -1,10 +1,10 @@
 from django_cron import CronJobBase, Schedule
 from collections import Counter
 
-from Application.utilities.index_utilities import get_item_keywords
 from Application.utilities.populate_utilities import update_feed
-from Application.utilities.queries_utilities import all_feeds_link, all_profile, \
-    get_filtered_status_by_profile
+from Application.service.feed_services import all_feeds_link
+from Application.service.profile_services import all_profile, get_filtered_status_by_profile
+from Application.service.item_services import get_item_keywords
 
 from Application.models import Keyword
 from django.utils import timezone

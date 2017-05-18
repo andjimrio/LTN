@@ -4,8 +4,8 @@ from django.shortcuts import render, redirect
 
 from Application.forms import FeedForm
 from Application.utilities.populate_utilities import populate_rss
-from Application.utilities.queries_utilities import get_feed, all_feeds_link, user_has_feed, get_sections_by_user, \
-    get_section
+from Application.service.feed_services import get_feed, all_feeds_link, user_has_feed
+from Application.service.section_services import get_sections_by_user, get_section
 
 
 @login_required

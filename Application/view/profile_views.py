@@ -1,7 +1,7 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 
-from Application.utilities.queries_utilities import get_profile, get_status_read_stats_by_user,\
+from Application.service.profile_services import get_profile, get_status_read_stats_by_user,\
     get_status_like_stats_by_user
 
 

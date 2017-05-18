@@ -2,7 +2,7 @@ from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.shortcuts import render
 
-from Application.utilities.queries_utilities import get_section, get_section_items
+from Application.service.section_services import get_section, get_section_items
 
 
 @login_required

@@ -6,10 +6,9 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.shortcuts import render
 
 from Application.forms import ItemSearchForm
-from Application.utilities.queries_utilities import get_item, get_last_items_by_user, get_status_by_user_item,\
-    get_item_today_by_section, get_sections_by_user
-from Application.utilities.index_utilities import get_item_keywords, get_item_similarity, get_item_query, \
-    get_item_recommend, query_multifield_dict
+from Application.service.item_services import get_item, get_last_items_by_user, get_status_by_user_item,\
+    get_item_today_by_section
+from Application.service.section_services import  get_sections_by_user
 
 
 @login_required

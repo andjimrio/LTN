@@ -1,3 +1,5 @@
+from math import floor, log
+
 from dateutil.parser import parse
 from django.utils import timezone
 
@@ -31,3 +33,7 @@ def redo_date(dic, string):
 
 def only_keys(dic, keys):
     return {x: dic[x] for x in dic if x in keys}
+
+
+def floor_log(number):
+    return floor(log(number))

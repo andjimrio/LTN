@@ -1,6 +1,3 @@
-from collections import Counter
-from math import floor, log
-
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
@@ -8,7 +5,7 @@ from django.shortcuts import render
 from Application.forms import ItemSearchForm
 from Application.service.item_services import get_item, get_last_items_by_user, get_status_by_user_item,\
     get_item_today_by_section, get_item_query, get_item_keywords, get_item_similarity, query_multifield_dict, \
-    get_item_recommend
+    get_item_recommend, SectionSummaryKeywords
 from Application.service.section_services import get_sections_by_user
 from Application.services import get_pagination
 
@@ -107,51 +104,9 @@ def item_summary(request):
     for section in get_sections_by_user(request.user.id):
         section_summary_keywords = SectionSummaryKeywords(section.title)
         for item in get_item_today_by_section(section.id):
-            for keyword in get_item_keywords(item['feeds__items__id'], 8):
-                section_summary_keywords.add_keyword(keyword, item['feeds__items__id'], item['feeds__items__title'])
+            keywords = get_item_keywords(item['feeds__items__id'], 8)
+            section_summary_keywords.add_keyword(keywords, item['feeds__items__id'], item['feeds__items__title'])
 
         summary_keywords[section.title] = section_summary_keywords.most_common()
 
     return render(request, 'item/item_summary.html', {'summary_keywords': summary_keywords})
-
-
-class SectionSummaryKeywords:
-    def __init__(self, section_title):
-        self.section = section_title
-        self.keywords_counters = dict()
-        self.counts_counters = Counter()
-
-    def add_keyword(self, keyword, item_id, item_title):
-        if keyword in self.keywords_counters:
-            self.keywords_counters[keyword].update(item_id, item_title)
-        else:
-            keyword_counter = KeywordCounter(keyword, item_id, item_title)
-            self.keywords_counters[keyword] = keyword_counter
-
-        self.counts_counters[keyword] += 1
-
-    def most_common(self, number=None):
-        if not number and self.counts_counters:
-            number = floor(log(len(self.counts_counters)))
-        else:
-            number = 0
-        return [self.keywords_counters[keyword[0]] for keyword in self.counts_counters.most_common(number)]
-
-    def __str__(self):
-        return "SSK: {} - {}".format(self.section, len(self.keywords_counters))
-
-
-class KeywordCounter:
-    def __init__(self, keyword, item_id, item_title):
-        self.keyword = keyword
-        self.counts = 1
-        self.sample_title = item_title
-        self.items = dict()
-        self.items[item_id] = item_title
-
-    def update(self, item_id, item_title):
-        self.counts += 1
-        self.items[item_id] = item_title
-
-    def __str__(self):
-        return "KC: {} - {}".format(self.keyword, self.counts)

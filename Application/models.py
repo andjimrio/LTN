@@ -1,8 +1,8 @@
 # encoding:utf-8
 from django.db import models
 from django.contrib.auth.models import User
-from math import log, floor
 
+from Application.utilities.python_utilities import floor_log
 from Application.managers import WhooshManager
 
 
@@ -83,7 +83,7 @@ class Item(models.Model):
         ordering = ('-pubDate', )
 
     def get_key_number(self):
-        return floor(log(len(self.article)))
+        return floor_log(len(self.article))
 
     def __create_keywords(self):
         pass

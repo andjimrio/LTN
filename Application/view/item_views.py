@@ -40,7 +40,7 @@ def item_list(request):
     if actual is not None:
         ids = [x['item_id'] for x in paginator.page(actual)]
         for item_id in ids:
-            status = get_status_by_user_item(request.user.id, item_id)
+            status = get_status_by_user_item(request.user.id, item_id)[0]
             status.as_view()
 
         if page is not None:

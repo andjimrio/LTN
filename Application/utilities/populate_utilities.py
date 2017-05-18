@@ -27,7 +27,9 @@ def populate_rss(link, title_section, user_id):
             if not exists_item_by_link(post.get('link', '')):
                 __populate_item(post, feeder.id)
 
-    return True
+        return True
+    else:
+        return False
 
 
 def update_feed(link, printer=False):
@@ -47,8 +49,6 @@ def update_feed(link, printer=False):
 
     if printer:
         print('\t\tActualizadas ' + str(cont) + ' entradas.')
-
-    pass
 
 
 def get_article(link):
@@ -73,7 +73,7 @@ def __populate_item(post, feed_id):
 
         top_image = article.top_image
         text = article.text
-    except:
+    except Exception:
         print("ERROR-Article")
         print("\t" + post.title)
         print("\t" + post.link)

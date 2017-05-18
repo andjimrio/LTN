@@ -24,12 +24,11 @@ class UpdateRSS(CronJobBase):
         for link in all_feeds_link():
             try:
                 update_feed(link['link_rss'], printer=True)
-            except:
+            except Exception:
                 print(traceback.format_exc())
                 print("Error de cron")
-        pass
+
         print("FIN CRON1 - Actualizando entradas ({})".format(timezone.now()))
-    pass
 
 
 class CalculeKeywords(CronJobBase):
@@ -58,7 +57,5 @@ class CalculeKeywords(CronJobBase):
                 keyword.save()
 
             print('\tFIN {}'.format(profile.user.username))
-        pass
-
         print('FIN CRON2 - Calculando keywords por cada usuario ({})'.format(timezone.now()))
-    pass
+

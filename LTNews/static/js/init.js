@@ -9,7 +9,7 @@ $( document ).ready(function() {
 
     $("#flag").click(function() {
         var lang = Cookies.get('lang');
-        if(lang == 'es-es') {
+        if(lang === 'es-es') {
             Cookies.set('lang', 'en-us');
         } else {
             Cookies.set('lang', 'es-es');

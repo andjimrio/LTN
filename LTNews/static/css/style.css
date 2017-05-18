@@ -159,7 +159,7 @@ header, main, footer {
 }
 
 a:hover .fa-circle {
-  color: #80d8ff !important;
+  color: #80d8ff;
   /* light-blue accent-1 */
 }
 

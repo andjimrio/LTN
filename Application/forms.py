@@ -15,14 +15,10 @@ class UserForm(forms.ModelForm):
         model = User
         fields = ('username', 'email', 'password')
 
-    pass
-
 
 class FeedForm(forms.Form):
     url = forms.URLField(label=_("link"), widget=forms.URLInput(attrs={'class': 'validate autocomplete'}))
     section = forms.CharField(label=_("section"), widget=forms.TextInput(attrs={'class': 'validate'}))
-
-    pass
 
 
 class ItemSearchForm(forms.Form):
@@ -36,5 +32,3 @@ class ItemSearchForm(forms.Form):
         super(ItemSearchForm, self).__init__(*args, **kwargs)
 
         self.fields['feed'].queryset = get_feeds_by_user(user)
-
-    pass

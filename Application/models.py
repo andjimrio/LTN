@@ -18,8 +18,6 @@ class UserProfile(models.Model):
     def __str__(self):
         return self.user.username
 
-    pass
-
 
 class Section(models.Model):
     """Entidad Section:
@@ -36,8 +34,6 @@ class Section(models.Model):
 
     class Meta:
         ordering = ('title',)
-
-    pass
 
 
 class Feed(models.Model):
@@ -59,8 +55,6 @@ class Feed(models.Model):
 
     class Meta:
         ordering = ('title', )
-
-    pass
 
 
 class Item(models.Model):
@@ -97,14 +91,10 @@ class Item(models.Model):
     def __create_status(self):
         for section in self.feed.sections.all():
             Status.objects.get_or_create(user_id=section.user.id, item_id=self.id)
-        pass
 
     def on_save(self):
         self.__create_status()
         self.__create_keywords()
-        pass
-
-    pass
 
 
 class Status(models.Model):
@@ -124,23 +114,19 @@ class Status(models.Model):
     def as_view(self):
         self.view = True
         self.save()
-        pass
 
     def as_read(self):
         self.view = True
         self.read = True
         self.save()
-        pass
 
     def as_like(self):
         self.like = True
         self.save()
-        pass
 
     def as_unlike(self):
         self.like = False
         self.save()
-        pass
 
     def get_score(self):
         if self.like:
@@ -153,7 +139,6 @@ class Status(models.Model):
     def __str__(self):
         return "{}-{}: {}/{}/{}".format(self.item.id, self.user.user.username, self.view,
                                         self.read, self.like)
-    pass
 
 
 class Keyword(models.Model):
@@ -167,8 +152,6 @@ class Keyword(models.Model):
 
     def __str__(self):
         return self.term
-
-    pass
 
 
 class Comment(models.Model):
@@ -184,4 +167,3 @@ class Comment(models.Model):
 
     def __str__(self):
         return "{}-{}".format(self.item.id, self.user.user.username)
-    pass

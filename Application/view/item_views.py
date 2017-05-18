@@ -155,4 +155,3 @@ class KeywordCounter:
 
     def __str__(self):
         return "KC: {} - {}".format(self.keyword, self.counts)
-    pass

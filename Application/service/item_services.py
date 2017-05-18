@@ -4,8 +4,16 @@ from Application.models import Item, UserProfile, Section, Status
 from Application.service.profile_services import get_profile, get_keywords_by_user
 
 
+def create_item(**dict_item):
+    return Item.objects.get_or_create(**dict_item)
+
+
 def get_item(item_id):
     return Item.objects.get(id=item_id)
+
+
+def exists_item_by_link(link):
+    return Item.objects.filter(link=link).exists()
 
 
 def get_status_by_user_item(user_id, item_id):

@@ -8,6 +8,7 @@ from Application.service.item_services import get_item_keywords
 
 from Application.models import Keyword
 from django.utils import timezone
+import traceback
 
 
 class UpdateRSS(CronJobBase):
@@ -24,6 +25,7 @@ class UpdateRSS(CronJobBase):
             try:
                 update_feed(link['link_rss'], printer=True)
             except:
+                print(traceback.format_exc())
                 print("Error de cron")
         pass
         print("FIN CRON1 - Actualizando entradas ({})".format(timezone.now()))

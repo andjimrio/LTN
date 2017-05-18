@@ -1,37 +1,46 @@
-from Application.models import Feed, Item
+import feedparser
+from newspaper import Article
+
 from Application.service.feed_services import get_feed_id_by_link, create_feed
 from Application.service.section_services import create_section
-from Application.utilities.rss_utilities import read_rss
+from Application.service.item_services import exists_item_by_link, create_item
+from Application.utilities.python_utilities import redo_string, redo_date
+from Application.utilities.web_utilitites import clean_html, extract_img_html
 
 
 def populate_rss(link, title_section, user_id):
-    rss, entries = read_rss(link)
-    if rss:
-        feeder = create_feed(**rss)[0]
+    rss = feedparser.parse(link)
+
+    if rss.entries:
+        feeder = create_feed(title=rss.feed.get('title', ''),
+                             link_rss=link,
+                             link_web=rss.feed.get('link', ''),
+                             description=rss.feed.get('description', ''),
+                             language=rss.feed.get('language'),
+                             logo=redo_string(rss.feed, 'image', 'href'))[0]
+
         section = create_section(title_section, user_id)[0]
         feeder.sections.add(section)
         feeder.save()
 
-        for entry in entries:
-            if entry and not Item.objects.filter(link=entry['link']).exists():
-                Item.objects.get_or_create(feed_id=feeder.id, **entry)
+        for post in rss.entries:
+            if not exists_item_by_link(post.get('link', '')):
+                __populate_item(post, feeder.id)
 
-        return feeder
-    else:
-        return None
+    return True
 
 
 def update_feed(link, printer=False):
-    rss, entries = read_rss(link)
+    cont = 0
+    rss = feedparser.parse(link)
     feed_id = get_feed_id_by_link(link)
 
     if printer:
-        print("\t" + rss['title'])
-        cont = 0
+        print("\t" + rss.feed['title'])
 
-    for entry in entries:
-        if not Item.objects.filter(link=entry['link']).exists():
-            Item.objects.get_or_create(feed_id=feed_id, **entry)
+    for post in rss.entries:
+        if not exists_item_by_link(post.get('link', '')):
+            __populate_item(post, feed_id)
 
             if printer:
                 cont += 1
@@ -39,4 +48,49 @@ def update_feed(link, printer=False):
     if printer:
         print('\t\tActualizadas ' + str(cont) + ' entradas.')
 
-    return feed_id
+    pass
+
+
+def get_article(link):
+    """
+    Nos da el objeto Article dado una dirección web
+
+    :param link: url de la noticia
+    :return: Article de la noticia
+    """
+    article = Article(link)
+    article.download()
+    article.parse()
+    return article
+
+
+def __populate_item(post, feed_id):
+    top_image = ''
+    text = ''
+
+    try:
+        article = get_article(post.link)
+
+        top_image = article.top_image
+        text = article.text
+    except:
+        print("ERROR-Article")
+        print("\t" + post.title)
+        print("\t" + post.link)
+
+    if text == '':
+        text = clean_html(redo_string(post, 'description'))
+
+    if top_image == '':
+        top_image = extract_img_html(redo_string(post, 'description'))
+
+    item, created = create_item(title=post.get('title', ''),
+                                link=post.get('link', ''),
+                                description=post.get('description', ''),
+                                image=top_image,
+                                article=text,
+                                creator=post.get('author', ''),
+                                pubDate=redo_date(post, 'published'),
+                                feed_id=feed_id)
+
+    return item, created

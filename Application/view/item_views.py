@@ -21,7 +21,7 @@ def item_view(request, item_id=None):
     tags = get_item_keywords(item_id, item.get_key_number())
     news = get_item_similarity(item_id, 6)
 
-    status = get_status_by_user_item(request.user.id, item_id)
+    status = get_status_by_user_item(request.user.id, item_id)[0]
     status.as_read()
 
     if like == 'True':
@@ -68,15 +68,7 @@ def item_query(request, query):
 
 @login_required
 def item_recommend(request):
-    page = request.GET.get('page')
-    paginator = Paginator(get_item_recommend(request.user.id), 20)
-
-    try:
-        news = paginator.page(page)
-    except PageNotAnInteger:
-        news = paginator.page(1)
-    except EmptyPage:
-        news = paginator.page(paginator.num_pages)
+    news = get_pagination(request.GET.get('page'), get_item_recommend(request.user.id))
 
     return render(request, 'item/item_recommend.html', {'news': news})
 

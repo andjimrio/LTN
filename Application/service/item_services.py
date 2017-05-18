@@ -9,7 +9,7 @@ def get_item(item_id):
 
 
 def get_status_by_user_item(user_id, item_id):
-    return Status.objects.get(user_id=get_profile(user_id).id, item_id=item_id)
+    return Status.objects.get_or_create(user_id=get_profile(user_id).id, item_id=item_id)
 
 
 def get_last_items_by_user(user_id, unview=False):

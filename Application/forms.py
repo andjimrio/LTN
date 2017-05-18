@@ -28,7 +28,8 @@ class FeedForm(forms.Form):
 class ItemSearchForm(forms.Form):
     title = forms.CharField(label=_("title"), required=False, widget=forms.TextInput(attrs={'class': 'validate'}))
     creator = forms.CharField(label=_("creator"), required=False, widget=forms.TextInput(attrs={'class': 'validate'}))
-    description = forms.CharField(label=_("description"), required=False, widget=forms.TextInput(attrs={'class': 'validate'}))
+    description = forms.CharField(label=_("description"), required=False,
+                                  widget=forms.TextInput(attrs={'class': 'validate'}))
     feed = forms.ModelChoiceField(label=_("newspaper"), required=False, queryset=None)
 
     def __init__(self, user, *args, **kwargs):

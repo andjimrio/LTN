@@ -34,7 +34,7 @@
                                    class="secondary-content"><i class="material-icons {{ color_secondary }}-text">delete</i></a>
                             </li>
                         {% empty %}
-                            <a href="{% url 'feed_create' %}" class="collection-item">
+                            <a href="{% url 'feed_create' %}?section={{ section.title|urlencode }}" class="collection-item">
                                 {% trans 'add_feed' %}
                             </a>
                         {% endfor %}

@@ -8,6 +8,7 @@
 {% block titulo %}{{ feed.title }}{% endblock %}
 {% block header %}{{ feed.title }}{% endblock %}
 {% block header_icon %}add{% endblock %}
+{% block header_href %}{% url 'feed_create' %}?url={{ feed.link_rss|urlencode }}{% endblock %}
 
 {% block contenido %}
     <div class="container-fix">

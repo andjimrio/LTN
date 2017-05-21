@@ -54,6 +54,8 @@ msgid "creator"
 msgstr "Autor"
 msgid "description"
 msgstr "Descripción"
+msgid "feeds"
+msgstr "Feeds"
 
 
 #: General

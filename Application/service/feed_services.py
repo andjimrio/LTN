@@ -24,6 +24,10 @@ def user_has_feed(user_id, feed_id):
     return get_feeds_by_user(user_id).filter(id=feed_id).exists()
 
 
-def get_feed_id_by_link(link_rss):
-    return Feed.objects.get(link_rss=link_rss).id
+def exists_feed_id_by_link(link_rss):
+    return Feed.objects.filter(link_rss=link_rss).exists()
+
+
+def get_feed_by_link(link_rss):
+    return Feed.objects.get(link_rss=link_rss)
 

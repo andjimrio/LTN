@@ -1,7 +1,7 @@
 import feedparser
 from newspaper import Article
 
-from Application.service.feed_services import get_feed_id_by_link, create_feed
+from Application.service.feed_services import get_feed_by_link, create_feed, exists_feed_id_by_link
 from Application.service.section_services import create_section
 from Application.service.item_services import exists_item_by_link, create_item
 from Application.utilities.python_utilities import redo_string, redo_date
@@ -12,12 +12,15 @@ def populate_rss(link, title_section, user_id):
     rss = feedparser.parse(link)
 
     if rss.entries:
-        feeder = create_feed(title=rss.feed.get('title', ''),
-                             link_rss=link,
-                             link_web=rss.feed.get('link', ''),
-                             description=rss.feed.get('description', ''),
-                             language=rss.feed.get('language', ''),
-                             logo=redo_string(rss.feed, 'image', 'href'))[0]
+        if exists_feed_id_by_link(link):
+            feeder = get_feed_by_link(link)
+        else:
+            feeder = create_feed(title=rss.feed.get('title', ''),
+                                 link_rss=link,
+                                 link_web=rss.feed.get('link', ''),
+                                 description=rss.feed.get('description', ''),
+                                 language=rss.feed.get('language', ''),
+                                 logo=redo_string(rss.feed, 'image', 'href'))[0]
 
         section = create_section(title_section, user_id)[0]
         feeder.sections.add(section)
@@ -35,7 +38,7 @@ def populate_rss(link, title_section, user_id):
 def update_feed(link, printer=False):
     cont = 0
     rss = feedparser.parse(link)
-    feed_id = get_feed_id_by_link(link)
+    feed_id = get_feed_by_link(link).id
 
     if printer:
         print("\t" + rss.feed['title'])

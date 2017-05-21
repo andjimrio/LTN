@@ -13,7 +13,7 @@
     <div class="container">
         <div class="row">
             <div class="col s12">
-            <br>
+                <br>
 
                 {% if feed_form.errors or error %}
                     <ul class="collection with-header red-text text-darken-4">
@@ -37,7 +37,7 @@
                             {{ feed_form.url }}
                             {{ feed_form.url.label_tag }}
                             <em class="error">
-                                {% for error in  field.errors %}{{ error }}{% endfor %}
+                                {% for error in feed_form.url.errors %}{{ error }}{% endfor %}
                             </em>
                         </div>
                         <div class="col s12 input-field">
@@ -45,7 +45,7 @@
                             {{ feed_form.section }}
                             {{ feed_form.section.label_tag }}
                             <em class="error">
-                                {% for error in  field.errors %}{{ error }}{% endfor %}
+                                {% for error in feed_form.section.errors %}{{ error }}{% endfor %}
                             </em>
                         </div>
                     </div>

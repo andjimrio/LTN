@@ -2,6 +2,7 @@ from django import forms
 from django.contrib.auth.models import User
 from django.utils.translation import ugettext_lazy as _
 
+from Application.models import Section
 from Application.service.feed_services import get_feeds_by_user
 
 
@@ -32,3 +33,12 @@ class ItemSearchForm(forms.Form):
         super(ItemSearchForm, self).__init__(*args, **kwargs)
 
         self.fields['feed'].queryset = get_feeds_by_user(user)
+
+
+class SectionForm(forms.ModelForm):
+    title = forms.CharField(label=_("title"), widget=forms.TextInput(attrs={'class': 'validate'}))
+    description = forms.CharField(label=_("description"), required=False, widget=forms.TextInput(attrs={'class': 'validate'}))
+
+    class Meta:
+        model = Section
+        fields = ('title', 'description')

@@ -7,12 +7,13 @@
 
 {% block titulo %}{{ section.title }}{% endblock %}
 {% block header %}{{ section.title }}{% endblock %}
+{% block header_href %}{% url 'section_edit' section.id %}{% endblock %}
 {% block header_icon %}edit{% endblock %}
 
 {% block contenido %}
     <div class="container section">
         <h5>{{ section.description }}</h5>
-
+        <br>
         <ul class="collection with-header">
              <li class="collection-header"><h4 class="{{ color_primary }}-text">{% trans 'feeds' %}</h4></li>
             {% for feed in section.feeds.all %}

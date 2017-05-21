@@ -33,6 +33,8 @@ urlpatterns = [
 
     # Section
     url(r'^section/view/(?P<section_id>\d+)/', section_views.section_view, name='section_view'),
+    url(r'^section/edit/(?P<section_id>\d+)/', section_views.section_edit, name='section_edit'),
+    url(r'^section/delete/(?P<section_id>\d+)/', section_views.section_delete, name='section_delete'),
 
     # Feed
     url(r'^feed/view/(?P<feed_id>\d+)/', feed_views.feed_view, name='feed_view'),

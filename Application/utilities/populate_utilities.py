@@ -16,7 +16,7 @@ def populate_rss(link, title_section, user_id):
                              link_rss=link,
                              link_web=rss.feed.get('link', ''),
                              description=rss.feed.get('description', ''),
-                             language=rss.feed.get('language'),
+                             language=rss.feed.get('language', ''),
                              logo=redo_string(rss.feed, 'image', 'href'))[0]
 
         section = create_section(title_section, user_id)[0]
@@ -79,10 +79,10 @@ def __populate_item(post, feed_id):
         print("\t" + post.link)
 
     if text == '':
-        text = clean_html(redo_string(post, 'description'))
+        text = clean_html(post.get('description', ''))
 
     if top_image == '':
-        top_image = extract_img_html(redo_string(post, 'description'))
+        top_image = extract_img_html(post.get('description', ''))
 
     item, created = create_item(title=post.get('title', ''),
                                 link=post.get('link', ''),

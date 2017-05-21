@@ -10,10 +10,14 @@ def clean_html(html_doc):
 def extract_img_html(html_doc):
     soup = BeautifulSoup(html_doc, 'html.parser')
     imgs = []
+
     for img in soup.findAll("img"):
         imgs.append(img['src'])
 
-    return imgs[0]
+    if len(imgs) > 0:
+        return imgs[0]
+    else:
+        return ""
 
 
 def reconvert_html(html_doc):

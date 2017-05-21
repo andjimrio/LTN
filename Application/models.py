@@ -11,7 +11,7 @@ class UserProfile(models.Model):
     Clase que contiene la información del usuario. Se relaciona con el
     User que define Django.
     """
-    image = models.URLField()
+    image = models.URLField(max_length=500, blank=True)
 
     user = models.OneToOneField(User)
 
@@ -25,7 +25,7 @@ class Section(models.Model):
     noticias.
     """
     title = models.CharField(max_length=500)
-    description = models.TextField()
+    description = models.TextField(blank=True)
 
     user = models.ForeignKey(UserProfile, related_name="sections")
 
@@ -42,11 +42,11 @@ class Feed(models.Model):
     información esencial y se relaciona con Section.
     """
     title = models.CharField(max_length=500)
-    link_rss = models.URLField()
-    link_web = models.URLField()
-    description = models.TextField()
-    language = models.CharField(max_length=50)
-    logo = models.URLField()
+    link_rss = models.URLField(max_length=500)
+    link_web = models.URLField(max_length=500)
+    description = models.TextField(blank=True)
+    language = models.CharField(max_length=50, blank=True)
+    logo = models.URLField(blank=True)
 
     sections = models.ManyToManyField(Section, related_name="feeds")
 
@@ -63,9 +63,9 @@ class Item(models.Model):
     defecto se ordena por la fecha de publicación de manera descendente.
     """
     title = models.CharField(max_length=500)
-    link = models.URLField()
+    link = models.URLField(max_length=500)
     description = models.TextField()
-    image = models.URLField()
+    image = models.URLField(max_length=500)
     article = models.TextField()
     pubDate = models.DateTimeField()
     creator = models.CharField(max_length=500)

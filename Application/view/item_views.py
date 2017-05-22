@@ -92,7 +92,7 @@ def item_summary(request):
     summary_keywords = dict()
     for section in get_sections_by_user(request.user.id):
         section_summary_keywords = SectionSummaryKeywords(section.title)
-        for item in get_item_today_by_section(section.id):
+        for item in get_item_today_by_section(section.id, hours=3):
             keywords = get_item_keywords(item['feeds__items__id'], 8)
             section_summary_keywords.add_keyword(keywords, item['feeds__items__id'], item['feeds__items__title'])
 

@@ -37,9 +37,9 @@ def get_last_items_by_user(user_id, unview=False):
             order_by('-item__pubDate')
 
 
-def get_item_today_by_section(section_id):
+def get_item_today_by_section(section_id, days=0, hours=0):
     end_date = timezone.now()
-    start_date = end_date - timezone.timedelta(days=1)
+    start_date = end_date - timezone.timedelta(days=days, hours=hours)
     return Section.objects.filter(id=section_id).filter(feeds__items__pubDate__range=[start_date, end_date])\
         .values('feeds__items__id', 'feeds__items__title')
 

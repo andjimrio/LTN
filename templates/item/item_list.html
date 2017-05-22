@@ -13,7 +13,7 @@
     <div class="container-fix">
         <br><br>
         <div class="row-fix">
-            {% for item in feedes %}
+            {% for item in news %}
                 <div class="col-fix">
                     {% show_card item.item__title item.item__image item.item__pubDate item.item__description color_secondary item.item_id item.item__feed__title item.item__feed_id %}
                 </div>
@@ -28,17 +28,17 @@
             {% endfor %}
         </div>
 
-        {% if feedes.has_next %}
+        {% if news.has_next %}
             <div class="center">
-                <a class="waves-effect waves-light btn {{ color_primary }}"
-                   href="?actual={{ feedes.number }}&page={{ feedes.next_page_number }}">
+                <a class="waves-effect waves-light btn {{ color_secondary }}"
+                   href="?follow={{ news.number }}">
                     <i class="material-icons right">forward</i>{% trans 'view_follow' %}
                 </a>
             </div>
-        {% elif feedes %}
+        {% elif news %}
             <div class="center">
-                <a class="waves-effect waves-light btn {{ color_primary }}"
-                   href="?actual={{ feedes.number }}">
+                <a class="waves-effect waves-light btn {{ color_secondary }}"
+                   href="?follow={{ news.number }}">
                     <i class="material-icons right">move_to_inbox</i>{% trans 'view' %}
                 </a>
             </div>

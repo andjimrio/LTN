@@ -1,4 +1,3 @@
-from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 
@@ -33,27 +32,17 @@ def item_view(request, item_id=None):
 
 @login_required
 def item_list(request):
-    actual = request.GET.get('actual')
-    page = request.GET.get('page')
-    paginator = Paginator(get_last_items_by_user(request.user.id), 20)
+    follow = request.GET.get('follow')
 
-    if actual is not None:
-        ids = [x['item_id'] for x in paginator.page(actual)]
-        for item_id in ids:
+    if follow is not None:
+        for item_id in request.session.get('news_ids', []):
             status = get_status_by_user_item(request.user.id, item_id)[0]
             status.as_view()
 
-        if page is not None:
-            page = int(page)-1
+    news = get_pagination(request.GET.get('page'), get_last_items_by_user(request.user.id))
+    request.session['news_ids'] = [x['item_id'] for x in news]
 
-    try:
-        feedes = paginator.page(page)
-    except PageNotAnInteger:
-        feedes = paginator.page(1)
-    except EmptyPage:
-        feedes = paginator.page(paginator.num_pages)
-
-    return render(request, 'item/item_list.html', {'feedes': feedes})
+    return render(request, 'item/item_list.html', {'news': news})
 
 
 @login_required

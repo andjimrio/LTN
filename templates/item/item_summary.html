@@ -20,7 +20,7 @@
                             {% for keyword_counter in keyword_counters %}
                                 <li>
                                     <div class="collapsible-header">
-                                        <span class="new badge {{ color_secondary }}" data-badge-caption=": {{ keyword_counter.keyword }}">{{ keyword_counter.counts }}</span>
+                                        <span class="new badge {{ color_secondary }}" data-badge-caption="">{{ keyword_counter.counts }}</span>
                                         {{ keyword_counter.sample_title }}
                                     </div>
                                     <div class="collapsible-body"><span>{% trans 'news_about' %} '{{ keyword_counter.keyword }}':

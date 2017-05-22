@@ -71,7 +71,7 @@
 {% endblock %}
 
 {% block javascript %}
-    {% if news %}
+    {% if news and news.number == 1 %}
         <script>
             Materialize.toast('{% trans 'query_has' %} {{ total }} {% trans 'news' %}', 4000);
         </script>

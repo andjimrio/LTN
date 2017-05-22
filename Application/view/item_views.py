@@ -82,7 +82,9 @@ def item_search(request):
         search_form = ItemSearchForm(request.user)
 
     if cleaned_data:
-        news = get_pagination(request.GET.get('page'), query_multifield_dict(cleaned_data))
+        query = query_multifield_dict(cleaned_data)
+        total = len(query)
+        news = get_pagination(request.GET.get('page'), query)
 
     return render(request, 'item/item_search.html', {'news': news, 'form': search_form, 'total': total})
 

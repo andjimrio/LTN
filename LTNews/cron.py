@@ -54,7 +54,7 @@ class CalculeKeywords(CronJobBase):
             Keyword.objects.filter(users__id=profile.id).delete()
 
             for tag_x in cont_user.most_common(8):
-                keyword, created = Keyword.objects.get_or_create(term=tag_x[0])
+                keyword = Keyword.objects.get_or_create(term=tag_x[0])[0]
                 keyword.users.add(profile)
                 keyword.save()
 

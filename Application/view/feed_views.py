@@ -10,7 +10,6 @@ from Application.service.section_services import get_sections_by_user, get_secti
 
 @login_required
 def feed_create(request):
-    section = request.GET.get('section', '')
     error = False
 
     if request.method == 'POST':

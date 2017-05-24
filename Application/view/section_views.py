@@ -4,7 +4,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from Application.models import Section
 from Application.forms import SectionForm
 from Application.services import get_pagination
-from Application.service.section_services import get_section, get_section_items
+from Application.service.section_services import get_section_items
 
 
 @login_required

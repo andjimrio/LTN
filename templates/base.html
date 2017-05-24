@@ -37,8 +37,7 @@
                     <span class="nav-title"><strong>{% block header %}{% endblock %}</strong></span>
 
                     {% block not_header_button %}
-                        <a class="btn-floating btn-large halfway-fab waves-effect waves-light
-                            {% block header_class %}{{ color_secondary }}{% endblock %}"
+                        <a class="btn-floating btn-large halfway-fab waves-effect waves-light {{ color_secondary }}"
                            href="{% block header_href %}{% endblock %}">
                             <i class="material-icons">{% block header_icon %}{% endblock %}</i>
                         </a>

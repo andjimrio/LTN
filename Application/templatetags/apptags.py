@@ -78,7 +78,7 @@ def show_card(user_id, title, image, pubDate, description, color_primary, item_i
         if status.like:
             color = "green lighten-4"
         elif status.saves:
-            color = "brown lighten-4"
+            color = "blue-grey lighten-4"
         elif status.view:
             color = "grey lighten-4"
         else:

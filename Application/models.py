@@ -122,6 +122,10 @@ class Status(models.Model):
         self.read = True
         self.save()
 
+    def as_web(self):
+        self.web = True
+        self.save()
+
     def as_like(self):
         self.like = True
         self.save()
@@ -130,17 +134,27 @@ class Status(models.Model):
         self.like = False
         self.save()
 
+    def as_save(self):
+        self.saves = True
+        self.save()
+
+    def as_unsave(self):
+        self.saves = False
+        self.save()
+
     def get_score(self):
         if self.like:
             return 10
+        elif self.web:
+            return 5
         elif self.read:
             return 1
         else:
             return 0
 
     def __str__(self):
-        return "{}-{}: {}/{}/{}".format(self.item.id, self.user.user.username, self.view,
-                                        self.read, self.like)
+        return "{}-{}: {}/{}/{}/{}/{}".format(self.item.id, self.user.user.username, self.view,
+                                              self.read, self.web, self.like, self.saves)
 
 
 class Keyword(models.Model):

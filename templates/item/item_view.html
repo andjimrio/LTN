@@ -8,13 +8,10 @@
 {% block titulo %}{% reduce_title item.title %}{% endblock %}
 {% block header %}{{ item.title }}{% endblock %}
 {% block header_icon %}
-    {% if not status.like %}thumb_up{% else %}clear{% endif %}
+    {% if not status.like %}favorite_border{% else %}favorite{% endif %}
 {% endblock %}
 {% block header_href %}
     {% if not status.like %}?like=True{% else %}?like=False{% endif %}
-{% endblock %}
-{% block header_class %}
-    {% if not status.like %}{{ color_secondary }}{% else %}green{% endif %}
 {% endblock %}
 
 {% block contenido %}
@@ -36,8 +33,17 @@
 
             <p class="justify">{% autoescape off %}{% pretty_text item.description %}{% endautoescape %}</p>
             <div class="center">
+                {% if not status.saves %}
+                    <a class="waves-effect waves-light btn {{ color_primary }}" href="?save=True">
+                        <i class="material-icons left">archive</i>{% trans 'save' %}
+                    </a>
+                {% else %}
+                    <a class="waves-effect waves-light btn blue-grey" href="?save=False">
+                        <i class="material-icons left">clear</i>{% trans 'save' %}
+                    </a>
+                {% endif %}
 
-                <a class="waves-effect waves-light btn {{ color_secondary }}" href="{{ item.link }}">
+                <a class="waves-effect waves-light btn {{ color_secondary }}" href="?web=True">
                     <i class="material-icons left">launch</i>{% trans 'launch_web' %}
                 </a>
             </div>

@@ -1,5 +1,5 @@
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 
 from Application.forms import ItemSearchForm
 from Application.service.item_services import get_item, get_last_items_by_user, get_status_by_user_item,\
@@ -12,6 +12,8 @@ from Application.services import get_pagination
 @login_required
 def item_view(request, item_id=None):
     like = request.GET.get('like')
+    save = request.GET.get('save')
+    web = request.GET.get('web')
 
     item = get_item(item_id)
     tags = get_item_keywords(item_id, item.get_key_number())
@@ -20,10 +22,19 @@ def item_view(request, item_id=None):
     status = get_status_by_user_item(request.user.id, item_id)[0]
     status.as_read()
 
+    if web:
+        status.as_web()
+        return redirect(item.link)
+
     if like == 'True':
         status.as_like()
     elif like == 'False':
         status.as_unlike()
+
+    if save == 'True':
+        status.as_save()
+    elif save == 'False':
+        status.as_unsave()
 
     return render(request, 'item/item_view.html',
                   {'item': item, 'tags': tags, 'news': news,

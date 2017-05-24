@@ -10,6 +10,13 @@
 {% block not_header_button %}{% endblock %}
 
 {% block contenido %}
+    <div class="container">
+        <div class="section row">
+            <div class="col s12">
+                <canvas id="appearing_chart"></canvas>
+            </div>
+        </div>
+    </div>
     <div class="container-fix">
         <br>
         <div class="row-fix">
@@ -30,4 +37,39 @@
 
         {% show_pagination news color_primary %}
     </div>
+{% endblock %}
+
+{% block javascript %}
+<script>
+    var ctx_appearing = $("#appearing_chart");
+
+    var data_appearing = {
+        labels: [
+            {% for key in stats.keys %}
+                "{{ key }}",
+            {% endfor %}
+        ],
+        datasets: [{
+            label: '{{ query }}',
+            data: [
+                {% for value in stats.values %}
+                    {{ value }},
+                {% endfor %}
+            ],
+            backgroundColor: ['{% random_color %}']
+        }]
+    };
+
+    var pie_appearing = new Chart(ctx_appearing,{
+        type: 'line',
+        data: data_appearing,
+        options: {
+            title: {
+                display: true,
+                text: '{% trans 'appearing_stats' %}'
+            },
+        }
+    });
+
+</script>
 {% endblock %}

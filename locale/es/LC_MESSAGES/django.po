@@ -126,6 +126,8 @@ msgid "like_section"
 msgstr "Gustados por sección"
 msgid "link_not_process"
 msgstr "El link no se procesó correctamente"
+msgid "appearing_stats"
+msgstr "Palabras clave aparecidas en el tiempo"
 
 
 #: Index

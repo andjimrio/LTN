@@ -55,13 +55,18 @@ def get_item_similarity(item_id, limit):
 
 
 def get_item_query(query):
-    results = Item.objects.query('article', query)
+    results = Item.objects.query('article', query).order_by('-pubDate')
     return results
 
 
 def query_multifield_dict(dict_query):
     results = Item.objects.query_multifield_dict(dict_query)
     return results
+
+
+def stats_items(queryset):
+    stats = [x.pubDate.strftime("%m/%Y") for x in queryset]
+    return dict(Counter(stats))
 
 
 def get_item_recommend(user_id):

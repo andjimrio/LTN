@@ -4,7 +4,7 @@ from django.shortcuts import render
 from Application.forms import ItemSearchForm
 from Application.service.item_services import get_item, get_last_items_by_user, get_status_by_user_item,\
     get_item_today_by_section, get_item_query, get_item_keywords, get_item_similarity, query_multifield_dict, \
-    get_item_recommend, SectionSummaryKeywords
+    get_item_recommend, SectionSummaryKeywords, stats_items
 from Application.service.section_services import get_sections_by_user
 from Application.services import get_pagination
 
@@ -47,9 +47,11 @@ def item_list(request):
 
 @login_required
 def item_query(request, query):
-    news = get_pagination(request.GET.get('page'), get_item_query(query))
+    queryset = get_item_query(query)
+    news = get_pagination(request.GET.get('page'), queryset)
+    stats = stats_items(queryset)
 
-    return render(request, 'item/item_query.html', {'news': news, 'query': query})
+    return render(request, 'item/item_query.html', {'news': news, 'query': query, 'stats': stats})
 
 
 @login_required

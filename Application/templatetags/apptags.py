@@ -4,6 +4,27 @@ from random import sample
 from Application.utilities.web_utilitites import clean_html, reconvert_html
 
 register = template.Library()
+colors = [
+        "#F44336",
+        "#E91E63",
+        "#9C27B0",
+        "#673AB7",
+        "#3F51B5",
+        "#2196F3",
+        "#03A9F4",
+        "#00BCD4",
+        "#009688",
+        "#4CAF50",
+        "#8BC34A",
+        "#CDDC39",
+        "#FFEB3B",
+        "#FFC107",
+        "#FF9800",
+        "#FF5722",
+        "#795548",
+        "#9E9E9E",
+        "#607D8B"
+    ]
 
 
 @register.filter('get_value_from_dict')
@@ -32,27 +53,6 @@ def reduce_title(text):
 
 @register.simple_tag
 def list_colors(number):
-    colors = [
-        "#F44336",
-        "#E91E63",
-        "#9C27B0",
-        "#673AB7",
-        "#3F51B5",
-        "#2196F3",
-        "#03A9F4",
-        "#00BCD4",
-        "#009688",
-        "#4CAF50",
-        "#8BC34A",
-        "#CDDC39",
-        "#FFEB3B",
-        "#FFC107",
-        "#FF9800",
-        "#FF5722",
-        "#795548",
-        "#9E9E9E",
-        "#607D8B"
-    ]
     color = ""
 
     voted = sample(colors, number)
@@ -60,6 +60,12 @@ def list_colors(number):
         color += "'{}',".format(v)
 
     return color
+
+
+@register.simple_tag
+def random_color():
+    voted = sample(colors, 1)
+    return voted[0]
 
 
 @register.inclusion_tag('tags/card.html')

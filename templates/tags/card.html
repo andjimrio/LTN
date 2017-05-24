@@ -1,8 +1,8 @@
 {% load apptags %}
 
 {% if not error %}
-<div class="card">
-    <div class="card-image">
+<div class="card {{ color }}">
+    <div class="card-image lig">
         <img src="{{ image }}">
         <a class="btn-floating halfway-fab waves-effect waves-light {{ color_primary }}"
             href="{% url 'item_view' item_id %}"><i class="material-icons">launch</i></a>

@@ -104,7 +104,9 @@ class Status(models.Model):
     """
     view = models.BooleanField(default=False)
     read = models.BooleanField(default=False)
+    web = models.BooleanField(default=False)
     like = models.BooleanField(default=False)
+    saves = models.BooleanField(default=False)
 
     user = models.ForeignKey(UserProfile, on_delete=models.CASCADE,
                              related_name="statuses")

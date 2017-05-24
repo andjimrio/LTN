@@ -7,7 +7,15 @@
 
 {% block titulo %}{% reduce_title item.title %}{% endblock %}
 {% block header %}{{ item.title }}{% endblock %}
-{% block not_header_button %}{% endblock %}
+{% block header_icon %}
+    {% if not status.like %}thumb_up{% else %}clear{% endif %}
+{% endblock %}
+{% block header_href %}
+    {% if not status.like %}?like=True{% else %}?like=False{% endif %}
+{% endblock %}
+{% block header_class %}
+    {% if not status.like %}{{ color_secondary }}{% else %}green{% endif %}
+{% endblock %}
 
 {% block contenido %}
     {% if article.image != '' %}
@@ -28,15 +36,7 @@
 
             <p class="justify">{% autoescape off %}{% pretty_text item.description %}{% endautoescape %}</p>
             <div class="center">
-                {% if not status.like %}
-                    <a class="waves-effect waves-light btn {{ color_primary }}" href="?like=True">
-                        <i class="material-icons left">thumb_up</i>{% trans 'like' %}
-                    </a>
-                {% else %}
-                    <a class="waves-effect waves-light btn green" href="?like=False">
-                        <i class="material-icons left">clear</i>{% trans 'like' %}
-                    </a>
-                {% endif %}
+
                 <a class="waves-effect waves-light btn {{ color_secondary }}" href="{{ item.link }}">
                     <i class="material-icons left">launch</i>{% trans 'launch_web' %}
                 </a>
@@ -61,7 +61,7 @@
             <div class="row-fix-m">
                 {% for item in news %}
                     <div class="col-fix">
-                        {% show_card item.title item.image item.pubDate item.description color_secondary item.id item.feed.title item.feed.id %}
+                        {% show_card user.id item.title item.image item.pubDate item.description color_secondary item.id item.feed.title item.feed.id %}
                     </div>
                 {% endfor %}
             </div>

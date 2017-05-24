@@ -2,6 +2,7 @@ from django import template
 from random import sample
 
 from Application.utilities.web_utilitites import clean_html, reconvert_html
+from Application.service.item_services import get_status_by_user_item
 
 register = template.Library()
 colors = [
@@ -69,10 +70,20 @@ def random_color():
 
 
 @register.inclusion_tag('tags/card.html')
-def show_card(title, image, pubDate, description, color_primary, item_id, newspaper=None, feed_id=None):
+def show_card(user_id, title, image, pubDate, description, color_primary, item_id, newspaper=None, feed_id=None):
     if item_id is None:
         return {'error': True}
     else:
+        status = get_status_by_user_item(user_id, item_id)[0]
+        if status.like:
+            color = "green lighten-4"
+        elif status.saves:
+            color = "brown lighten-4"
+        elif status.view:
+            color = "grey lighten-4"
+        else:
+            color = ""
+
         return {'title': title,
                 'image': image,
                 'pubDate': pubDate,
@@ -81,7 +92,8 @@ def show_card(title, image, pubDate, description, color_primary, item_id, newspa
                 'color_primary': color_primary,
                 'newspaper': newspaper if newspaper else "",
                 'feed_id': feed_id if newspaper else "",
-                'error': False}
+                'error': False,
+                'color': color}
 
 
 @register.inclusion_tag('tags/pagination.html')

@@ -33,7 +33,7 @@
         <div class="row-fix">
             {% for item in news %}
                 <div class="col-fix">
-                    {% show_card item.items__title item.items__image item.items__pubDate item.items__description color_secondary item.items__id item.title item.id %}
+                    {% show_card user.id item.items__title item.items__image item.items__pubDate item.items__description color_secondary item.items__id item.title item.id %}
                 </div>
             {% endfor %}
         </div>

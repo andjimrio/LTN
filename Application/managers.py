@@ -53,6 +53,10 @@ class WhooshManager(models.Manager):
 
         super().__init__()
 
+    # -----------------------------------------------------------
+    # BASIC OPERATIONS
+    # -----------------------------------------------------------
+
     def contribute_to_class(self, model, name):
         super().contribute_to_class(model, name)
         class_prepared.connect(self.class_prepared_callback, sender=self.model)
@@ -88,9 +92,44 @@ class WhooshManager(models.Manager):
     def post_delete_callback(self, sender, instance, **kwargs):
         pass
 
+    # -----------------------------------------------------------
+    # INDEX OPERATIONS
+    # -----------------------------------------------------------
+
+    def get_keywords(self, field, item_id, num_terms=20):
+        index = open_dir(STORAGE_DIR)
+
+        with index.searcher() as searcher:
+            query = QueryParser('id', index.schema).parse(str(item_id))
+            results = searcher.search(query)
+            keywords = [keyword for keyword, score in results.key_terms(field, numterms=num_terms)]
+
+        return keywords
+
+    def get_more_like_this(self, field, item_id, limit=None):
+        index = open_dir(STORAGE_DIR)
+
+        with index.searcher() as searcher:
+            query = QueryParser('id', index.schema).parse(str(item_id))
+            results = searcher.search(query)
+            identities = results[0].more_like_this(field, top=limit)
+            ids = [r['id'] for r in identities]
+
+        return self.filter(id__in=ids)
+
+    # -----------------------------------------------------------
+    # QUERIES
+    # -----------------------------------------------------------
+
     def query(self, field, query):
-        results = self.__query_search(field, query)
-        return self.filter(id__in=[r['id'] for r in results])
+        ids = self.__query_search(field, query)
+        return self.filter(id__in=ids)
+
+    def query_multifield(self, fields, query):
+        ids = self.__query_multifield_search(fields, query)
+        return self.filter(id__in=ids)
+
+    # HELPERS QUERIES
 
     def query_list_and(self, field, query_list):
         query = self.__list_to_query(query_list, 'AND')
@@ -100,36 +139,33 @@ class WhooshManager(models.Manager):
         query = self.__list_to_query(query_list, 'OR')
         return self.query(field, query)
 
-    def query_multifield(self, fields, query):
-        results = self.__query_multifield_search(fields, query)
-        return self.filter(id__in=[r['id'] for r in results])
-
     def query_multifield_dict(self, dict_data):
         fields, query = self.__dict_to_query(dict_data)
         return self.query_multifield(fields, query)
 
-    def get_keywords(self, field, item_id, num_terms=20):
-        results = self.__query_search('id', item_id)
-        return [keyword for keyword, score in results.key_terms(field, numterms=num_terms)]
-
-    def get_more_like_this(self, field, item_id, limit=None):
-        results = self.__query_search('id', item_id)
-        first_hit = results[0]
-        return self.filter(id__in=[r['id'] for r in first_hit.more_like_this(field, top=limit)])
+    # STATIC METHODS
 
     @staticmethod
     def __query_search(field, search, limit=None):
         index = open_dir(STORAGE_DIR)
-        query = QueryParser(field, index.schema).parse(str(search))
-        results = index.searcher().search(query, limit=limit)
-        return results
+
+        with index.searcher() as searcher:
+            query = QueryParser(field, index.schema).parse(str(search))
+            results = searcher.search(query, limit=limit)
+            ids = [r['id'] for r in results]
+
+        return ids
 
     @staticmethod
     def __query_multifield_search(fields, search, limit=None):
         index = open_dir(STORAGE_DIR)
-        query = MultifieldParser(fields, index.schema).parse(str(search))
-        results = index.searcher().search(query, limit=limit)
-        return results
+
+        with index.searcher() as searcher:
+            query = MultifieldParser(fields, index.schema).parse(str(search))
+            results = searcher.search(query, limit=limit)
+            ids = [r['id'] for r in results]
+
+        return ids
 
     @staticmethod
     def __list_to_query(query_list, word):

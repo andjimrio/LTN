@@ -96,6 +96,7 @@ class WhooshManager(models.Manager):
     # INDEX OPERATIONS
     # -----------------------------------------------------------
 
+    @staticmethod
     def get_keywords(self, field, item_id, num_terms=20):
         index = open_dir(STORAGE_DIR)
 
@@ -143,7 +144,7 @@ class WhooshManager(models.Manager):
         fields, query = self.__dict_to_query(dict_data)
         return self.query_multifield(fields, query)
 
-    # STATIC METHODS
+    # PRIVATE METHODS
 
     @staticmethod
     def __query_search(field, search, limit=None):

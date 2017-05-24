@@ -19,7 +19,8 @@ class UpdateRSS(CronJobBase):
                         retry_after_failure_mins=RETRY_AFTER_FAILURE_MINS)
     code = 'cron.UpdateRSS'
 
-    def do(self):
+    @staticmethod
+    def do():
         print("INI CRON1 - Actualizando entradas ({})".format(timezone.now()))
         for link in all_feeds_link():
             try:
@@ -39,7 +40,8 @@ class CalculeKeywords(CronJobBase):
                         retry_after_failure_mins=RETRY_AFTER_FAILURE_MINS)
     code = 'cron.CalculeKeywords'
 
-    def do(self):
+    @staticmethod
+    def do():
         print('INI CRON2 - Calculando keywords por cada usuario ({})'.format(timezone.now()))
 
         for profile in all_profile():

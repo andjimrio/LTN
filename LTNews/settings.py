@@ -32,8 +32,8 @@ ALLOWED_HOSTS = ["lt-news.herokuapp.com", "www.lt-news.herokuapp.com", "localhos
                  "127.0.0.1", "95.85.22.119", "lt-news.mooo.com", "www.lt-news.mooo.com"]
 
 LANGUAGES = (
-    ('en', _('English')),
-    ('es', _('Spanish')),
+    ('en-us', _('English')),
+    ('es-es', _('Spanish')),
 )
 
 LOCALE_PATHS = (
@@ -156,7 +156,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/1.10/topics/i18n/
 
-LANGUAGE_CODE = 'es'
+LANGUAGE_CODE = 'es-es'
 
 LANGUAGE_COOKIE_NAME = 'lang'
 

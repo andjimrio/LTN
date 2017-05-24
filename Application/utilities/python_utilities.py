@@ -36,4 +36,7 @@ def only_keys(dic, keys):
 
 
 def floor_log(number):
-    return floor(log(number))
+    if number == 0:
+        return 0
+    else:
+        return floor(log(number))

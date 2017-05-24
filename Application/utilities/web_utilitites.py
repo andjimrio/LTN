@@ -36,4 +36,8 @@ def reconvert_html(html_doc):
     for div in soup.findAll("div"):
         div['class'] = div.get('class', []) + ['center']
 
+    for x in range(1, 6):
+        for hs in soup.findAll("h{}".format(x)):
+            hs['class'] = hs.get('class', []) + ['small-title']
+
     return soup.prettify("utf-8")

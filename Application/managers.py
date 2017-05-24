@@ -97,7 +97,7 @@ class WhooshManager(models.Manager):
     # -----------------------------------------------------------
 
     @staticmethod
-    def get_keywords(self, field, item_id, num_terms=20):
+    def get_keywords(field, item_id, num_terms=20):
         index = open_dir(STORAGE_DIR)
 
         with index.searcher() as searcher:

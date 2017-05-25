@@ -128,6 +128,8 @@ msgid "link_not_process"
 msgstr "El link no se procesó correctamente"
 msgid "appearing_stats"
 msgstr "Palabras clave aparecidas en el tiempo"
+msgid "not_passwords"
+msgstr "Las contraseñas no coinciden"
 
 
 #: Index

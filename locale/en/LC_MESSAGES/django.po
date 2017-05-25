@@ -127,6 +127,8 @@ msgid "link_not_process"
 msgstr "Link not processing correctly"
 msgid "appearing_stats"
 msgstr "Keyword appearing in time"
+msgid "not_passwords"
+msgstr "Passwords don't match"
 
 
 #: Index

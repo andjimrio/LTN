@@ -30,6 +30,7 @@ urlpatterns = [
 
     # Profile
     url(r'^profile/view/', profile_views.profile_view, name='profile_view'),
+    url(r'^profile/edit/', profile_views.profile_edit, name='profile_edit'),
 
     # Section
     url(r'^section/view/(?P<section_id>\d+)/', section_views.section_view, name='section_view'),

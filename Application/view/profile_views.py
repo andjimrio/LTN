@@ -12,3 +12,9 @@ def profile_view(request):
     like_stats = get_status_like_stats_by_user(profile.id)
     return render(request, 'profile/profile_view.html', {'profile': profile, 'read_stats': read_stats,
                                                          'like_stats': like_stats})
+
+
+@login_required
+def profile_edit(request):
+
+    return render(request, 'profile/profile_edit.html', {})

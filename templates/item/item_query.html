@@ -60,14 +60,14 @@
         }]
     };
 
-    var pie_appearing = new Chart(ctx_appearing,{
+    new Chart(ctx_appearing,{
         type: 'line',
         data: data_appearing,
         options: {
             title: {
                 display: true,
                 text: '{% trans 'appearing_stats' %}'
-            },
+            }
         }
     });
 

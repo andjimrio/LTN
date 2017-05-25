@@ -12,6 +12,12 @@ class UserForm(forms.ModelForm):
     password = forms.CharField(label=_("password"), widget=forms.PasswordInput())
     repassword = forms.CharField(label=_("repassword"), widget=forms.PasswordInput())
 
+    def clean(self):
+        cd = self.cleaned_data
+        if cd.get('password') != cd.get('re_password'):
+            self.add_error('repassword', _("not_passwords"))
+        return cd
+
     class Meta:
         model = User
         fields = ('username', 'email', 'password')

@@ -56,3 +56,21 @@
             </form>
         </div>
 {% endblock %}
+
+{% block javascript %}
+<script>
+    var password = document.getElementById("id_password");
+    var confirm_password = document.getElementById("id_repassword");
+
+    function validatePassword(){
+      if(password.value != confirm_password.value) {
+        confirm_password.setCustomValidity("{% trans 'not_passwords' %}");
+      } else {
+        confirm_password.setCustomValidity('');
+      }
+    }
+
+    password.onchange = validatePassword;
+    confirm_password.onkeyup = validatePassword;
+</script>
+{% endblock %}

@@ -8,6 +8,7 @@
 {% block titulo %}{% trans 'profile' %}{% endblock %}
 {% block header %}{% trans 'profile' %}{% endblock %}
 {% block header_icon %}edit{% endblock %}
+{% block header_href %}{% url 'profile_edit' %}{% endblock %}
 
 {% block contenido %}
     <div class="container">
@@ -94,7 +95,7 @@
         }]
     };
 
-    var pie_read = new Chart(ctx_read,{
+    new Chart(ctx_read,{
         type: 'pie',
         data: data_read,
         options: {
@@ -105,7 +106,7 @@
         }
     });
 
-    var pie_like = new Chart(ctx_like,{
+    new Chart(ctx_like,{
         type: 'pie',
         data: data_like,
         options: {

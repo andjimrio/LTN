@@ -135,6 +135,8 @@ msgid "appearing_stats"
 msgstr "Keyword appearing in time"
 msgid "not_passwords"
 msgstr "Passwords don't match"
+msgid "user_repeat"
+msgstr "User has already this name"
 
 
 #: Index

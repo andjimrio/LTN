@@ -3,19 +3,22 @@ from django.contrib.auth.models import User
 from django.utils.translation import ugettext_lazy as _
 
 from Application.models import Section, UserProfile
+from Application.service.profile_services import exists_user
 from Application.service.feed_services import get_feeds_by_user
 
 
 class UserForm(forms.ModelForm):
-    username = forms.CharField(label=_("username"), widget=forms.TextInput(attrs={'class': 'validate'}))
-    email = forms.EmailField(label=_("email"), widget=forms.EmailInput(attrs={'class': 'validate'}))
-    password = forms.CharField(label=_("password"), widget=forms.PasswordInput())
-    repassword = forms.CharField(label=_("repassword"), widget=forms.PasswordInput())
+    username = forms.CharField(label=_("username"), required=True, widget=forms.TextInput(attrs={'class': 'validate'}))
+    email = forms.EmailField(label=_("email"), required=True, widget=forms.EmailInput(attrs={'class': 'validate'}))
+    password = forms.CharField(label=_("password"), required=True, widget=forms.PasswordInput())
+    repassword = forms.CharField(label=_("repassword"), required=True, widget=forms.PasswordInput())
 
     def clean(self):
         cd = self.cleaned_data
-        if cd.get('password') != cd.get('re_password'):
+        if cd.get('password') != cd.get('repassword'):
             self.add_error('repassword', _("not_passwords"))
+        if exists_user(cd.get('username')):
+            self.add_error('username', _("user_repeat"))
         return cd
 
     class Meta:

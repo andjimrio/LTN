@@ -86,7 +86,10 @@ class Item(models.Model):
         return floor_log(len(self.article))
 
     def __create_keywords(self):
-        pass
+        for keyword in Item.objects.get_keywords('article', self.id, self.get_key_number()):
+            keyword = Keyword.objects.get_or_create(term=keyword)[0]
+            keyword.items.add(self)
+            keyword.save()
 
     def __create_status(self):
         for section in self.feed.sections.all():
@@ -165,6 +168,7 @@ class Keyword(models.Model):
     term = models.CharField(max_length=250)
 
     users = models.ManyToManyField(UserProfile, related_name="keywords")
+    items = models.ManyToManyField(Item, related_name="keywords")
 
     def __str__(self):
         return self.term

@@ -44,23 +44,24 @@ def get_item_today_by_section(section_id, days=0, hours=0):
         .values('feeds__items__id', 'feeds__items__title')
 
 
-def get_item_keywords(item_id, num_terms):
-    keywords = Item.objects.get_keywords('article', item_id, num_terms)
-    return keywords
-
-
-def get_item_similarity(item_id, limit):
-    more_results = Item.objects.get_more_like_this('article', item_id, limit)
+def get_item_similarity(item_id, limit, user_id):
+    more_results = Item.objects.get_more_like_this('article', item_id, limit). \
+        filter(statuses__user__user_id=user_id)\
+        .order_by('-pubDate')
     return more_results
 
 
-def get_item_query(query):
-    results = Item.objects.query('article', query).order_by('-pubDate')
+def get_item_query(query, user_id):
+    results = Item.objects.query('article', query) \
+        .filter(statuses__user__user_id=user_id)\
+        .order_by('-pubDate')
     return results
 
 
-def query_multifield_dict(dict_query):
-    results = Item.objects.query_multifield_dict(dict_query)
+def query_multifield_dict(dict_query, user_id):
+    results = Item.objects.query_multifield_dict(dict_query) \
+        .filter(statuses__user__user_id=user_id)\
+        .order_by('-pubDate')
     return results
 
 
@@ -70,10 +71,9 @@ def stats_items(queryset):
 
 
 def get_item_recommend(user_id):
-    keys_user = [x.term for x in get_keywords_by_user(user_id)]
-    results = Item.objects.query_list_or('article', keys_user)\
-        .filter(statuses__user__user_id=user_id)\
+    results = Item.objects.filter(statuses__user__user_id=user_id)\
         .exclude(statuses__view=True)\
+        .filter(keywords__in=get_keywords_by_user(user_id))\
         .order_by('-pubDate')
     return results
 

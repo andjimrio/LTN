@@ -30,3 +30,7 @@ def get_status_like_stats_by_user(profile_id):
 
 def get_keywords_by_user(user_id):
     return Keyword.objects.filter(users__user=user_id).all()
+
+
+def exists_user(username):
+    return UserProfile.objects.filter(user__username__exact=username).exists()

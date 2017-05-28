@@ -53,7 +53,7 @@
         <div class="section center">
             <h6 class="{{ color_secondary }}-text">{% trans 'tags' %}</h6>
             <br>
-            {% for tag in tags %}
+            {% for tag in item.keywords.all %}
                 <div class="chip"><a href="{% url 'item_query' tag %}">{{ tag }}</a></div>
             {% endfor %}
         </div>

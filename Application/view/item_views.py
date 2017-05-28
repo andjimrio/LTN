@@ -3,7 +3,7 @@ from django.shortcuts import render, redirect
 
 from Application.forms import ItemSearchForm
 from Application.service.item_services import get_item, get_last_items_by_user, get_status_by_user_item,\
-    get_item_today_by_section, get_item_query, get_item_keywords, get_item_similarity, query_multifield_dict, \
+    get_item_today_by_section, get_item_query, get_item_similarity, query_multifield_dict, \
     get_item_recommend, SectionSummaryKeywords, stats_items
 from Application.service.section_services import get_sections_by_user
 from Application.services import get_pagination
@@ -16,8 +16,7 @@ def item_view(request, item_id=None):
     web = request.GET.get('web')
 
     item = get_item(item_id)
-    tags = get_item_keywords(item_id, item.get_key_number())
-    news = get_item_similarity(item_id, 6)
+    news = get_item_similarity(item_id, 6, request.user.id)
 
     status = get_status_by_user_item(request.user.id, item_id)[0]
     status.as_read()
@@ -36,9 +35,7 @@ def item_view(request, item_id=None):
     elif save == 'False':
         status.as_unsave()
 
-    return render(request, 'item/item_view.html',
-                  {'item': item, 'tags': tags, 'news': news,
-                   'status': status})
+    return render(request, 'item/item_view.html', {'item': item, 'news': news, 'status': status})
 
 
 @login_required
@@ -58,7 +55,7 @@ def item_list(request):
 
 @login_required
 def item_query(request, query):
-    queryset = get_item_query(query)
+    queryset = get_item_query(query, request.user.id)
     news = get_pagination(request.GET.get('page'), queryset)
     stats = stats_items(queryset)
 
@@ -95,7 +92,7 @@ def item_search(request):
         search_form = ItemSearchForm(request.user)
 
     if cleaned_data:
-        query = query_multifield_dict(cleaned_data)
+        query = query_multifield_dict(cleaned_data, request.user.id)
         total = len(query)
         news = get_pagination(request.GET.get('page'), query)
 
@@ -108,7 +105,7 @@ def item_summary(request):
     for section in get_sections_by_user(request.user.id):
         section_summary_keywords = SectionSummaryKeywords(section.title)
         for item in get_item_today_by_section(section.id, hours=3):
-            keywords = get_item_keywords(item['feeds__items__id'], 8)
+            keywords = get_item(item['feeds__items__id']).keywords.all()
             if len(keywords) > 0:
                 section_summary_keywords.add_keyword(keywords, item['feeds__items__id'], item['feeds__items__title'])
 

@@ -4,7 +4,7 @@ from collections import Counter
 from Application.utilities.populate_utilities import update_feed
 from Application.service.feed_services import all_feeds_link
 from Application.service.profile_services import all_profile, get_filtered_status_by_profile
-from Application.service.item_services import get_item_keywords
+from Application.service.item_services import get_item
 
 from Application.models import Keyword
 from django.utils import timezone
@@ -48,7 +48,7 @@ class CalculeKeywords(CronJobBase):
             print('\tINI {}'.format(profile.user.username))
             cont_user = Counter()
             for status in get_filtered_status_by_profile(profile.id):
-                for tag in get_item_keywords(status.item.id, status.item.get_key_number()):
+                for tag in get_item(status.item.id).keywords.all():
                     cont_user[tag] += status.get_score()
 
             Keyword.objects.filter(users__id=profile.id).delete()

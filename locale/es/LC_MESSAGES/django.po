@@ -136,6 +136,8 @@ msgid "appearing_stats"
 msgstr "Palabras clave aparecidas en el tiempo"
 msgid "not_passwords"
 msgstr "Las contraseñas no coinciden"
+msgid "user_repeat"
+msgstr "Ya existe un usuario con dicho nombre"
 
 
 #: Index

@@ -9,6 +9,10 @@ def get_feed(feed_id):
     return Feed.objects.get(id=feed_id)
 
 
+def get_section_by_feed(feed_id, user_id):
+    return Feed.objects.get(id=feed_id).sections.all().get(user__user_id=user_id)
+
+
 def all_feeds_link(user_id=None):
     if user_id is None:
         return Feed.objects.all().values('link_rss')

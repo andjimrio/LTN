@@ -7,8 +7,12 @@
 
 {% block titulo %}{{ feed.title }}{% endblock %}
 {% block header %}{{ feed.title }}{% endblock %}
-{% block header_icon %}add{% endblock %}
-{% block header_href %}{% url 'feed_create' %}?url={{ feed.link_rss|urlencode }}{% endblock %}
+{% block header_icon %}{% if has_feed %}delete{% else %}add{% endif %}{% endblock %}
+{% block header_href %}
+    {% if has_feed %}{% url 'feed_delete' section_id feed.id %}
+    {% else %}{% url 'feed_create' %}?url={{ feed.link_rss|urlencode }}
+    {% endif %}
+{% endblock %}
 
 {% block contenido %}
     <div class="container-fix">

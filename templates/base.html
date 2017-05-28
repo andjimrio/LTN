@@ -52,7 +52,11 @@
                         <div class="background">
                             <img src="{% static 'img/newspaper.jpg' %}">
                         </div>
-                        <img class="circle" src="{% static 'img/icon_circle.png' %}">
+                        {% if user.profile.image %}
+                            <img class="circle" src="{{ user.profile.image }}">
+                        {% else %}
+                            <img class="circle" src="{% static 'img/icon_circle.png' %}">
+                        {% endif %}
                         <span class="white-text name">{{ user.username }}</span>
                         <a href="{% url 'profile_view' %}"><span class="white-text email">
                             <i class="material-icons right">arrow_drop_down</i>{{ user.email }}</span>

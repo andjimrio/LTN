@@ -2,7 +2,7 @@ from django import forms
 from django.contrib.auth.models import User
 from django.utils.translation import ugettext_lazy as _
 
-from Application.models import Section
+from Application.models import Section, UserProfile
 from Application.service.feed_services import get_feeds_by_user
 
 
@@ -48,3 +48,20 @@ class SectionForm(forms.ModelForm):
     class Meta:
         model = Section
         fields = ('title', 'description')
+
+
+class UserEditForm(forms.ModelForm):
+    username = forms.CharField(label=_("username"), widget=forms.TextInput(attrs={'class': 'validate'}))
+    email = forms.EmailField(label=_("email"), widget=forms.EmailInput(attrs={'class': 'validate'}))
+
+    class Meta:
+        model = User
+        fields = ('username', 'email')
+
+
+class ProfileForm(forms.ModelForm):
+    image = forms.CharField(label=_("image_link"), required=False, widget=forms.URLInput(attrs={'class': 'validate'}))
+
+    class Meta:
+        model = UserProfile
+        fields = ('image',)

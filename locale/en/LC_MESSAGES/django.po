@@ -55,6 +55,8 @@ msgid "description"
 msgstr "Description"
 msgid "feeds"
 msgstr "Feeds"
+msgid "image_link"
+msgstr "Link of your image"
 
 
 #: General
@@ -104,6 +106,10 @@ msgid "new_feed"
 msgstr "Add new feed"
 msgid "your_feeds"
 msgstr "Your feeds"
+msgid "edit_section"
+msgstr "Edit section"
+msgid "edit_profile"
+msgstr "Edit profile"
 
 
 #: Modals

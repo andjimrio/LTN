@@ -13,7 +13,7 @@ class UserProfile(models.Model):
     """
     image = models.URLField(max_length=500, blank=True)
 
-    user = models.OneToOneField(User)
+    user = models.OneToOneField(User, related_name="profile")
 
     def __str__(self):
         return self.user.username

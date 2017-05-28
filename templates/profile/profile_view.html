@@ -15,7 +15,11 @@
         <div class="section row">
             <div class="col s12 m6">
                 <div class="center">
-                    <img src="{% static 'img/icon_circle.png' %}" class="primo-team">
+                    {% if profile.image %}
+                         <img src="{{ profile.image }}" class="primo-team">
+                    {% else %}
+                         <img src="{% static 'img/icon_circle.png' %}" class="primo-team">
+                    {% endif %}
                 </div>
             </div>
             <div class="col s12 m6">

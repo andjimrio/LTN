@@ -3,9 +3,8 @@ from django.shortcuts import render, redirect
 
 from Application.forms import ItemSearchForm
 from Application.service.item_services import get_item, get_last_items_by_user, get_status_by_user_item,\
-    get_item_today_by_section, get_item_query, get_item_similarity, query_multifield_dict, \
-    get_item_recommend, SectionSummaryKeywords, stats_items
-from Application.service.section_services import get_sections_by_user
+    get_item_query, get_item_similarity, query_multifield_dict, get_item_recommend, stats_items, get_summary
+
 from Application.services import get_pagination
 
 
@@ -101,14 +100,6 @@ def item_search(request):
 
 @login_required
 def item_summary(request):
-    summary_keywords = dict()
-    for section in get_sections_by_user(request.user.id):
-        section_summary_keywords = SectionSummaryKeywords(section.title)
-        for item in get_item_today_by_section(section.id, hours=3):
-            keywords = get_item(item['feeds__items__id']).keywords.all()
-            if len(keywords) > 0:
-                section_summary_keywords.add_keyword(keywords, item['feeds__items__id'], item['feeds__items__title'])
-
-        summary_keywords[section.title] = section_summary_keywords.most_common()
+    summary_keywords = get_summary(request.user.id)
 
     return render(request, 'item/item_summary.html', {'summary_keywords': summary_keywords})

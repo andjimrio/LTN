@@ -5,6 +5,7 @@ from django.utils import timezone
 from Application.models import Item, UserProfile, Section, Status
 from Application.utilities.python_utilities import floor_log
 from Application.service.profile_services import get_profile, get_keywords_by_user
+from Application.service.section_services import get_sections_by_user
 
 
 def create_item(**dict_item):
@@ -76,6 +77,21 @@ def get_item_recommend(user_id):
         .filter(keywords__in=get_keywords_by_user(user_id))\
         .order_by('-pubDate')
     return results
+
+
+def get_summary(user_id):
+    summary_keywords = dict()
+
+    for section in get_sections_by_user(user_id):
+        section_summary_keywords = SectionSummaryKeywords(section.title)
+        for item in get_item_today_by_section(section.id, days=1):
+            keywords = get_item(item['feeds__items__id']).keywords.all()
+            if len(keywords) > 0:
+                section_summary_keywords.add_keyword(keywords, item['feeds__items__id'], item['feeds__items__title'])
+
+        summary_keywords[section.title] = section_summary_keywords.most_common()
+
+    return summary_keywords
 
 
 class SectionSummaryKeywords:

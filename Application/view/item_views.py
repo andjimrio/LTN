@@ -1,11 +1,12 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 
-from Application.forms import ItemSearchForm
+from Application.forms import ItemSearchForm, CommentForm
 from Application.service.item_services import get_item, get_last_items_by_user, get_status_by_user_item,\
     get_item_query, get_item_similarity, query_multifield_dict, get_item_recommend, stats_items, get_summary
-
+from Application.service.comment_services import delete_comment, get_comments_by_item
 from Application.services import get_pagination
+from Application.service.profile_services import get_profile
 
 
 @login_required
@@ -13,10 +14,20 @@ def item_view(request, item_id=None):
     like = request.GET.get('like')
     save = request.GET.get('save')
     web = request.GET.get('web')
+    delete = request.GET.get('delete')
 
     item = get_item(item_id)
-    news = get_item_similarity(item_id, 6, request.user.id)
 
+    comment_form = CommentForm(request.POST or None, initial={'item': item, 'user': get_profile(request.user.id)})
+    if comment_form.is_valid():
+        comment_form.save()
+        comment_form = CommentForm(initial={'item': item, 'user': get_profile(request.user.id)})
+    else:
+        if comment_form.errors:
+            print(comment_form.errors)
+
+    news = get_item_similarity(item_id, 6, request.user.id)
+    comments = get_comments_by_item(item.id)
     status = get_status_by_user_item(request.user.id, item_id)[0]
     status.as_read()
 
@@ -34,7 +45,11 @@ def item_view(request, item_id=None):
     elif save == 'False':
         status.as_unsave()
 
-    return render(request, 'item/item_view.html', {'item': item, 'news': news, 'status': status})
+    if delete:
+        delete_comment(delete, request.user.id)
+
+    return render(request, 'item/item_view.html', {'item': item, 'news': news, 'status': status,
+                                                   'comments': comments, 'comment_form': comment_form})
 
 
 @login_required

@@ -2,7 +2,7 @@ from django import forms
 from django.contrib.auth.models import User
 from django.utils.translation import ugettext_lazy as _
 
-from Application.models import Section, UserProfile
+from Application.models import Section, UserProfile, Comment, Item
 from Application.service.profile_services import exists_user
 from Application.service.feed_services import get_feeds_by_user
 
@@ -68,3 +68,13 @@ class ProfileForm(forms.ModelForm):
     class Meta:
         model = UserProfile
         fields = ('image',)
+
+
+class CommentForm(forms.ModelForm):
+    description = forms.CharField(label=_("comment"), widget=forms.Textarea(attrs={'class': 'validate materialize-textarea'}))
+    user = forms.ModelChoiceField(queryset=UserProfile.objects.all(), widget=forms.HiddenInput())
+    item = forms.ModelChoiceField(queryset=Item.objects.all(), widget=forms.HiddenInput())
+
+    class Meta:
+        model = Comment
+        fields = ('description', 'user', 'item')

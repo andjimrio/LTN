@@ -58,6 +58,10 @@ msgid "feeds"
 msgstr "Feeds"
 msgid "image_link"
 msgstr "Link de tu imagen"
+msgid "comments"
+msgstr "Comentarios"
+msgid "comment"
+msgstr "Comentario"
 
 
 #: General

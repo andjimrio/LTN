@@ -50,6 +50,7 @@
         </div>
 
         <div class="divider"></div>
+
         <div class="section center">
             <h6 class="{{ color_secondary }}-text">{% trans 'tags' %}</h6>
             <br>
@@ -58,19 +59,82 @@
             {% endfor %}
         </div>
 
+        {% if news %}
+            <div class="divider"></div>
+
+            <div class="section">
+                <h6 class="center {{ color_secondary }}-text">{% trans 'recommend_news' %}</h6>
+                <br>
+
+                <div class="row-fix-m">
+                    {% for item in news %}
+                        <div class="col-fix">
+                            {% show_card user.id item.title item.image item.pubDate item.description color_secondary item.id item.feed.title item.feed.id %}
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        {% endif %}
+
+
         <div class="divider"></div>
 
         <div class="section">
-            <h6 class="center {{ color_secondary }}-text">{% trans 'recommend_news' %}</h6>
+            <h6 class="{{ color_secondary }}-text center">{% trans 'comments' %}</h6>
             <br>
+            {% if comments %}
+                <ul class="collection">
+                    {% for comment in comments %}
+                        <li class="collection-item avatar">
+                            {% if comment.user.image %}
+                                <img src="{{ comment.user.image }}" alt="" class="circle">
+                            {% else %}
+                                <img src="{% static 'img/icon_circle.png' %}" alt="" class="circle">
+                            {% endif %}
 
-            <div class="row-fix-m">
-                {% for item in news %}
-                    <div class="col-fix">
-                        {% show_card user.id item.title item.image item.pubDate item.description color_secondary item.id item.feed.title item.feed.id %}
+                            <span class="title">{{ comment.user.user.username }}</span>
+                            <p><small>{{ comment.pubDate }}</small></p>
+                            <p>{{ comment.description }}</p>
+
+                            {% if user.id == comment.user.user.id %}
+                                <a href="?delete={{ comment.id }}" class="secondary-content">
+                                    <i class="material-icons {{ color_secondary }}-text">delete</i>
+                                </a>
+                            {% endif %}
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+            <br>
+            {% if comment_form.errors %}
+                <ul class="collection with-header red-text text-darken-4">
+                    <li class="collection-header"><h4>{% trans 'errors' %}</h4></li>
+                    {% for error in comment_form.non_field_errors %}
+                        <li class="collection-item">{{error|escape }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+
+            <form id="comment_form" method="POST" class="row">
+                {% csrf_token %}
+                {% for field in comment_form.visible_fields %}
+                    <div class="col s12 input-field">
+                        <i class="material-icons prefix">mode_edit</i>
+                        {{ field }}
+                        {{ field.label_tag }}
+                        <em class="error">
+                            {% for error in  field.errors %}{{ error }}{% endfor %}
+                        </em>
                     </div>
                 {% endfor %}
-            </div>
+                {% for hidden in comment_form.hidden_fields %}{{ hidden }}{% endfor %}
+
+                <div class="center">
+                    <button class="btn waves-effect waves-light {{ color_primary }}" type="submit" name="action">
+                        {% trans 'submit' %}<i class="material-icons right">send</i>
+                    </button>
+                </div>
+            </form>
         </div>
     </div>
 

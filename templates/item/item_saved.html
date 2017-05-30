@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% load i18n %}
+{% load l10n %}
+{% load static %}
+{% load apptags %}
+
+{% block titulo %}{% trans 'saved_news' %}{% endblock %}
+{% block header %}{% trans 'saved_news' %}{% endblock %}
+{% block not_header_button %}{% endblock %}
+
+{% block contenido %}
+    <div class="container-fix">
+        <br><br>
+        <div class="row-fix">
+            {% for item in news %}
+                <div class="col-fix">
+                    {% show_card user.id item.title item.image item.pubDate item.description color_secondary item.id item.feed.title item.feed.id %}
+                </div>
+            {% empty %}
+                <div class="col-fix">
+                    <ul class="collection">
+                        <a class="collection-item">
+                            {% trans 'add_saved' %}
+                        </a>
+                    </ul>
+                </div>
+            {% endfor %}
+        </div>
+
+        {% show_pagination news color_primary %}
+    </div>
+{% endblock %}

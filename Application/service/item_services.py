@@ -79,6 +79,12 @@ def get_item_recommend(user_id):
     return results
 
 
+def get_item_saved(user_id):
+    return Item.objects.filter(statuses__user__user_id=user_id)\
+        .filter(statuses__saves=True)\
+        .order_by('-pubDate')
+
+
 def get_summary(user_id):
     summary_keywords = dict()
 

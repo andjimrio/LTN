@@ -84,6 +84,8 @@ msgid "stats"
 msgstr "Stats"
 msgid "submit"
 msgstr "Submit"
+msgid "saved"
+msgstr "Saved"
 
 
 #: Buttons
@@ -95,6 +97,8 @@ msgid "add_feed"
 msgstr "Add your favourite feeds here"
 msgid "add_recommend"
 msgstr "Soon we will add news that may interest you"
+msgid "add_saved"
+msgstr "You will see your saved news here"
 
 
 #: Views
@@ -114,6 +118,8 @@ msgid "edit_section"
 msgstr "Edit section"
 msgid "edit_profile"
 msgstr "Edit profile"
+msgid "saved_news"
+msgstr "Saved news"
 
 
 #: Modals

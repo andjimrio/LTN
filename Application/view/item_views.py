@@ -3,7 +3,8 @@ from django.shortcuts import render, redirect
 
 from Application.forms import ItemSearchForm, CommentForm
 from Application.service.item_services import get_item, get_last_items_by_user, get_status_by_user_item,\
-    get_item_query, get_item_similarity, query_multifield_dict, get_item_recommend, stats_items, get_summary
+    get_item_query, get_item_similarity, query_multifield_dict, get_item_recommend, stats_items, get_summary, \
+    get_item_saved
 from Application.service.comment_services import delete_comment, get_comments_by_item
 from Application.services import get_pagination
 from Application.service.profile_services import get_profile
@@ -118,3 +119,10 @@ def item_summary(request):
     summary_keywords = get_summary(request.user.id)
 
     return render(request, 'item/item_summary.html', {'summary_keywords': summary_keywords})
+
+
+@login_required
+def item_saved(request):
+    news = get_pagination(request.GET.get('page'), get_item_saved(request.user.id))
+
+    return render(request, 'item/item_saved.html', {'news': news})

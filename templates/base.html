@@ -70,6 +70,12 @@
                 <li><a href="{% url 'feed_list' %}">
                     <i class="material-icons left">library_books</i>{% trans 'newspapers' %}
                 </a></li>
+                <li><a href="{% url 'item_saved' %}">
+                    <i class="material-icons left">archive</i>{% trans 'saved' %}
+                </a></li>
+
+                <li class="divider"></li>
+
                 <li><a href="{% url 'item_recommend' %}">
                     <i class="material-icons left">grade</i>{% trans 'recommends' %}
                 </a></li>

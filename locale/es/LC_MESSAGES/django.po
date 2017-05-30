@@ -85,6 +85,8 @@ msgid "stats"
 msgstr "Gráficas"
 msgid "submit"
 msgstr "Confirmar"
+msgid "saved"
+msgstr "Guardadas"
 
 
 #: Buttons
@@ -96,6 +98,8 @@ msgid "add_feed"
 msgstr "Añade tus feeds favoritos aquí"
 msgid "add_recommend"
 msgstr "Pronto añadiremos noticias que pueden interesarte"
+msgid "add_saved"
+msgstr "Aquí podrás ver las noticias que hayas guardado"
 
 
 #: Views
@@ -115,6 +119,8 @@ msgid "edit_section"
 msgstr "Editar sección"
 msgid "edit_profile"
 msgstr "Editar perfil"
+msgid "saved_news"
+msgstr "Noticias guardadas"
 
 
 #: Modals

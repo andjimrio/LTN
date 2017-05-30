@@ -50,6 +50,7 @@ urlpatterns = [
     url(r'^item/recommend/', item_views.item_recommend, name='item_recommend'),
     url(r'^item/summary/', item_views.item_summary, name='item_summary'),
     url(r'^item/search/', item_views.item_search, name='item_search'),
+    url(r'^item/saved/', item_views.item_saved, name='item_saved'),
 
     # User
     url(r'^register/', views.register, name='register'),

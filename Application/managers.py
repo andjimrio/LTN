@@ -8,6 +8,7 @@ from django.db.models.signals import post_save, post_delete, class_prepared
 from whoosh.fields import Schema, STORED, ID, KEYWORD, TEXT, DATETIME
 from whoosh.index import create_in, open_dir, exists_in
 from whoosh.qparser import QueryParser, MultifieldParser
+from whoosh.writing import AsyncWriter
 
 try:
     STORAGE_DIR = settings.WHOOSH_STORAGE_DIR
@@ -79,7 +80,7 @@ class WhooshManager(models.Manager):
         dct = dict([(f, str(getattr(instance, f))) for f in self.fields])
 
         index = open_dir(STORAGE_DIR)
-        writer = index.writer()
+        writer = AsyncWriter(index)
 
         if created:
             writer.add_document(**dct)

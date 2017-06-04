@@ -1,4 +1,5 @@
 import os
+import shutil
 
 from django.db import models
 from django.conf import settings
@@ -8,7 +9,6 @@ from django.db.models.signals import post_save, post_delete, class_prepared
 from whoosh.fields import Schema, STORED, ID, KEYWORD, TEXT, DATETIME
 from whoosh.index import create_in, open_dir, exists_in
 from whoosh.qparser import QueryParser, MultifieldParser
-from whoosh.writing import AsyncWriter
 
 try:
     STORAGE_DIR = settings.WHOOSH_STORAGE_DIR
@@ -63,14 +63,7 @@ class WhooshManager(models.Manager):
         class_prepared.connect(self.class_prepared_callback, sender=self.model)
 
     def class_prepared_callback(self, sender, **kwargs):
-        if not exists_in(STORAGE_DIR):
-            schema_dict = {}
-            for field_name in self.fields:
-                field_type = self.model._meta.get_field(field_name).get_internal_type()
-                schema_dict[field_name] = field_mapping[field_type]
-            schema = Schema(**schema_dict)
-
-            create_in(STORAGE_DIR, schema)
+        self.__create_index(self.model, self.fields)
 
         if self.real_time:
             post_save.connect(self.post_save_callback, sender=self.model)
@@ -80,7 +73,7 @@ class WhooshManager(models.Manager):
         dct = dict([(f, str(getattr(instance, f))) for f in self.fields])
 
         index = open_dir(STORAGE_DIR)
-        writer = AsyncWriter(index)
+        writer = index.writer()
 
         if created:
             writer.add_document(**dct)
@@ -92,6 +85,15 @@ class WhooshManager(models.Manager):
 
     def post_delete_callback(self, sender, instance, **kwargs):
         pass
+
+    def rebuild_index(self, model, instances):
+        if os.path.exists(STORAGE_DIR):
+            shutil.rmtree(STORAGE_DIR)
+            os.mkdir(STORAGE_DIR)
+
+        self.__create_index(model, self.fields)
+        for instance in instances:
+            self.post_save_callback(instance=instance, created=True, sender=None)
 
     # -----------------------------------------------------------
     # INDEX OPERATIONS
@@ -146,6 +148,17 @@ class WhooshManager(models.Manager):
         return self.query_multifield(fields, query)
 
     # PRIVATE METHODS
+
+    @staticmethod
+    def __create_index(model, fields):
+        if not exists_in(STORAGE_DIR):
+            schema_dict = {}
+            for field_name in fields:
+                field_type = model._meta.get_field(field_name).get_internal_type()
+                schema_dict[field_name] = field_mapping[field_type]
+            schema = Schema(**schema_dict)
+
+            create_in(STORAGE_DIR, schema)
 
     @staticmethod
     def __query_search(field, search, limit=None):

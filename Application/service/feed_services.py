@@ -1,8 +1,19 @@
 from Application.models import Feed
+from Application.service.section_services import get_section
 
 
 def create_feed(**dict_feed):
     return Feed.objects.get_or_create(**dict_feed)
+
+
+def delete_feed(section_id, feed_id, user_id):
+    if user_has_feed(user_id, feed_id):
+        section = get_section(section_id)
+        section.feeds.remove(get_feed(feed_id))
+        section.save()
+        return True
+    else:
+        return False
 
 
 def get_feed(feed_id):

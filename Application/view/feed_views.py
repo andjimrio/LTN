@@ -4,8 +4,8 @@ from django.shortcuts import render, redirect
 from Application.forms import FeedForm
 from Application.utilities.populate_utilities import populate_rss
 from Application.services import get_pagination
-from Application.service.feed_services import get_feed, all_feeds_link, user_has_feed, get_section_by_feed
-from Application.service.section_services import get_sections_by_user, get_section
+from Application.service.feed_services import get_feed, all_feeds_link, user_has_feed, get_section_by_feed, delete_feed
+from Application.service.section_services import get_sections_by_user
 
 
 @login_required
@@ -62,9 +62,5 @@ def feed_list(request):
 
 @login_required
 def feed_delete(request, section_id, feed_id):
-    if user_has_feed(request.user.id, feed_id):
-        section = get_section(section_id)
-        section.feeds.remove(get_feed(feed_id))
-        section.save()
-
+    delete_feed(section_id, feed_id, request.user.id)
     return redirect('feed_list')

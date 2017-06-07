@@ -72,9 +72,7 @@ class ProfileForm(forms.ModelForm):
 
 class CommentForm(forms.ModelForm):
     description = forms.CharField(label=_("comment"), widget=forms.Textarea(attrs={'class': 'validate materialize-textarea'}))
-    user = forms.ModelChoiceField(queryset=UserProfile.objects.all(), widget=forms.HiddenInput())
-    item = forms.ModelChoiceField(queryset=Item.objects.all(), widget=forms.HiddenInput())
 
     class Meta:
         model = Comment
-        fields = ('description', 'user', 'item')
+        fields = ('description',)

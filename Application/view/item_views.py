@@ -19,10 +19,14 @@ def item_view(request, item_id=None):
 
     item = get_item(item_id)
 
-    comment_form = CommentForm(request.POST or None, initial={'item': item, 'user': get_profile(request.user.id)})
+    comment_form = CommentForm(request.POST or None)
     if comment_form.is_valid():
-        comment_form.save()
-        comment_form = CommentForm(initial={'item': item, 'user': get_profile(request.user.id)})
+        comment = comment_form.save(commit=False)
+        comment.item = item
+        comment.user = request.user.profile
+        comment.save()
+
+        comment_form = CommentForm()
     else:
         if comment_form.errors:
             print(comment_form.errors)

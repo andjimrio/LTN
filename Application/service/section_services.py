@@ -6,6 +6,18 @@ def create_section(title_section, user_id):
     return Section.objects.get_or_create(title=title_section, user=get_profile(user_id))
 
 
+def delete_section(section_id, user_id):
+    if user_has_section(section_id, user_id):
+        Section.objects.get(id=section_id).delete()
+        return True
+    else:
+        return False
+
+
+def user_has_section(section_id, user_id):
+    return Section.objects.filter(user__user_id=user_id).filter(id=section_id).exists()
+
+
 def get_sections_by_user(user_id):
     return UserProfile.objects.get(user__id=user_id).sections.all()
 

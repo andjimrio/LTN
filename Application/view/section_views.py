@@ -4,7 +4,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from Application.models import Section
 from Application.forms import SectionForm
 from Application.services import get_pagination
-from Application.service.section_services import get_section_items
+from Application.service.section_services import get_section_items, delete_section
 
 
 @login_required
@@ -32,7 +32,5 @@ def section_edit(request, section_id):
 
 @login_required
 def section_delete(request, section_id):
-    section = get_object_or_404(Section, pk=section_id)
-    section.delete()
-
+    delete_section(section_id, request.user.id)
     return redirect('feed_list')

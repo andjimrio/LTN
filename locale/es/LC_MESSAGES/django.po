@@ -92,6 +92,8 @@ msgstr "Guardadas"
 #: Buttons
 msgid "view"
 msgstr "Visto"
+msgid "save"
+msgstr "Guardar"
 msgid "view_follow"
 msgstr "Visto y Seguir"
 msgid "add_feed"

@@ -1,4 +1,5 @@
 from django.shortcuts import get_object_or_404
+from django.core.exceptions import PermissionDenied
 
 from Application.models import UserProfile, Section
 from Application.service.profile_services import get_profile
@@ -17,7 +18,7 @@ def delete_section(section_id, user_id):
         Section.objects.get(id=section_id).delete()
         return True
     else:
-        return False
+        raise PermissionDenied
 
 
 def user_has_section(section_id, user_id):

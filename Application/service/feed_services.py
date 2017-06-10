@@ -1,4 +1,5 @@
 from django.shortcuts import get_object_or_404
+from django.core.exceptions import PermissionDenied
 
 from Application.models import Feed
 from Application.service.section_services import get_section
@@ -15,7 +16,7 @@ def delete_feed(section_id, feed_id, user_id):
         section.save()
         return True
     else:
-        return False
+        raise PermissionDenied
 
 
 def get_feed(feed_id):

@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% load i18n %}
+{% load l10n %}
+{% load static %}
+{% load apptags %}
+
+{% block titulo %}Error{% endblock %}
+{% block not_header %}{% endblock %}
+
+{% block contenido %}
+    <div class="container center">
+        <h1 class="red-text">{% block error_title %}{% endblock %}</h1>
+        <br><br>
+        <p>{% block error_description %}{% endblock %}</p>
+        <br><br>
+        <a class="btn-large waves-effect waves-light {{ color_secondary }}"
+           href="{% url 'home' %}">{% trans 'home' %}</a>
+    </div>
+{% endblock %}

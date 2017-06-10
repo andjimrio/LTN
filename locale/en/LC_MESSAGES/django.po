@@ -88,6 +88,19 @@ msgid "saved"
 msgstr "Saved"
 
 
+#: Errors
+msgid "error400"
+msgstr "The server couldn't understand your request: we are sorry!"
+msgid "error403"
+msgstr "Access denied. You tried to access a resource that you do not have permission: be careful!"
+msgid "error404"
+msgstr "The page that you are trying to access is not available: are you sure it exists?"
+msgid "error500"
+msgstr "Oops! I think this should not have happened... Don't worry, the server just sent an email informing us of the error: try to reload the page."
+msgid "home"
+msgstr "Go home"
+
+
 #: Buttons
 msgid "view"
 msgstr "View"

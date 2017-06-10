@@ -89,6 +89,19 @@ msgid "saved"
 msgstr "Guardadas"
 
 
+#: Errors
+msgid "error400"
+msgstr "El servidor no es capaz de entender dicha petición: ¡lo sentimos!"
+msgid "error403"
+msgstr "Acceso denegado. Ha intentado acceder a un recurso del que no tiene permiso: ¡tenga cuidado!"
+msgid "error404"
+msgstr "La página a la que intenta acceder no se encuentra disponible: ¿está seguro de que existe?"
+msgid "error500"
+msgstr "¡Ups! Creo que no debería haber pasado esto... No se preocupe, se acaba de enviar un correo informando del error: intente recargar la página."
+msgid "home"
+msgstr "Volver al inicio"
+
+
 #: Buttons
 msgid "view"
 msgstr "Visto"

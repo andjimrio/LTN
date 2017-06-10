@@ -1,0 +1,7 @@
+{% extends 'errors/error_base.html' %}
+
+{% load i18n %}
+{% load l10n %}
+
+{% block error_title %}Error 500{% endblock %}
+{% block error_description %}{% trans 'error500' %}{% endblock %}

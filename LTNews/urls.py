@@ -15,13 +15,18 @@ Including another URLconf
 """
 from django.conf import settings
 from django.conf.urls.static import static
-from django.conf.urls import url, include
+from django.conf.urls import url, include, handler400, handler403, handler404, handler500
 from django.contrib.auth.views import login, logout
 from django.core.urlresolvers import reverse_lazy
 from django.contrib import admin
 
 from Application import views
 from Application.view import feed_views, item_views, profile_views, section_views
+
+handler400 = 'Application.views.bad_request'
+handler403 = 'Application.views.permission_denied'
+handler404 = 'Application.views.page_not_found'
+handler500 = 'Application.views.server_error'
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),

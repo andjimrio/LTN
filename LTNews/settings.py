@@ -26,10 +26,9 @@ PROY_DIR = os.path.dirname(os.path.realpath(__file__))
 SECRET_KEY = 'id(pu606k)*c2vs24atw3$2+_5$elfs)2lpf6(6@7%p2x=*1*d'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = ["lt-news.herokuapp.com", "www.lt-news.herokuapp.com", "localhost",
-                 "127.0.0.1", "95.85.22.119", "lt-news.mooo.com", "www.lt-news.mooo.com"]
+ALLOWED_HOSTS = ["localhost", "95.85.22.119", ".lt-news.mooo.com"]
 
 LANGUAGES = (
     ('en-us', _('English')),
@@ -81,11 +80,10 @@ LOGOUT_URL = '/'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'templates')]
-        ,
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
-            'debug':DEBUG,
+            'debug': DEBUG,
             'context_processors': [
                 'django.template.context_processors.i18n',
                 'django.template.context_processors.debug',
@@ -104,35 +102,17 @@ WSGI_APPLICATION = 'LTNews.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.10/ref/settings/#databases
 
-in_heroku = False
-if 'DATABASE_URL' in os.environ:
-    in_heroku = True
 
-if in_heroku:
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.sqlite3',
-            'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-        }
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'django_psql_db',
+        'USER': 'django_psql',
+        'PASSWORD': 'django_psql',
+        'HOST': 'localhost',
+        'PORT': '',
     }
-    # Update database configuration with $DATABASE_URL.
-    db_from_env = dj_database_url.config(conn_max_age=500)
-    DATABASES['default'].update(db_from_env)
-
-    # Honor the 'X-Forwarded-Proto' header for request.is_secure()
-    SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
-
-else:
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.postgresql_psycopg2',
-            'NAME': 'django_psql_db',
-            'USER': 'django_psql',
-            'PASSWORD': 'django_psql',
-            'HOST': 'localhost',
-            'PORT': '',
-        }
-    }
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/1.10/ref/settings/#auth-password-validators
@@ -172,10 +152,10 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.10/howto/static-files/
 
-STATIC_ROOT = 'staticfiles'
+STATIC_ROOT = os.path.join(PROY_DIR, 'staticfiles')
 STATIC_URL = '/static/'
 STATICFILES_DIRS = (
-    os.path.join(PROY_DIR,'static'),
+    os.path.join(PROY_DIR, 'static'),
 )
 
 WHOOSH_STORAGE_DIR = os.path.join(PROY_DIR, 'whoosh_index')

@@ -1,6 +1,7 @@
 from collections import Counter
 
 from django.utils import timezone
+from django.shortcuts import get_object_or_404
 
 from Application.models import Item, UserProfile, Section, Status
 from Application.utilities.python_utilities import floor_log
@@ -13,7 +14,7 @@ def create_item(**dict_item):
 
 
 def get_item(item_id):
-    return Item.objects.get(id=item_id)
+    return get_object_or_404(Item, pk=item_id)
 
 
 def exists_item_by_link(link):

@@ -1,3 +1,5 @@
+from django.shortcuts import get_object_or_404
+
 from Application.models import Feed
 from Application.service.section_services import get_section
 
@@ -17,11 +19,11 @@ def delete_feed(section_id, feed_id, user_id):
 
 
 def get_feed(feed_id):
-    return Feed.objects.get(id=feed_id)
+    return get_object_or_404(Feed, pk=feed_id)
 
 
 def get_section_by_feed(feed_id, user_id):
-    return Feed.objects.get(id=feed_id).sections.all().get(user__user_id=user_id)
+    return get_feed(feed_id).sections.all().get(user__user_id=user_id)
 
 
 def all_feeds_link(user_id=None):

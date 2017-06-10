@@ -26,7 +26,7 @@ PROY_DIR = os.path.dirname(os.path.realpath(__file__))
 SECRET_KEY = 'id(pu606k)*c2vs24atw3$2+_5$elfs)2lpf6(6@7%p2x=*1*d'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ["localhost", "95.85.22.119", ".lt-news.mooo.com"]
 

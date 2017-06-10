@@ -74,7 +74,7 @@ def item_list(request):
 
 @login_required
 def item_query(request, query):
-    queryset = get_item_query(query, request.user.id)
+    queryset = get_item_query(query, request.user.profile.id)
     news = get_pagination(request.GET.get('page'), queryset)
     stats = stats_items(queryset)
 
@@ -83,7 +83,7 @@ def item_query(request, query):
 
 @login_required
 def item_recommend(request):
-    news = get_pagination(request.GET.get('page'), get_item_recommend(request.user.id))
+    news = get_pagination(request.GET.get('page'), get_item_recommend(request.user.profile.id))
 
     return render(request, 'item/item_recommend.html', {'news': news})
 
@@ -111,7 +111,7 @@ def item_search(request):
         search_form = ItemSearchForm(request.user)
 
     if cleaned_data:
-        query = query_multifield_dict(cleaned_data, request.user.id)
+        query = query_multifield_dict(cleaned_data, request.user.profile.id)
         total = len(query)
         news = get_pagination(request.GET.get('page'), query)
 

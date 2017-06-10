@@ -53,16 +53,16 @@ def get_item_similarity(item_id, limit, user_id):
     return more_results
 
 
-def get_item_query(query, user_id):
-    results = Item.objects.query('article', query) \
-        .filter(statuses__user__user_id=user_id)\
+def get_item_query(query, profile_id):
+    results = Item.objects.filter(keywords__term__contains=query) \
+        .filter(feed__sections__user_id=profile_id)\
         .order_by('-pubDate')
     return results
 
 
-def query_multifield_dict(dict_query, user_id):
+def query_multifield_dict(dict_query, profile_id):
     results = Item.objects.query_multifield_dict(dict_query) \
-        .filter(statuses__user__user_id=user_id)\
+        .filter(feed__sections__user_id=profile_id)\
         .order_by('-pubDate')
     return results
 
@@ -72,10 +72,10 @@ def stats_items(queryset):
     return dict(Counter(stats))
 
 
-def get_item_recommend(user_id):
-    results = Item.objects.filter(statuses__user__user_id=user_id)\
+def get_item_recommend(profile_id):
+    results = Item.objects.filter(feed__sections__user_id=profile_id)\
         .exclude(statuses__view=True)\
-        .filter(keywords__in=get_keywords_by_user(user_id))\
+        .filter(keywords__in=get_keywords_by_user(profile_id))\
         .order_by('-pubDate')
     return results
 

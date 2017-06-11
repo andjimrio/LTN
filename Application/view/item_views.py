@@ -7,7 +7,6 @@ from Application.service.item_services import get_item, get_last_items_by_user, 
     get_item_saved
 from Application.service.comment_services import delete_comment, get_comments_by_item
 from Application.services import get_pagination
-from Application.service.profile_services import get_profile
 
 
 @login_required

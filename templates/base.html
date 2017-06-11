@@ -24,6 +24,31 @@
 
     <link rel="shortcut icon" type="image/png" href="{% static "img/favicon.ico" %}"/>
     <link rel="icon" href="{% static "img/icon.png" %}">
+
+
+    <!-- Cookie stuff -->
+    <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.0.3/cookieconsent.min.css" />
+    <script src="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.0.3/cookieconsent.min.js"></script>
+    <script>
+        window.addEventListener("load", function(){
+            window.cookieconsent.initialise({
+                "palette": {
+                    "popup": {
+                        "background": "#424242"
+                    },
+                    "button": {
+                        "background": "#795548"
+                    }
+                },
+                "content": {
+                    "message": "{% trans 'cookies_popup_msg' %}",
+                    "dismiss": "{% trans 'cookies_popup_ok' %}",
+                    "link": "{% trans 'cookies_popup_link' %}",
+                    "href": "#cookie_policy"
+                }
+            })
+        });
+    </script>
 </head>
 <body>
     <header>
@@ -123,18 +148,17 @@
                 <div class="col l3 s6">
                     <h5 class="white-text">{% trans 'footer_title2' %}</h5>
                     <ul>
-                        <li><a class="white-text" href="https://www.python.org/">Python</a></li>
                         <li><a class="white-text" href="https://www.djangoproject.com/">Django</a></li>
                         <li><a class="white-text" href="http://whoosh.readthedocs.io/en/latest/">Whoosh</a></li>
                         <li><a class="white-text" href="https://pythonhosted.org/feedparser/">Feedparser</a></li>
+                        <li><a class="white-text" href="http://newspaper.readthedocs.io/en/latest/">Newspaper</a></li>
                     </ul>
                 </div>
                 <div class="col l3 s6">
-                    <h5 class="white-text">{% trans 'footer_title3' %}</h5>
+                    <h5 class="white-text">{% trans 'Legal' %}</h5>
                     <ul>
-                        <li><a class="white-text" href="http://newspaper.readthedocs.io/en/latest/">Newspaper</a></li>
-                        <li><a class="white-text" href="http://django-cron.readthedocs.io/en/latest/index.html">Django-cron</a></li>
-                        <li><a class="white-text" href="http://materializecss.com/">Materialize</a></li>
+                        <li><a class="white-text" href="#cookie_policy">{% trans 'cookies_title' %}</a></li>
+                        <li><a class="white-text" href="#legal_policy">{% trans 'terms_title' %}</a></li>
                     </ul>
                 </div>
             </div>
@@ -155,5 +179,50 @@
     <script src="{% static "js/init.js" %}"></script>
 
     {% block javascript %}{% endblock %}
+
+    <div id="cookie_policy" class="modal">
+        <div class="modal-content">
+            <h4 class="{{ color_primary }}-text">{% trans 'cookies_title' %}</h4>
+            <p>{% trans 'cookies_text_1' %}</p>
+            <p>{% trans 'cookies_text_2' %}</p>
+
+            <ul>
+                <li><strong class="{{ color_primary }}-text">sessionid</strong> {% trans 'cookies_text_sessionid' %}</li>
+                <li><strong class="{{ color_primary }}-text">lang</strong> {% trans 'cookies_text_lang' %}</li>
+                <li><strong class="{{ color_primary }}-text">csrftoken</strong> {% trans 'cookies_text_csrftoken' %}</li>
+                <li><strong class="{{ color_primary }}-text">cookieconsent_status</strong> {% trans 'cookies_text_consent' %}</li>
+            </ul>
+        </div>
+        <div class="modal-footer">
+            <a href="#!" class="modal-action modal-close waves-effect btn-flat {{ color_secondary }}-text">{% trans 'accept' %}</a>
+        </div>
+    </div>
+
+    <div id="legal_policy" class="modal modal-fixed-footer">
+        <div class="modal-content">
+            <h4 class="{{ color_primary }}-text">{% trans 'terms_title' %}</h4>
+            <h5>{% trans 'terms_1_title' %}</h5>
+            <p>{% trans 'terms_1_text' %}</p>
+            <h5>{% trans 'terms_2_title' %}</h5>
+            <p>{% trans 'terms_2_text' %}</p>
+            <h5>{% trans 'terms_3_title' %}</h5>
+            <p>{% trans 'terms_3_text' %}</p>
+            <h5>{% trans 'terms_4_title' %}</h5>
+            <p>{% trans 'terms_4_text' %}</p>
+            <h5>{% trans 'terms_5_title' %}</h5>
+            <p>{% trans 'terms_5_text' %}</p>
+            <h5>{% trans 'terms_6_title' %}</h5>
+            <p>{% trans 'terms_6_text' %}</p>
+            <h5>{% trans 'terms_7_title' %}</h5>
+            <p>{% trans 'terms_7_text' %}</p>
+            <h5>{% trans 'terms_8_title' %}</h5>
+            <p>{% trans 'terms_8_text' %}</p>
+            <h5>{% trans 'terms_9_title' %}</h5>
+            <p>{% trans 'terms_9_text' %}</p>
+        </div>
+        <div class="modal-footer">
+            <a href="#!" class="modal-action modal-close waves-effect btn-flat {{ color_secondary }}-text">{% trans 'accept' %}</a>
+        </div>
+    </div>
 </body>
 </html>

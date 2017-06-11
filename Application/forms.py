@@ -2,7 +2,7 @@ from django import forms
 from django.contrib.auth.models import User
 from django.utils.translation import ugettext_lazy as _
 
-from Application.models import Section, UserProfile, Comment, Item
+from Application.models import Section, UserProfile, Comment
 from Application.service.profile_services import exists_user
 from Application.service.feed_services import get_feeds_by_user
 

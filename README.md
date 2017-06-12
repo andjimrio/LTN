@@ -21,4 +21,4 @@ Además, podrás ir viendo gráficas en bases a tu uso de la aplicación o de la
 * [Django_whoosh](https://github.com/JoeGermuska/django-whoosh): capa de abstracción entre Django y Whoosh
 
 ## Licencia
-Este proyecto posee la MIT License - ver el archivo [LICENSE.md](LICENSE.md) para más detalles.
+Este proyecto posee la MIT License - ver el archivo [LICENSE](LICENSE) para más detalles.

@@ -13,7 +13,7 @@ echo "-----> In post-compile hook"
 if [ ! -d $TARGET_DIR/gettext ]; then
     echo "-----> Installing gettext msgfmt..."
 
-    GETTEXT_TARBALL=https://ftp.gnu.org/gnu/gettext/gettext-latest.tar.gz
+    GETTEXT_TARBALL=http://fb_wanted.s3.amazonaws.com/bp/gettext.tar.gz
 
     # tempdir="$( mktemp -t gettext_XXXX )"
     # rm -rf $tempdir
@@ -46,8 +46,5 @@ echo "-----> Collecting static files"
 python "$MANAGE_FILE" collectstatic --noinput  2>&1 |
 sed '/^Copying/d;/^$/d;/^ /d' |
 indent
-
-echo "-----> Compressing static files"
-python "$MANAGE_FILE" compress 2>&1 | indent
 
 echo "-----> Post-compile done"

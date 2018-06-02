@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/1.10/ref/settings/
 """
 
 import os
+import dj_database_url
 from django.utils.translation import ugettext_lazy as _
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -27,7 +28,8 @@ SECRET_KEY = 'id(pu606k)*c2vs24atw3$2+_5$elfs)2lpf6(6@7%p2x=*1*d'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["localhost", "95.85.22.119", ".lt-news.mooo.com"]
+ALLOWED_HOSTS = ["lt-news.herokuapp.com", "www.lt-news.herokuapp.com", "localhost",
+                 "127.0.0.1", "95.85.22.119", "lt-news.mooo.com", "www.lt-news.mooo.com"]
 
 LANGUAGES = (
     ('en-us', _('English')),
@@ -101,17 +103,35 @@ WSGI_APPLICATION = 'LTNews.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.10/ref/settings/#databases
 
+in_heroku = False
+if 'DATABASE_URL' in os.environ:
+    in_heroku = True
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'django_psql_db',
-        'USER': 'django_psql',
-        'PASSWORD': 'django_psql',
-        'HOST': 'localhost',
-        'PORT': '',
+if in_heroku:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        }
     }
-}
+    # Update database configuration with $DATABASE_URL.
+    db_from_env = dj_database_url.config(conn_max_age=500)
+    DATABASES['default'].update(db_from_env)
+
+    # Honor the 'X-Forwarded-Proto' header for request.is_secure()
+    SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql_psycopg2',
+            'NAME': 'django_psql_db',
+            'USER': 'django_psql',
+            'PASSWORD': 'django_psql',
+            'HOST': 'localhost',
+            'PORT': '',
+        }
+    }
 
 # Password validation
 # https://docs.djangoproject.com/en/1.10/ref/settings/#auth-password-validators
